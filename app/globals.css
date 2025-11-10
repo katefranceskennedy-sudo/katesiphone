@@ -658,9 +658,9 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  /* place the stripe just below the header (outside the header box) and nudge up 50px total */
-  top: calc(100% - 50px);
-  height: 200px; /* stripe thickness remains 200px */
+  /* place the stripe immediately above the header */
+  top: -200px;
+  height: 200px; /* stripe thickness: 200px */
   pointer-events: none;
   z-index: 1; /* sit above page content but behind header children (which use z-index:2) */
   /* Use a space-free copy of the uploaded GIF to avoid URL-encoding issues */
@@ -672,9 +672,28 @@ body {
   opacity: 0.98;
 }
 
+.header-polka::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* place the stripe immediately below the header */
+  top: 100%;
+  height: 200px; /* stripe thickness: 200px */
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("/headerline.gif");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 200px;
+  transform: translateX(10px);
+  opacity: 0.98;
+}
+
 /* On small screens, reduce the stripe thickness and reserved padding */
 @media (max-width: 720px) {
-  .header-polka::before { height: 140px; background-size: auto 140px; }
+  .header-polka::before,
+  .header-polka::after { height: 140px; background-size: auto 140px; }
   .header-polka { padding-bottom: 0 !important; }
 }
 

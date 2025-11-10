@@ -182,7 +182,9 @@ export default function Header() {
             <ImageNavLink href="/" src="/Home.gif" alt="Home" />
             <ImageNavLink
               href="/digital-culture"
-              src="/digitalculture.gif"
+              // use the capitalized DigitalCulture.gif from public/ as requested
+              src="/DigitalCulture.gif"
+              // keep a safe fallback in case the file doesn't load for some reason
               fallbackSrc="/headerart.gif"
               alt="Digital Culture"
             />

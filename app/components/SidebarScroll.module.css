@@ -5,10 +5,11 @@
   top: 140px;
   z-index: 60;
   display: block;
-  width: 24px;
-  padding: 6px 4px;
+  width: 64px; /* panel width */
+  padding: 12px 8px;
   background: transparent;
-  border-radius: 10px;
+  /* round the left edge so it looks anchored to the side */
+  border-radius: 8px 0 0 8px;
 }
 
 .sidebar.active {
@@ -21,8 +22,7 @@
   margin: auto;
   background: rgba(128, 128, 128, 0.04);
   border-radius: 8px;
-  display: flex;
-  align-items: flex-start;
+  position: relative; /* allow absolutely positioned thumb */
   transition: background 0.2s;
 }
 
@@ -31,13 +31,62 @@
   height: 60px;
   background: #c1c1c1;
   border-radius: 8px;
-  margin-top: 0;
-  transition: background 0.2s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: background 0.2s, transform 0.12s linear;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar.active .thumb {
   background: #888;
+}
+
+.box {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.9);
+  border-radius: 8px 0 0 8px;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.scrollArea {
+  width: 100%;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 8px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  background: transparent;
+}
+
+/* hide native scrollbar so only the custom thumb is visible */
+.scrollArea::-webkit-scrollbar { width: 0; height: 0; }
+.scrollArea { scrollbar-width: none; -ms-overflow-style: none; }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* overlay the custom track inside the box on the right */
+.box .track {
+  position: absolute;
+  right: 10px;
+  top: 48px; /* below top arrow */
+  bottom: 48px; /* above bottom arrow */
+  height: auto;
+}
+
+/* hide on small screens */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
 }
 
 @media (max-width: 900px) {

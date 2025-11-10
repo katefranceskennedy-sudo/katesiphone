@@ -1,0 +1,33 @@
+.sidebar {
+  /* hide the decorative secondary scrollbar to avoid duplicate scroll UI */
+  display: none !important;
+}
+
+.sidebar.active {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.track {
+  width: 8px;
+  height: 80vh;
+  margin: auto;
+  background: rgba(128, 128, 128, 0.04);
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-start;
+  transition: background 0.2s;
+}
+
+.thumb {
+  width: 8px;
+  height: 60px;
+  background: #c1c1c1;
+  border-radius: 8px;
+  margin-top: 0;
+  transition: background 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar.active .thumb {
+  background: #888;
+}

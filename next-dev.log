@@ -1,0 +1,152 @@
+
+> creative-babes@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.4
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.105:3000
+
+ ✓ Starting...
+ ✓ Ready in 5.1s
+ ○ Compiling / ...
+ ✓ Compiled / in 3.1s (636 modules)
+ GET / 200 in 4863ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1071ms (618 modules)
+ GET /jacket-countdown-poster.jpg 404 in 1837ms
+ ✓ Compiled in 1502ms (613 modules)
+ ✓ Compiled in 350ms (613 modules)
+ ✓ Compiled in 729ms (613 modules)
+ ✓ Compiled in 834ms (613 modules)
+ ✓ Compiled in 2.7s (613 modules)
+ ⨯ ./app/components/SplashScreen.tsx
+Error:   [31mx[0m Unexpected token. Did you mean `{'>'}` or `&gt;`?
+     ,-[[36;1;4mC:\Users\katef\creative-babes\app\components\SplashScreen.tsx[0m:531:1]
+ [2m528[0m |       >
+ [2m529[0m |           {/* media-only layout: no controls */}
+ [2m530[0m |                   style={{ width: 56 }}
+ [2m531[0m |                 />
+     : [35;1m                 ^[0m
+ [2m532[0m |                 <label
+ [2m533[0m |                   style={{
+ [2m534[0m |                     color: "#fff",
+     `----
+  [31mx[0m Unterminated regexp literal
+     ,-[[36;1;4mC:\Users\katef\creative-babes\app\components\SplashScreen.tsx[0m:572:1]
+ [2m569[0m |                 >
+ [2m570[0m |                   Skip
+ [2m571[0m |                 </button>
+ [2m572[0m |               </div>
+     : [35;1m               ^^^^^[0m
+ [2m573[0m |             </div>
+ [2m574[0m |           </div>
+ [2m575[0m |         </div>
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/components/SplashScreen.tsx
+./app/components/AppShell.tsx
+ ⨯ ./app/components/SplashScreen.tsx
+Error:   [31mx[0m Unexpected token. Did you mean `{'>'}` or `&gt;`?
+     ,-[[36;1;4mC:\Users\katef\creative-babes\app\components\SplashScreen.tsx[0m:531:1]
+ [2m528[0m |       >
+ [2m529[0m |           {/* media-only layout: no controls */}
+ [2m530[0m |                   style={{ width: 56 }}
+ [2m531[0m |                 />
+     : [35;1m                 ^[0m
+ [2m532[0m |                 <label
+ [2m533[0m |                   style={{
+ [2m534[0m |                     color: "#fff",
+     `----
+  [31mx[0m Unterminated regexp literal
+     ,-[[36;1;4mC:\Users\katef\creative-babes\app\components\SplashScreen.tsx[0m:572:1]
+ [2m569[0m |                 >
+ [2m570[0m |                   Skip
+ [2m571[0m |                 </button>
+ [2m572[0m |               </div>
+     : [35;1m               ^^^^^[0m
+ [2m573[0m |             </div>
+ [2m574[0m |           </div>
+ [2m575[0m |         </div>
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/components/SplashScreen.tsx
+./app/components/AppShell.tsx
+ ✓ Compiled in 1020ms (613 modules)
+ ✓ Compiled in 683ms (613 modules)
+ GET / 200 in 841ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 802ms (618 modules)
+ GET /jacket-countdown-poster.jpg 404 in 1086ms
+ ✓ Compiled in 1367ms (618 modules)
+ ✓ Compiled in 384ms (613 modules)
+ ✓ Compiled in 1866ms (613 modules)
+ ✓ Compiled in 487ms (613 modules)
+ ✓ Compiled in 5.6s (646 modules)
+ ⨯ ./app/components/Header.tsx:4:1
+Module not found: Can't resolve '../config/assets'
+  2 | import Link from "next/link";
+  3 | import Image from "next/image";
+> 4 | import { LOGO_PATH } from "../config/assets";
+    | ^
+  5 |
+  6 | export default function Header() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/components/AppShell.tsx
+ ⨯ ./app/components/Header.tsx:4:1
+Module not found: Can't resolve '../config/assets'
+  2 | import Link from "next/link";
+  3 | import Image from "next/image";
+> 4 | import { LOGO_PATH } from "../config/assets";
+    | ^
+  5 |
+  6 | export default function Header() {
+  7 |   return (
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/components/AppShell.tsx
+ ✓ Compiled in 506ms (648 modules)
+ ✓ Compiled in 410ms (648 modules)
+ ✓ Compiled in 1226ms (648 modules)
+ ✓ Compiled in 253ms (648 modules)
+ ✓ Compiled in 103ms (254 modules)
+ GET / 200 in 699ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 940ms (653 modules)
+ GET /jacket-countdown-poster.jpg 404 in 1318ms
+ ✓ Compiled in 1023ms (653 modules)
+ GET /jacket-countdown-poster.svg 404 in 333ms
+ ✓ Compiled in 589ms (653 modules)
+ GET /jacket-countdown-poster.svg 404 in 845ms
+ GET / 200 in 166ms
+ ✓ Compiled in 2.2s (648 modules)
+ ✓ Compiled in 630ms (648 modules)
+ ✓ Compiled in 858ms (648 modules)
+ ✓ Compiled in 338ms (648 modules)
+ ✓ Compiled in 1482ms (615 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 986ms
+ GET / 200 in 293ms
+ ✓ Compiled in 1073ms (615 modules)
+ ✓ Compiled in 1285ms (615 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 752ms
+ ✓ Compiled in 1003ms (615 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 1492ms
+[?25h

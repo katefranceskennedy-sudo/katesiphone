@@ -1,0 +1,1374 @@
+/* Relaxed, friendly UI font (Rubik loaded as a helpful fallback) */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+/* Editorial serif for the site title (Playfair Display still available as an import) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Oswald:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  /* Use DejaVu Sans as the primary font; fall back to other sans fonts if not present */
+  font-family: 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* make body text a bit lighter/thinner */
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6; /* breezier leading for relaxed reading */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent horizontal/bottom scrollbar caused by full-bleed elements */
+html, body {
+  overflow-x: hidden;
+}
+
+
+/* FS Sans Coded fallback — drop the font file at public/fonts/FS-Sans-Coded.woff2 */
+@font-face {
+  font-family: 'FS Sans Coded';
+  src: url('/fonts/FS-Sans-Coded.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400 700;
+  font-style: normal;
+}
+
+.menu-font {
+  /* force menu text to use DejaVu Sans when available */
+  left: 50%;
+  /* use viewport width and center to ensure the footer extends under the browser scrollbar (full-bleed) */
+  width: 100vw;
+  transform: translateX(-50%);
+}
+
+.loading-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #fff;
+}
+
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #ff69b4;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Outlined circular bullets with white center */
+.outlined-bullets {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+.outlined-bullets li {
+  padding-left: 28px;
+  margin-bottom: 6px;
+}
+.outlined-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fafafa; /* lighter pencil center */
+  border: 1px solid rgba(0,0,0,0.45); /* thinner, lighter outline */
+  box-sizing: border-box;
+}
+
+/* About page centered layout and academia link styles */
+.about-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertically center content in viewport */
+  gap: 20px;
+}
+
+/* ensure inner content (the card) is left-aligned while the outer container remains centered */
+.about-center .about-content {
+  max-width: 900px;
+  width: 90%;
+  text-align: left;
+  /* leaner text weight inside content for a lighter feel */
+  font-weight: 300;
+}
+
+.academia-line {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1px;
+  color: #111;
+  opacity: 0.95;
+}
+
+.academia-line .dotted-link {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.academia-line .dotted-link:hover {
+  /* on hover switch to solid underline */
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+}
+
+/* after-colon: make the words visually prominent by default */
+.after-colon {
+  text-decoration-line: underline;
+  text-decoration-style: dotted; /* dotted underline by default */
+  text-underline-offset: 3px;
+  cursor: pointer;
+  color: #00B3C6; /* stronger turquoise text */
+  /* red background (default) */
+  background-color: rgba(255, 205, 205, 0.92);
+  padding: 1px 4px;
+  border-radius: 4px;
+  display: inline-block;
+  /* slightly less bold than before so the highlighted text reads lighter */
+  font-weight: 500;
+  transition: background-color 160ms ease, color 160ms ease, font-weight 120ms ease, border-color 120ms ease;
+  /* lighter outline by default */
+  border: 1px solid rgba(0,0,0,0.55);
+}
+
+/* on hover/focus slightly strengthen the underline and background */
+.after-colon:hover,
+.after-colon:focus,
+.after-colon:focus-visible {
+  text-decoration-style: solid; /* solid underline on hover/focus */
+  /* darker red on hover/focus */
+  background-color: rgba(170, 20, 20, 0.95);
+  /* slightly stronger border on hover */
+  border-color: rgba(0,0,0,0.85);
+}
+.academia-line.academia-struck {
+  text-decoration-line: line-through;
+  text-decoration-thickness: 1px;
+}
+
+/* visible academy strike-through for the list item */
+.academia-line-visible {
+  text-decoration-line: line-through !important;
+  text-decoration-thickness: 1px !important;
+  text-decoration-color: rgba(0,0,0,0.85) !important;
+  color: rgba(0,0,0,0.95);
+}
+
+/* modifier for lighter, thinner bullets */
+.lighter-bullets li::before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fbfbfb;
+  border: 1px solid rgba(0,0,0,0.35);
+}
+
+/* Restored social footer styles with per-icon hover colors */
+.social-footer {
+  position: fixed;
+  left: 50%;
+  /* use viewport width and center to ensure the footer extends under the browser scrollbar (full-bleed) */
+  width: 100vw;
+  transform: translateX(-50%);
+  bottom: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: none; /* allow page interactions except on the icons themselves */
+}
+.social-footer .social-row {
+  pointer-events: auto;
+  /* only curve the bottom corners; keep top corners square */
+  border-radius: 0 0 12px 12px;
+  box-sizing: border-box;
+  gap: 0; /* we'll use negative margins to pull icons closer */
+  align-items: center;
+  padding: 6px;
+  /* only curve the bottom corners; keep top corners square */
+  border-radius: 0 0 12px 12px;
+  background: transparent;
+}
+.social-footer .social-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: block;
+  padding: 6px;
+  border-radius: 10px;
+  background: transparent;
+  transition: transform 120ms ease; /* remove color/box-shadow transitions */
+  cursor: pointer;
+  margin-right: -20px; /* pull icons 20px closer together */
+}
+.social-footer .social-row .social-icon:last-child { margin-right: 0; }
+.social-footer .social-link img { display: block; }
+
+/* Remove per-icon hover background colors and shadows — keep only subtle lift */
+.social-footer .social-icon:hover,
+.social-footer .social-icon:focus {
+  transform: translateY(-3px) scale(1.02);
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .social-footer { bottom: 8px; }
+  .social-footer .social-icon { width: 28px; height: 28px; padding: 4px; margin-right: -14px; }
+}
+
+/* Social tab (dismissible) styles */
+.social-tab {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 16px;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+}
+.social-tab-inner {
+  background: rgba(255,255,255,0.98);
+  border-radius: 999px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  width: min(900px, calc(100% - 40px));
+}
+.social-tab .social-row { display:flex; align-items:center; gap: 0; }
+.social-tab .social-icon { margin-right: -20px; }
+.social-tab .social-icon:last-child { margin-right: 0; }
+.social-tab-close {
+  margin-left: 8px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.social-tab-close:focus { outline: 3px solid rgba(0,0,0,0.08); }
+.social-tab-toggle {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 99999;
+}
+.social-tab-open-button {
+  background: rgba(0,0,0,0.06);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Sticky footer bar (always visible) */
+.sticky-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999999; /* ensure it's above other elements */
+  display: flex;
+  justify-content: center;
+  background: rgba(255,238,240,0.95); /* light pink pill */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06); /* lighter shadow like before */
+  border-top: 1px solid rgba(0,0,0,0.04);
+  /* increase bottom padding so components sit visually lower in the pill */
+  padding: 6px 8px 12px; /* top right bottom */
+  border-radius: 999px;
+  pointer-events: auto;
+}
+.sticky-row {
+  display: flex;
+  /* align items to the bottom so they sit lower inside the pill */
+  align-items: flex-end;
+  gap: 0; /* icons pulled close using negative margins */
+  width: 20%; /* reduced to 20% of viewport per request */
+  max-width: 100px; /* cap so it doesn't grow too wide on large screens */
+  justify-content: center;
+  /* keep row centered; ensure updates image sits next to the icons */
+  transform: none;
+  /* position left in normal flow so children take layout space */
+}
+.sticky-updates {
+  display: inline-flex;
+  align-items: center;
+  /* small positive gap so updates image sits coherently next to icons */
+  margin-right: 2px;
+}
+.updates-text {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+  color: #111;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  padding: 6px 8px 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.sticky-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  padding: 4px;
+  border-radius: 8px;
+  margin-right: -20px; /* pull icons 20px closer */
+  transition: transform 120ms ease;
+}
+.sticky-row .sticky-icon:last-child { margin-right: 0; }
+.sticky-icon:focus { transform: translateY(-3px); }
+
+@media (max-width: 480px) {
+  .sticky-icon { width: 12px; height: 12px; padding: 2px; margin-right: -6px; }
+}
+
+/* Reserve space so sticky footer doesn't overlap content */
+body {
+  /* No reserved bottom padding — the banner is fixed and does not push content */
+  padding-bottom: 0;
+}
+
+/* Tooltip labels above icons */
+.sticky-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px; /* slightly tighter gap between items */
+}
+
+.sticky-label { display: none !important; }
+
+/* Keep focus styles for keyboard users but remove hover effects on emojis */
+.sticky-item:focus .sticky-icon { background: rgba(0,0,0,0.04); border-radius: 8px; }
+
+/* Ensure Link-wrapped item behaves same */
+.sticky-link { display: inline-flex; }
+
+/* Hide tooltip labels from DOM interaction (we keep them hidden) */
+.sticky-label { display: none !important; }
+
+/* Updates image styling (replaces text) */
+.updates-image {
+  display: block;
+  width: 40px; /* small GIF box so footer stays compact */
+  height: 40px;
+  object-fit: contain;
+  padding: 4px;
+  border-radius: 8px;
+  background: transparent;
+  transform: none;
+  position: relative;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 720px) {
+  /* smaller GIF on narrow screens so it fits the pill */
+  .updates-image { width: 40px; }
+  /* slightly reduce footer reserve on small screens */
+  body { padding-bottom: 72px; }
+}
+
+.updates-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+/* About page decorative drop-cap and image styling */
+.about-center p:first-of-type {
+  position: relative;
+}
+.about-center p:first-of-type::first-letter {
+  float: left;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(56px, 8vw, 112px);
+  line-height: 0.7;
+  margin-right: 12px;
+  margin-top: 4px;
+  color: #b7324a; /* deep rose/pink tone for the initial */
+  font-weight: 700;
+}
+
+.about-center img {
+  box-shadow: 0 12px 36px rgba(11,13,12,0.08);
+  border-radius: 6px;
+  background: #fff;
+}
+}
+
+/* Reusable GIF frame styles: make the black border and surrounding treatment easy to tweak via CSS variables */
+:root {
+  --gif-border: 4px solid #000;
+  --gif-border-radius: 0px;
+  --gif-shadow: 0 10px 25px rgba(0,0,0,0.20);
+  --gif-shadow-hover: 0 18px 40px rgba(0,0,0,0.25);
+  --gif-hover-scale: 1.02;
+}
+
+.gif-frame {
+  box-sizing: border-box;
+  border: var(--gif-border);
+  border-radius: var(--gif-border-radius);
+  box-shadow: var(--gif-shadow);
+  overflow: hidden;
+  display: inline-block;
+  transition: box-shadow 200ms ease; /* remove transform transitions to avoid hover scaling that can overlap text */
+  background: #fff; /* keep a neutral background just under the border */
+}
+
+.gif-frame:hover,
+.gif-frame:focus-within {
+  /* don't scale the GIF on hover — keep it within its flex column to prevent overlap */
+  transform: none;
+  box-shadow: var(--gif-shadow-hover);
+}
+
+.gif-frame.no-hover { transform: none; }
+
+.gif-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated; /* attempt to preserve sharpness when scaled */
+  transform: translateZ(0); /* promote to its own layer for smoother compositing */
+}
+
+/* utility to override the default border for specific pages/components */
+.gif-frame[data-border="thin"] { --gif-border: 2px solid rgba(0,0,0,0.85); }
+.gif-frame[data-border="none"] { --gif-border: 0; }
+/* pink border variant used for special GIFs (paglia, Newman variants can use different colors) */
+.gif-frame[data-border="pink"] { --gif-border: 4px solid #ff69b4; }
+
+/* Newman page layout: gif left, article text right; stacks on narrow viewports */
+.newman-layout {
+  display: flex;
+  gap: 16px; /* slightly tighter gutter for proportional layout */
+  align-items: flex-start;
+  width: 100%;
+}
+.newman-text {
+  /* use the site's body (Digital Culture) sans-serif font here so Newman pages match other articles */
+  font-family: inherit;
+  -webkit-font-smoothing: antialiased;
+  color: #111;
+  line-height: 1.7;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  max-width: 62ch; /* comfortable measure for reading */
+  padding-left: 8px;
+  flex: 1 1 0%; /* allow text column to take remaining space */
+  min-width: 0; /* prevent overflow/overlap inside flex container */
+}
+.newman-text p { margin: 0 0 1em 0; }
+
+/* Ensure gif frame stays proportional and doesn't let text overlap it */
+.newman-layout .gif-frame {
+  flex: 0 0 min(285px, 40%); /* keep GIF at a reasonable proportion */
+  margin: 0;
+  max-width: 285px; /* ensure a hard cap so the GIF cannot grow larger than layout allows */
+  min-width: 160px; /* provide a sensible minimum for very narrow viewports */
+}
+
+/* Make quoted block elements bold and remove padding */
+.newman-fulltext blockquote,
+.newman-text blockquote {
+  font-weight: 700;
+  margin: 0 0 1em 0;
+  padding: 0;
+  border-left: none;
+}
+
+@media (max-width: 720px) {
+  .newman-layout { flex-direction: column; gap: 12px; }
+  .newman-text { padding-left: 0; }
+}
+
+/* Full-width article section that sits below the GIF and spans the content width */
+.newman-fulltext {
+  width: 100%;
+  margin-top: 20px;
+}
+.newman-fulltext p {
+  margin: 0 0 1em 0;
+  max-width: none; /* allow lines to span the full content width */
+}
+
+/* Ensure any emphasized/quoted passages use the editorial Playfair font and appear bold */
+.newman-text strong,
+.newman-fulltext strong,
+.newman-text q,
+.newman-fulltext q {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Make all Newman page text use the Playfair Display editorial font by default,
+   with a lighter normal weight; strong remains bold as above. */
+.newman-text,
+.newman-fulltext {
+  /* inherit the global site font so these sections match Digital Culture */
+  font-family: inherit;
+  font-weight: inherit;
+  color: #111;
+}
+
+/* Fixed, non-intrusive banner that stays visible while scrolling */
+/* Banner removed — styles for .fixed-banner, .fixed-banner-wrap, .fixed-banner-inner,
+   .banner-socials, and related selectors have been deleted per user request. */
+
+/* Decorative row of top emojis positioned below the header nav and centered.
+   Styled as a small rounded, pale pill with tight spacing between icons so it matches
+   the design mockup (see attachment). The pill is nudged to sit approximately
+   between header items and collapses to a centered pill on small screens. */
+.top-emojis-wrap {
+  display: flex;
+  justify-content: flex-start; /* left-align the emoji row in the column */
+  align-items: center;
+  margin-top: 6px;
+  /* nudge the row so it spans the area from About to Published Work (approx one header item to the right)
+     shift by half a header-item width so the emojis align under About -> PublishedWork */
+  margin-left: 0; /* position is computed in the client component; clear CSS nudges */
+  width: auto; /* size to the content */
+  position: static; /* positioning handled inline in the TopEmojisAnchor component */
+  pointer-events: auto; /* allow interactions */
+  z-index: 9999; /* ensure it sits above most layout elements */
+}
+
+/* Portal-fixed helper: force the portal-mounted wrapper to act as a true
+   viewport-fixed element. This uses !important to override any page-level
+   transforms or positioning that may otherwise affect the element. Keep this
+   in place only for debugging/robustness; remove if you prefer a cleaner CSS. */
+.top-emojis-wrap.portal-fixed {
+  position: fixed !important;
+  /* left/transform/top are set dynamically by the portal script to precisely
+     align to the purple column; avoid hardcoding them here so script-applied
+     inline styles can take effect. */
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+.top-emojis {
+  width: auto; /* let the content determine width so icons sit tightly together */
+  display: flex;
+  gap: 2px; /* reduced gap between emojis for a tighter row */
+  align-items: center;
+  justify-content: center;
+  position: relative; /* container for the highlight pseudo-element */
+  padding: 1px 6px; /* tighter vertical spacing */
+  pointer-events: auto; /* allow hover/focus on the emoji row */
+}
+
+/* Caption that sits directly under the emoji row. White framed with blue inner bar to match attachment. */
+.top-emojis-caption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  position: relative;
+  z-index: 10000; /* above highlight */
+  pointer-events: auto;
+}
+.top-emojis-caption .caption-inner {
+  /* lighter-weight caption that reads as part of the highlighter but feels delicate */
+  background: rgba(255,246,150,0.42); /* keep pale yellow but slightly subtler */
+  color: #111114; /* dark, but slightly softened */
+  padding: 4px 10px; /* keep tight padding */
+  display: inline-block;
+  text-align: left; /* ensure the caption text is left-aligned, not centered */
+  /* markdown-like system font stack for readable article text */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', system-ui, sans-serif;
+  font-weight: 300; /* lighter font weight per request */
+  font-size: 13px; /* reduced from 14px */
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  /* no text decoration (underlines removed) */
+  text-decoration: none;
+  box-shadow: inset 0 -3px 6px rgba(255,200,60,0.03);
+  transition: color 140ms ease, text-decoration-color 140ms ease, text-decoration-style 140ms ease, box-shadow 140ms ease;
+}
+
+.top-emojis-caption .caption-inner:hover,
+.top-emojis-caption .caption-inner:focus,
+.top-emojis-caption .caption-inner:focus-visible {
+  color: #0f0f10;
+}
+.top-emojis-caption { /* outer frame: keep subtle pale yellow so caption reads as part of the highlight */
+  background: rgba(255,246,150,0.38);
+  padding: 2px 0 2px 8px; /* tighter outer frame with left inset to align inner content */
+  border-radius: 2px; /* slightly rounded to match the pill-like highlight */
+  display: flex;
+  justify-content: flex-start; /* ensure caption content is left-aligned */
+  align-items: center;
+}
+
+/* Left-side polka-dot column for homepage decorative effect */
+/* Left polka removed — polka dots moved into the header as requested */
+
+/* Polka dots in the header: subtle repeating dots across the header background */
+.header-polka {
+  /* header must be relative so pseudo-elements can be positioned inside it */
+  position: relative;
+  background-color: #fff; /* keep white base */
+}
+
+/* Sporadic, larger polka dots that appear to pop out of the header.
+   Implemented with isolated radial-gradients on ::before for irregular placement
+   and a faint blurred layer on ::after for depth. */
+/* Header decorative stripe: use the uploaded repeating artwork as a thin horizontal
+   line across the header. This uses a pseudo-element so header content keeps its
+   existing structure and z-index ordering. If you want to change the image, replace
+   the URL below with the image in `public/` (e.g. `/KK Website (4).gif`). */
+.header-polka {
+  position: relative; /* ensure pseudo-element is positioned relative to header */
+  background-image: none !important; /* clear any earlier background images */
+  /* allow header to size to content so the stripe sits just below the text */
+  min-height: unset !important;
+  /* no extra padding needed when the stripe is placed outside the header */
+  padding-bottom: 0 !important;
+}
+
+.header-polka::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* place the stripe just below the header (outside the header box) and nudge up 50px total */
+  top: calc(100% - 50px);
+  height: 200px; /* stripe thickness remains 200px */
+  pointer-events: none;
+  z-index: 1; /* sit above page content but behind header children (which use z-index:2) */
+  /* Use a space-free copy of the uploaded GIF to avoid URL-encoding issues */
+  background-image: url("/headerline.gif");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 200px;
+  transform: translateX(10px); /* nudge stripe 10px to the right */
+  opacity: 0.98;
+}
+
+/* On small screens, reduce the stripe thickness and reserved padding */
+@media (max-width: 720px) {
+  .header-polka::before { height: 140px; background-size: auto 140px; }
+  .header-polka { padding-bottom: 0 !important; }
+}
+
+/* Ensure header content sits above the decorative layers */
+.header-polka > * { position: relative; z-index: 2; }
+
+@media (max-width: 720px) {
+  /* reduce number of dots on small screens for clarity */
+  .header-polka::before,
+  .header-polka::after { background-image: none; }
+}
+
+/* Decorative footer stripe (fixed to bottom). Non-interactive visual only. */
+.site-root {
+  /* Constrain the site to the requested design viewport of 1440 × 1024px
+     while still allowing smaller viewports to scale down via max-width:100%. */
+  width: 1440px;
+  max-width: 100%;
+  /* align the canvas to the right edge so the visible viewport shows the right-most design
+    (equivalent to scrolling all the way to the right). Left-side pixels are effectively removed
+    from the initial viewport. */
+  margin-left: auto;
+  margin-right: 0;
+  min-height: 1024px;
+  display: flex;
+  flex-direction: column;
+}
+.site-root > *:first-child { /* AppShell grows to fill available space */
+  flex: 1 1 auto;
+}
+
+.site-footer {
+  position: relative; /* in-flow footer */
+  width: 100%;
+  height: 200px; /* reserve space equal to stripe height */
+  pointer-events: none;
+  z-index: 1;
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("/headerline.gif");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 200px;
+  opacity: 0.98;
+  transform: translateX(10px);
+}
+@media (max-width: 720px) {
+  .site-footer { height: 140px; }
+  .site-footer::before { background-size: auto 140px; }
+}
+
+/* Hide footer stripe entirely on contact page */
+body:has(main[ data-page="contact" ]) .site-footer::before,
+body.contact-page .site-footer::before {
+  display: none !important;
+}
+
+/* About page text: match home font and force non-bold, constrain width under central header items */
+.about-text,
+.about-text * {
+  font-weight: 400 !important; /* override global bold */
+}
+.about-text {
+  margin: 0 auto;
+  /* approximate width spanning Published Work → Digital Culture area */
+  max-width: clamp(360px, 62vw, 720px);
+}
+
+/* Home page blurb under the tile row */
+.home-blurb,
+.home-blurb * {
+  font-weight: 300 !important; /* lighter/thinner text */
+}
+.home-blurb {
+  margin: 18px auto 24px;
+  max-width: clamp(360px, 62vw, 720px); /* align with header span from Home to Digital Culture */
+  font-size: 16px;
+  line-height: 1.6;
+  /* requested visual adjustments */
+  background: rgba(255, 0, 153, 0.34); /* bright transparent pink */
+  border-radius: 0; /* square edges */
+  padding: 12px 14px;
+  transform: translate(-210px, -90px); /* nudge left 210px (prev 190 + 20) and up 90px (prev 70 + 20) */
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgba(255, 0, 153, 0.6); /* pink dotted underline */
+  text-underline-offset: 3px;
+}
+.home-blurb:hover {
+  text-decoration-style: solid; /* become solid underline on hover */
+  text-decoration-color: rgba(255, 0, 153, 0.8); /* brighter pink on hover */
+}
+
+@media (max-width: 720px) {
+  /* hide header dots on very small screens to reduce visual noise */
+  .header-polka { background-image: none; }
+}
+
+/* Topic buttons row (pills) that sit under the caption text. Matches the attached visual:
+   white rounded pills with thin border, small padding and light drop shadow. Separators
+   between pills are rendered as slashes similar to the reference image. */
+.topic-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.topic-btn {
+  background: transparent; /* match the surrounding background */
+  border: 1px solid rgba(0,0,0,0.10); /* thinner, lighter outline */
+  padding: 6px 10px;
+  border-radius: 999px; /* fully rounded pill */
+  box-shadow: none; /* remove interior shadow for a flatter look */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, background-color 120ms ease;
+}
+.topic-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(0,0,0,0.06); border-color: rgba(0,0,0,0.14); }
+.topic-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.04); border-color: rgba(0,0,0,0.16); }
+.topic-btn .label {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #111114;
+  /* no underlines on button labels */
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.topic-btn .label:hover,
+.topic-btn .label:focus,
+.topic-btn:focus .label { color: #0f0f10; }
+
+/* topic icon inside a button (for DT) */
+.topic-icon {
+  display: inline-block;
+  width: 18px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* fixed-width icon slot so adding an icon doesn't shift text */
+.icon-slot {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+.topic-fallback { font-weight: 500; font-size: 12px; color: #111114; }
+
+/* separators between pills rendered visually like the reference.
+   Using ::after ensures the slash sits outside the pill content visually. */
+.topic-sep {
+  display: none; /* separators removed per request */
+}
+
+/* wrapper for topic buttons placed outside the highlighted caption */
+.topic-buttons-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* descriptive paragraph below the highlighted caption */
+.caption-body-inner {
+  max-width: 760px; /* keep paragraph measure readable */
+  color: #111114;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', system-ui, sans-serif;
+  font-size: 14px; /* reduced from 15px */
+  line-height: 1.65;
+  margin: 0;
+  padding-left: 8px; /* align paragraph with caption inner content */
+  text-align: left;
+}
+.caption-body-inner p { margin: 0 0 0.9rem 0; }
+
+/* small caption text above the buttons: keep the lighter font and dotted underline */
+.caption-text {
+  font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 13px; /* reduced from 14px */
+  color: #111114;
+  /* dotted underline by default */
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(0,0,0,0.18);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* on hover/focus, make the underline solid and slightly darker */
+.top-emojis-caption .caption-inner:hover .caption-text,
+.top-emojis-caption .caption-inner:focus-within .caption-text,
+.caption-text:hover,
+.caption-text:focus {
+  text-decoration-style: solid;
+  text-decoration-color: rgba(0,0,0,0.6);
+  color: #0f0f10;
+}
+
+/* Attribution that follows the first descriptive sentence: dotted underline by default,
+   becomes a solid underline when hovered or when the purple column (digital-culture) is hovered. */
+.caption-attribution {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: rgba(0,0,0,0.18);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  cursor: default;
+  /* make attribution an inline-block so background/padding can be applied without layout shifts */
+  display: inline-block;
+  padding: 0 3px; /* small horizontal padding so the highlight has breathing room */
+  border-radius: 4px;
+  font-size: 12px; /* slightly smaller attribution text */
+  transition: text-decoration-color 140ms ease, text-decoration-style 140ms ease, background-color 160ms ease, color 120ms ease;
+}
+
+/* Solid underline and pastel green background when hovered, when the descriptive block is hovered,
+   or when the purple Digital Culture column is hovered (darker purple highlight). */
+.caption-attribution:hover,
+.caption-body-inner:hover .caption-attribution,
+#digital-culture-column:hover .caption-attribution {
+  text-decoration-style: solid;
+  text-decoration-color: rgba(0,0,0,0.6);
+  /* subtle pastel green highlight */
+  background: rgba(200,255,220,0.45);
+  color: #071012; /* slightly darker text for contrast on green */
+}
+
+/* keep the phrase 'alienation, and harm' and the attribution together on one visual line */
+.inline-attribution-group {
+  white-space: nowrap;
+  display: inline-block; /* allows background/padding on the group if needed */
+  max-width: 100%; /* never exceed the parent column width */
+  box-sizing: border-box;
+  overflow-wrap: anywhere; /* allow long tokens (like emojis) to break if needed */
+  word-break: break-word;
+  vertical-align: baseline;
+}
+
+/* Allow wrapping on very narrow viewports so text doesn't overflow */
+@media (max-width: 720px) {
+  .header-polka::before { height: 140px; background-size: auto 140px; }
+  .header-polka { padding-bottom: 8px !important; }
+}
+/* Continuous highlight bar behind the emoji row. Using a pseudo-element keeps the markup
+   unchanged while making the whole row read as a single highlighter stroke. */
+
+.top-emojis::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 32px; /* tightened height to sit closer to icons */
+  /* pale highlighter yellow (match caption) */
+  background: rgba(255,246,150,0.45);
+  border-radius: 2px; /* slight rounding to match caption treatment */
+  z-index: 0; /* sit behind the icons */
+  pointer-events: none; /* don't block pointer interactions */
+  box-shadow: inset 0 -3px 6px rgba(255,200,60,0.03);
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+
+.top-emoji {
+  /* icons sit above the highlight pseudo-element */
+  width: min(4vw, 23px);
+  height: auto;
+  display: inline-block;
+  padding: 2px; /* small inner padding to keep icons from touching the highlight edges */
+  background: transparent; /* remove per-emoji block backgrounds */
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+  opacity: 0.98;
+  margin: 0;
+  position: relative;
+  z-index: 1; /* ensure icons render above the highlight */
+  transition: none; /* disable per-emoji movement */
+  cursor: pointer;
+}
+
+/* Hover/focus: deepen the whole highlight strip and lift the emojis slightly */
+.top-emojis:hover::before,
+.top-emojis:focus-within::before {
+  /* deepen to the darker highlighter color and add a soft outer glow */
+  background: rgba(255,200,60,0.95);
+  box-shadow: inset 0 -8px 18px rgba(255,180,40,0.12), 0 6px 18px rgba(0,0,0,0.06);
+  transform: translateY(-50%) scaleY(1.02);
+}
+.top-emojis:hover .top-emoji,
+.top-emojis:focus-within .top-emoji {
+  /* no movement; instead emphasize via slight scale on icon opacity for affordance */
+  opacity: 1;
+  outline: none;
+}
+
+/* Make the row itself clearly interactive */
+.top-emojis {
+  cursor: pointer;
+}
+.top-emojis:focus-within {
+  box-shadow: 0 0 0 3px rgba(255,220,70,0.12);
+}
+
+@media (max-width: 720px) {
+  /* on small screens keep the row centered to avoid awkward offsets */
+  .top-emojis-wrap { margin-left: 0; padding: 4px 6px; }
+  .top-emojis { gap: 2px; }
+}
+
+/* overlay (are.na logo) centered over the banner */
+.banner-socials {
+  /* cover the exact area of the banner image so the socials row is the same size */
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center; /* center the row within the banner area */
+  z-index: 2;
+  pointer-events: auto; /* allow clicks on social links */
+  padding: 4px; /* small padding so icons don't sit flush to edges */
+  box-sizing: border-box;
+  overflow: hidden; /* ensure nothing exceeds the banner area */
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Contact page magenta square centered in the content column */
+.contact-magenta-wrap {
+  /* center the box in the page flow (not viewport-fixed) so the page can scroll if needed */
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 32px auto; /* slightly tighter space above/below for proportion */
+  width: 100%;
+}
+.contact-magenta-square {
+  /* slightly reduced width and padding so the box feels more proportional */
+  width: min(78vw, 760px);
+  max-width: 820px;
+  /* switch to a semi-transparent turquoise-blue so the box reads lighter */
+  background: rgba(48, 224, 214, 0.18); /* turquoise-blue, low alpha */
+  box-shadow: none; /* removed drop shadow per request */
+  border-radius: 0; /* remove rounded corners to make square edges */
+  border: 1px solid rgba(192,192,192,0.5); /* slim silver border */
+  box-sizing: border-box;
+  padding: 18px; /* reduced padding for tighter feel */
+  overflow: visible; /* allow content to flow naturally */
+}
+
+@media (max-width: 720px) {
+  .contact-magenta-square { width: calc(100% - 32px); padding: 16px; }
+}
+
+/* Ensure the duplicated text inside the magenta square is readable */
+.contact-magenta-square-content {
+  color: #0B6623; /* royal green for in-box text */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', system-ui, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  -webkit-font-smoothing: antialiased;
+  font-size: 16px; /* larger base text for better proportion */
+  line-height: 1.6;
+}
+.contact-magenta-square-content p,
+.contact-magenta-square-content li {
+  color: #0B6623;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.contact-magenta-square-content strong { color: #083f18; }
+.contact-magenta-square-content .outlined-bullets { padding-left: 0; }
+
+/* dotted underline under the social row; becomes solid on hover/focus */
+.banner-socials::after {
+  content: "";
+  position: absolute;
+  left: 8px; /* align with the container padding */
+  right: 8px;
+  bottom: 6px; /* sit slightly above the bottom edge of the banner */
+  border-bottom: 2px dotted rgba(0,0,0,0.22);
+  transition: border-bottom-color 160ms ease, border-bottom-style 160ms ease, opacity 160ms ease;
+  z-index: 0; /* behind icons but above the banner image */
+  pointer-events: none; /* don't block clicks */
+}
+
+/* Close button for the fixed banner */
+.fixed-banner-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: #efefef; /* lighter grey background */
+  color: #111; /* darker X for contrast */
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 999px;
+  cursor: pointer;
+  z-index: 60;
+  pointer-events: auto; /* ensure button is clickable even if wrapper has none */
+  transition: transform 120ms ease, opacity 120ms ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+.fixed-banner-close:hover,
+.fixed-banner-close:focus {
+  transform: translateY(-2px) scale(1.04);
+  opacity: 0.98;
+}
+
+/* Small open button that appears when the banner is dismissed */
+.fixed-banner-open {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 1000002;
+  background: rgba(0,0,0,0.06);
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #111;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+.fixed-banner-open:hover,
+.fixed-banner-open:focus {
+  transform: translateY(-2px) scale(1.02);
+  opacity: 0.98;
+}
+
+.banner-socials:hover::after,
+.banner-socials:focus-within::after {
+  border-bottom-style: solid;
+  border-bottom-color: rgba(0,0,0,0.36);
+}
+
+.banner-social-link { display: inline-block; }
+
+/* Make social icons match are.na dimensions */
+.banner-social-icon {
+  /* clamp icon height so they remain a practical size regardless of banner height
+     - min 16px for tiny screens, scale with viewport via 4.5vh, cap at 48px */
+  max-height: clamp(16px, 4.5vh, 48px);
+  width: auto;
+  display: block;
+  pointer-events: auto; /* ensure icons can be clicked */
+  cursor: pointer;
+  opacity: 1;
+  object-fit: contain;
+}
+
+/* If you want are.na slightly larger or styled differently, target the are-na class */
+.banner-social-icon.are-na {
+  /* placeholder for are.na-specific tweaks; keep icon slightly emphasized */
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  /* reduce icon height slightly on small screens */
+  .banner-social-icon { max-height: 22%; }
+}
+
+/* Hide the old sticky footer pill so only the fixed banner shows */
+.sticky-footer { display: none !important; }
+
+/* no blending applied to the updates GIF; keep visuals simple */
+
+.updates-dots {
+  /* decorative dots removed */
+  display: none !important;
+}
+.updates-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.12);
+  display: inline-block;
+}
+
+/* ensure no accidental text-decoration on the updates container */
+.sticky-updates { text-decoration: none; }
+
+/* Close button in top-right of the sticky footer */
+.sticky-close {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* make sure sticky-footer remains fixed to the viewport (no override) */
+
+/* Closed state open button */
+.sticky-footer-closed { position: fixed; right: 12px; bottom: 12px; z-index: 99999; }
+.sticky-open { background: rgba(0,0,0,0.06); border: none; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+
+/* responsive adjustments kept minimal so banner stays small */
+
+
+/* example.gif removed */
+
+/* Article-style title placed next to GIF tiles (magazine headline style) */
+.article-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  margin: 0; /* reset default h3 margin */
+  color: #111;
+  font-size: clamp(18px, 2.6vw, 36px);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  max-width: 36ch;
+  text-transform: none;
+  display: inline-block;
+  /* replace bottom border with deep blue dotted underline */
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #1E90FF; /* brighter blue */
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+@media (max-width: 880px) {
+  .article-title { font-size: clamp(16px, 3.4vw, 24px); }
+}
+
+@media (max-width: 560px) {
+  .article-title { display: block; margin-top: 10px; text-align: left; font-size: 18px; }
+}
+
+/* Hover: switch dotted underline to solid while keeping color */
+.article-title:hover {
+  text-decoration-style: solid;
+  text-decoration-color: #1E90FF; /* keep bright blue on hover */
+}
+
+/* Title image placed to the right of the third GIF on the home page */
+.title-image {
+  width: auto;
+  /* limit height so it visually reads as a title next to the GIF */
+  max-height: clamp(28px, 5.5vh, 92px);
+  object-fit: contain;
+  pointer-events: none; /* decorative */
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .title-image { max-height: clamp(20px, 4.5vh, 56px); }
+}
+
+/* Tiny fixed home arrow used on article pages (top-right corner) */
+.home-arrow {
+  position: fixed;
+  /* sit in the top-right corner and behave responsively like header images,
+     but remain visually small for articles */
+  top: 6px;
+  right: 6px;
+  width: min(8vw, 36px); /* responsive but kept tiny */
+  height: auto;
+  object-fit: contain;
+  z-index: 1000001; /* above headers and banners */
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  background: transparent;
+  transition: transform 140ms ease, opacity 140ms ease;
+  padding: 0; /* ensure no extra clickable padding */
+}
+.home-arrow:hover,
+.home-arrow:focus {
+  transform: translateY(-2px) scale(1.03);
+  opacity: 0.98;
+}
+
+@media (max-width: 720px) {
+  /* slightly larger on very small screens but still small */
+  .home-arrow { width: min(10vw, 28px); top: 6px; right: 6px; }
+}
+
+/* Monospace stack for inline code/pre blocks to match markdown renderers */
+code, pre, kbd, samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Segoe UI Mono', 'Roboto Mono', 'Helvetica Neue', monospace;
+}
+
+/* Make all site text black and bold per user request. This forces readable emphasis across components. */
+body, body * {
+  color: #000 !important;
+  font-weight: 700 !important;
+}
+
+/* Standard summary textbox used inside a GIF frame (keeps content within the 2px border) */
+.summary-box {
+  margin: 6px 0 0 0; /* placed outside the frame: align to frame edges */
+  padding: 8px 10px;
+  background: transparent; /* remove fill as requested */
+  border: 1px solid #000; /* keep subtle outline */
+  border-radius: 0; /* square corners */
+  box-sizing: border-box;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere; /* prevent overflow for long words */
+  word-break: break-word;
+  max-width: 100%;
+  font-weight: 400 !important; /* override global bold to read like normal text */
+}
+
+
+/* -------------------------------------------------------------------------
+   TEMPORARY DEBUG OVERRIDE
+
+   Hide likely fixed-position, right-edge UI elements that can produce a
+   secondary visual scrollbar (used only for quick local debugging). This is
+   intentionally appended as a single toggle block so it's easy to remove.
+   Remove this block once you've confirmed which element caused the extra
+   scrollbar in your browser, or toggle it off for normal use.
+   ------------------------------------------------------------------------- */
+.debug-hide-fixed-suspects, /* helper class (not used in markup) */
+.social-footer,
+.social-tab,
+.social-tab-toggle,
+.fixed-banner,
+.fixed-banner-open,
+.home-arrow {
+  display: none !important;
+  /* keep pointer-events unaffected for debugging clarity */
+}
+
+/* -------------------------------------------------------------------------
+   AGGRESSIVE DEBUG: hide dev-overlay / toasts / scrollable panels and remove
+   internal scrollbars. Use only for local debugging; this will forcefully
+   remove any in-page scrollable UI that could appear as a second scrollbar.
+   ------------------------------------------------------------------------- */
+/* Next dev overlay / toasts / panels */
+.nextjs-toast,
+[data-nextjs-dialog-overlay],
+[data-nextjs-dialog-backdrop],
+.dynamic-panel-container,
+[data-nextjs-scrollable-content],
+.nextjs__container_errors_expand_button,
+.nextjs__container_errors_gradient_overlay {
+  display: none !important;
+}
+
+/* Force internal elements to reveal content instead of scrolling (hide internal scrollbars)
+   This prevents any element from showing its own vertical track on the right. */
+body * {
+  overflow: visible !important;
+  max-height: none !important;
+  /* hide scrollbars for Firefox */
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Chrome/WebKit: hide any rendered scrollbars */
+body *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Keep html/body native scrollbar intact */
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; }
+
+
+

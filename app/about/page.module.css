@@ -1,0 +1,63 @@
+/* page root styles applied locally to avoid CSS module global selector errors */
+.pageRoot {
+  font-family: "Georgia", serif;
+  background-color: #f8f5f2;
+  margin: 0;
+  padding: 60px 20px;
+  color: #2b2b2b;
+  line-height: 1.8;
+}
+
+.container {
+  column-count: 2;
+  column-gap: 50px;
+  max-width: 900px;
+  margin: auto;
+  position: relative;
+  text-align: justify;
+}
+
+.text {
+  /* match header text size and use normal weight (not bold) as requested */
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: #2b2b2b;
+}
+
+/* Drop cap styling */
+.dropcap {
+  float: left;
+  font-size: 5em;
+  line-height: 0.9;
+  padding-right: 10px;
+  color: #d63b5d;
+  font-weight: bold;
+}
+
+/* 🖼 The image wrap magic */
+.portrait {
+  width: 300px;
+  float: right; /* text flows around it */
+  shape-outside: circle(50%); /* circular wrap */
+  shape-margin: 25px; /* space between text and image */
+  margin: 40px 0 40px 30px; /* gives it vertical breathing space */
+  border-radius: 50%;
+  display: block;
+}
+
+/* Responsive (single column on smaller screens) */
+@media (max-width: 800px) {
+  .container {
+    column-count: 1;
+  }
+  .portrait {
+    float: none;
+    display: block;
+    margin: 40px auto;
+    shape-outside: none;
+    clip-path: none;
+    border-radius: 15px;
+    width: 80%;
+  }
+}

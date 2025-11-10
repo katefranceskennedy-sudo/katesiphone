@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const metadata = { title: "Hold on, if art is the answer, you're home" }
+export const metadata = { title: "Hold on, if art is the answer, you&apos;re home" }
 
 export default function BooksPage(){
   return (

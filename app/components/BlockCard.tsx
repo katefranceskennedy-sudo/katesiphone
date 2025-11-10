@@ -3,7 +3,9 @@ import { useState } from 'react';
 import HoverScaleImg from './HoverScaleImg';
 import BlockModal from './BlockModal';
 
-export default function BlockCard({ block }: { block: any }) {
+import type { BlockItem } from '../../lib/seed';
+
+export default function BlockCard({ block }: { block: BlockItem }) {
   const [open, setOpen] = useState(false);
 
   return (

@@ -4,8 +4,9 @@ import { channels, blocksByChannel } from '../../../lib/seed';
 
 type Props = { params: { slug: string } };
 
-export default function ChannelDetailPage({ params }: Props) {
-  const slug = params.slug;
+// Accept a permissive props shape to avoid generated Next.js type mismatches
+export default function ChannelDetailPage(props: any) {
+  const slug = props?.params?.slug as string;
   const channel = channels.find((c) => c.slug === slug);
   if (!channel) {
     return (

@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import type { Channel } from '../../lib/seed';
 
-export default function ChannelCard({ channel }: { channel: any }) {
+export default function ChannelCard({ channel }: { channel: Channel }) {
   return (
     <Link href={`/channels/${channel.slug}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: 12, border: '1px solid rgba(0,0,0,0.06)', borderRadius: 8, marginBottom: 12 }}>

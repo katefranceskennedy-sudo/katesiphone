@@ -16,15 +16,15 @@ export default function FannysPage(){
           {/* layout: GIF on left, article text on right (stacks on small screens) */}
           <div className="newman-layout">
             <div className="gif-frame" data-border="pink" style={{ width: 'min(384px, 43vw)', flex: '0 0 auto', marginTop: 10 }}>
-              <a href="/paglia.gif" target="_blank" rel="noopener noreferrer" aria-label="Open paglia gif in new tab" style={{ display: 'block' }}>
+              <Link href="/paglia.gif" target="_blank" rel="noopener noreferrer" aria-label="Open paglia gif in new tab" style={{ display: 'block' }}>
                 <img src="/paglia.gif" alt="Paglia" />
-              </a>
+              </Link>
             </div>
 
             <div className="newman-text">
               <p>The very term ‘libertarian’ was probably coined by the dissident Leanord Reed, to denote a uniquely western thought of anti-absolutism that essentially sought to zhoosh up private life and the individual conscience. Jean-Jacques Rousseau’s early classic, ‘The Social Contract’, foreshadowed the image of “noble savages” in which our primitive identities in civilisation have become hypocritical due to our conformist identities. A natural surplus of brute authoritarianism needing to be disposed of no matter what. As with concepts, so with consequences as criticised in Balzac’s The wild Ass’s Skin.</p>
 
-              <p>To me, the most brilliant and the most engaging of these libertarian intellectuals is Camilla Paglia, the New York born Italian who is just the most fabulous figure in the cause against the hostile relations between the Crats and Republicans. By contrast the not generally accepted verdict that we associate with the name of ms. Camellia Paglia’s ideology is that their feminist character eclipses any of the ostensible differences between her ‘left’ and ‘right’ soul and is one that few wish to dispute.</p>
+              <p>To me, the most brilliant and the most engaging of these libertarian intellectuals is Camilla Paglia, the New York born Italian who is just the most fabulous figure in the cause against the hostile relations between the Crats and Republicans. By contrast the not generally accepted verdict that we associate with the name of ms. Camellia Paglia&apos;s ideology is that their feminist character eclipses any of the ostensible differences between her ‘left’ and ‘right’ soul and is one that few wish to dispute.</p>
             </div>
           </div>
 
@@ -48,9 +48,9 @@ Always,
 Julie Birchil”</p>
               </blockquote>
 
-            <p>To me, Birchil’s bitch-slap delivers best, in the context of a conscience-stricken Tabloidist writing in Conservative Britain of Sir John Major.</p>
+            <p>To me, Birchil&apos;s bitch-slap delivers best, in the context of a conscience-stricken Tabloidist writing in Conservative Britain of Sir John Major.</p>
 
-            <p>On the topic of Julie Birchill, I'd like to appreciate her “extermination order” against woke snobbery in what now is the impeachment of the middle class. One feels another crackle of premonition when reading about this. Notwithstanding the current running atrocity in the press corp being the decline of British Values. I’m with Birchill when she says woke snobbery has conducted hideous social experiments on the underprivileged and oppressed, the same fickle group calling itself the Labour party, the same seeds which fuel the genocidal IDF. I find it difficult to be like Paglia, who understands the hecatomb of hypocrisy is partly a projection of the natural brutality of empires. Her prompting is always to enlarge the picture: the concept of the force of the cosmics in political relations does not intimidate her as written in ‘A post-war and pre-Sex, Art, and American Culture’, which is almost entirely devoted to a rhapsodic review of Poetry.</p>
+            <p>On the topic of Julie Birchill, I&apos;d like to appreciate her “extermination order” against woke snobbery in what now is the impeachment of the middle class. One feels another crackle of premonition when reading about this. Notwithstanding the current running atrocity in the press corp being the decline of British Values. I&apos;m with Birchill when she says woke snobbery has conducted hideous social experiments on the underprivileged and oppressed, the same fickle group calling itself the Labour party, the same seeds which fuel the genocidal IDF. I find it difficult to be like Paglia, who understands the hecatomb of hypocrisy is partly a projection of the natural brutality of empires. Her prompting is always to enlarge the picture: the concept of the force of the cosmics in political relations does not intimidate her as written in ‘A post-war and pre-Sex, Art, and American Culture’, which is almost entirely devoted to a rhapsodic review of Poetry.</p>
 
               <blockquote className="quoted">
                 <p>“Capitalism is an art form, an Apollonian fabrication to rival nature.”</p>

@@ -1,15 +1,23 @@
 .sidebar {
-  /* hide the decorative secondary scrollbar to avoid duplicate scroll UI */
-  display: none !important;
+  /* fixed decorative vertical track on the right side */
+  position: fixed;
+  right: 18px;
+  top: 140px;
+  z-index: 60;
+  display: block;
+  width: 24px;
+  padding: 6px 4px;
+  background: transparent;
+  border-radius: 10px;
 }
 
 .sidebar.active {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .track {
   width: 8px;
-  height: 80vh;
+  height: 60vh;
   margin: auto;
   background: rgba(128, 128, 128, 0.04);
   border-radius: 8px;
@@ -30,4 +38,9 @@
 
 .sidebar.active .thumb {
   background: #888;
+}
+
+@media (max-width: 900px) {
+  /* hide on small screens */
+  .sidebar { display: none; }
 }

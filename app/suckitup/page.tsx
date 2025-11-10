@@ -70,19 +70,18 @@ export default function SuckItUpPage() {
               >
                 W
               </span>
-              hen people in England say, “you’ve made your bed, now lie in it,” as Joan Didion once put it, they may think they are quoting Jane Austen. But when Austen annexed those seductive words from Samuel Johnson’s The Rambler No. 32, fictionising whole paragraphs in her pages and borrowing from it one of the 18th century’s most reflective titles, Johnson did not mean, literally, that all experiences are the same or that all fortunes are to be suffered equally. He meant that, in Georgian society under the reign of George II, we would all be losers if we lost a sense of basic respect for one another. It was a matter of both solidarity and self-interest: stand by your friends now, or be shamed (and deserted in your turn) later on.
+                hen people in England say, &quot;you&apos;ve made your bed, now lie in it,&quot; as Joan Didion once put it, they may think they are quoting Jane Austen. But when Austen annexed those seductive words from Samuel Johnson&apos;s The Rambler No. 32, fictionising whole paragraphs in her pages and borrowing from it one of the 18th century&apos;s most reflective titles, Johnson did not mean, literally, that all experiences are the same or that all fortunes are to be suffered equally. He meant that, in Georgian society under the reign of George II, we would all be losers if we lost a sense of basic respect for one another. It was a matter of both solidarity and self-interest: stand by your friends now, or be shamed (and deserted in your turn) later on.
             </p>
 
-            <p>
-              One month ago, the grisly events that filled London involved no struggle, no sacrifice, no great principle. They were random and pointless. Those who marched with Tommy Robinson were not soldiers in any cause. I’m also not promoting that they were not funded by our enemies, the same, not martyrs. And yet, from this vacuum of personhood came an exhausting national online sob-fest from the most recent non-event.
+              <p>
+              One month ago, the grisly events that filled London involved no struggle, no sacrifice, no great principle. They were random and pointless. Those who marched with Tommy Robinson were not soldiers in any cause. I&apos;m also not promoting that they were not funded by our enemies, the same, not martyrs. And yet, from this vacuum of personhood came an exhausting national online sob-fest from the most recent non-event.
             </p>
 
             <p>
               Enter the tech billionaire E. Musk, who ordered the chimes of nationalism to be spat by ordinary Middle Men before announcing the “four years we have left of modern civilization.” Four years? Yes. “We are here to fight,” he declared. For a billionaire to equate 100,000 gatherers in an orgy of “oneness” with a crusade for civilisation's survival was probably the stupidest thing that happened last month, though not by a wide margin. Almost everyone in the country seems to have taken this non-event as permission to talk about starkest nonsense. And why not? Since the rally changed no real issues, it was a blank slate on which any class could doodle racist bigotry.
+              <p>
+              As Amis once observed, “The internet does not argue; it emits. It&apos;s a static of grievance disguised as dialogue, a place where noise mistakes itself for consequence.” And I say it&apos;s time we grew up and faced it. In the name of revolution, the more it matters, the less you should interact with it online. To me, in the meantime, and in anticipation of sterner tests to our composure, we might try nailing our colours to the mast of half the population, dare I say, women&apos;s rights, if the phrase still means anything. Better that than rehearsing the other side of that shabby coin, a permanent dress rehearsal for bigotry and masochism.
             </p>
-
-            <p>
-              Take a more recent example: Tommy Robinson’s warm welcome in Tel Aviv. Here is how the bells tolled for them at another national seat of power. Try this, from the fourth day of breathless media coverage. The person being quoted is Lindsay Hilsum:
             </p>
 
             <p>

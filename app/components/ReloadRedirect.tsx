@@ -9,14 +9,14 @@ export default function ReloadRedirect() {
     if (typeof window === 'undefined') return;
 
     try {
-      const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
+  const navEntries = performance.getEntriesByType('navigation') as PerformanceNavigationTiming[];
       let isReload = false;
 
       if (navEntries && navEntries.length > 0) {
-        isReload = (navEntries[0] as any).type === 'reload';
-      } else if ((performance as any).navigation) {
+        isReload = navEntries[0].type === 'reload';
+      } else if ((performance as unknown as { navigation?: { type: number } }).navigation) {
         // fallback for older browsers
-        isReload = (performance as any).navigation.type === 1;
+        isReload = (performance as unknown as { navigation?: { type: number } }).navigation!.type === 1;
       }
 
       // If it was a reload and we're not already on the homepage, replace to '/'

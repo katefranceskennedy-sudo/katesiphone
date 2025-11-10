@@ -1,7 +1,9 @@
 "use client";
 import { useEffect } from 'react';
 
-export default function BlockModal({ block, onClose }: { block: any; onClose: () => void }) {
+import type { BlockItem } from '../../lib/seed';
+
+export default function BlockModal({ block, onClose }: { block: BlockItem; onClose: () => void }) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') onClose();

@@ -10,7 +10,7 @@ export default function AboutContent() {
 
   return (
     <div className="about-content" style={{ maxWidth: 900, width: "90%" }}>
-      <p style={{ marginTop: 20 }}>My name is Kate Kennedy. I use my middle initial ‘F’ as there are many other Kate Kennedy’s out there.</p>
+  <p style={{ marginTop: 20 }}>My name is Kate Kennedy. I use my middle initial &apos;F&apos; as there are many other Kate Kennedy&apos;s out there.</p>
 
       <p style={{ marginTop: 8 }}>
         To get in touch, please copy and paste my email into your mail client:

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
@@ -48,7 +48,7 @@ function ImageNavLink({
         }}
         style={{
           display: "block",
-          width: "min(20vw, 220px)", // 💥 larger image size restored
+          width: "min(20vw, 220px)",
           height: "auto",
         }}
       />
@@ -79,92 +79,127 @@ function ImageNavLink({
 }
 
 export default function Header() {
+  const textRef = useRef<HTMLSpanElement | null>(null);
+
+  // Measure only the width of the text content (not a full-width container) so the stripe matches just the header line.
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    const updateWidth = () => {
+      const w = el.getBoundingClientRect().width;
+      document.documentElement.style.setProperty('--ultramarine-stripe-width', `${w}px`);
+    };
+    updateWidth();
+    const ro = new ResizeObserver(updateWidth);
+    ro.observe(el);
+    window.addEventListener('resize', updateWidth);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, []);
+
   return (
     <>
-      {/* 💛 Intro line above header */}
+      {/* Intro line above the decorative stripe; includes updates.gif to the right */}
       <div
+        className="ultramarine-stripe-anchor"
         style={{
-          textAlign: "center",
+          display: 'block',
+          width: 'fit-content',
+          margin: '10px auto 8px',
           fontFamily:
             '"FS Sans Coded", Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
           fontSize: 14,
           fontWeight: 500,
-          letterSpacing: "0.03em",
-          color: "#000",
-          marginTop: "10px",
-          marginBottom: "8px",
+          letterSpacing: '0.03em',
+          color: '#000',
+          position: 'relative',
+          zIndex: 2 /* ensure header text is above background stripe */
         }}
       >
-        My name is{" "}
-        <span
-          style={{
-            borderBottom: "2px dotted #fbc02d",
-            transition: "border-bottom 0.25s ease",
-            cursor: "default",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.borderBottom = "2px solid #fbc02d")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.borderBottom = "2px dotted #fbc02d")
-          }
-        >
-          Kate Kennedy
-        </span>{" "}
-        and my email is{" "}
-        <a
-          href="mailto:katefranceskennedy@gmail.com"
-          style={{
-            color: "#000",
-            textDecoration: "none",
-            borderRadius: 4,
-            backgroundColor: "#fff9c4",
-            padding: "0 3px",
-            transition: "background-color 0.25s ease",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "#ffeb3b")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "#fff9c4")
-          }
-        >
-          katefranceskennedy@gmail.com
-        </a>{" "}
-        <span
-          style={{
-            borderRadius: 4,
-            backgroundColor: "#fff9c4",
-            padding: "0 4px",
-            transition: "background-color 0.25s ease",
-            cursor: "default",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "#ffeb3b")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "#fff9c4")
-          }
-        >
-          💛
+        <span ref={textRef} style={{ display: 'inline-block' }}>
+          My name is {" "}
+          <span
+            style={{
+              borderBottom: "2px dotted #fbc02d",
+              transition: "border-bottom 0.25s ease",
+              cursor: "default",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.borderBottom = "2px solid #fbc02d")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.borderBottom = "2px dotted #fbc02d")
+            }
+          >
+            Kate Kennedy
+          </span>{" "}
+          and my email is {" "}
+          <a
+            href="mailto:katefranceskennedy@gmail.com"
+            style={{
+              color: "#000",
+              textDecoration: "none",
+              borderRadius: 4,
+              backgroundColor: "#fff9c4",
+              padding: "0 3px",
+              transition: "background-color 0.25s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#ffeb3b")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "#fff9c4")
+            }
+          >
+            katefranceskennedy@gmail.com
+          </a>{" "}
+          <span
+            style={{
+              borderRadius: 4,
+              backgroundColor: "#fff9c4",
+              padding: "0 4px",
+              transition: "background-color 0.25s ease",
+              cursor: "default",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor = "#ffeb3b")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "#fff9c4")
+            }
+          >
+            💛
+          </span>
         </span>
+
+        {/* updates.gif removed from inline intro and placed above in the header so it sits
+            centered on the decorative stripe/pink background without changing surrounding layout */}
       </div>
 
       {/* Header */}
       <header
         className="header-polka"
         style={{
-          padding: "0px 9px",
+          padding: "0px 6px",
           position: "relative",
           width: "100%",
         }}
       >
+        {/* updates.gif removed — the decorative GIF was removed from the header to stop it appearing across pages */}
         <div
           style={{
             width: "100%",
             margin: 0,
             display: "flex",
             justifyContent: "center",
+            /* absolutely position the GIF nav and lift it visually by 200px */
+            position: 'absolute',
+            left: '50%',
+            top: 0,
+            transform: 'translate(-50%, -200px)',
+            zIndex: 60,
           }}
         >
           <nav
@@ -172,36 +207,19 @@ export default function Header() {
             style={{
               display: "flex",
               justifyContent: "center",
-              gap: 24, // ✅ closer together, but not cramped
-              padding: "10px 0",
+              gap: 20,
+              padding: "6px 0",
               alignItems: "center",
               overflow: "visible",
               width: "max-content",
             }}
           >
-            <ImageNavLink href="/" src="/Home.gif" alt="Home" />
-            <ImageNavLink
-              href="/digital-culture"
-              // use the capitalized DigitalCulture.gif from public/ as requested
-              src="/DigitalCulture.gif"
-              // keep a safe fallback in case the file doesn't load for some reason
-              fallbackSrc="/headerart.gif"
-              alt="Digital Culture"
-            />
-            <ImageNavLink
-              href="/updates"
-              src="/updates.gif"
-              alt="Updates"
-              style={{
-                padding: 0,
-                display: "inline-flex",
-                alignItems: "center",
-                lineHeight: 0,
-              }}
-            />
+            {/* Home, Digital Culture and Updates links removed site-wide per request */}
           </nav>
         </div>
       </header>
+      {/* Vertical ultramarine stripe spanning full page height, matching intro width */}
+      <div aria-hidden="true" className="ultramarine-vertical-stripe" />
     </>
   );
 }

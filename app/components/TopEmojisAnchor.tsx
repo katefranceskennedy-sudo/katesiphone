@@ -17,8 +17,8 @@ export default function TopEmojisAnchor(): React.ReactElement | null {
         className="top-emojis-wrap"
         aria-hidden={false}
         style={hasColumn
-          ? { position: "sticky", top: "24px", display: "flex", justifyContent: "flex-start", width: "100%", zIndex: 9999, transform: "none" }
-          : { position: "fixed", left: "50%", transform: "translateX(calc(-50% - 120px))", top: "88px", zIndex: 9999 }}
+          ? { position: "relative", display: "flex", justifyContent: "flex-start", width: "100%", zIndex: 999, transform: "none" }
+          : { position: "relative", width: "100%", display: "flex", justifyContent: "center", zIndex: 999 }}
       >
         <div className="top-emojis">
           <img src="/topemojis/swan.png" alt="" className="top-emoji" />
@@ -60,8 +60,7 @@ export default function TopEmojisAnchor(): React.ReactElement | null {
   );
 
   if (hasColumn === null) return null; // wait until we know whether the column exists
-  if (hasColumn) return emojis;
-  if (typeof document === "undefined") return null;
-  return createPortal(emojis, document.body);
+  // Always render in flow now so it scrolls naturally with page content (no sticky/fixed/portal)
+  return emojis;
 }
 

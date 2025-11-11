@@ -6,7 +6,7 @@
 body {
   margin: 0;
   /* Use DejaVu Sans as the primary font; fall back to other sans fonts if not present */
-  font-family: 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-inter), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   /* make body text a bit lighter/thinner */
   font-weight: 300;
   font-size: 16px;
@@ -15,13 +15,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Prevent horizontal/bottom scrollbar caused by full-bleed elements */
-html, body {
-  overflow-x: hidden;
-}
+/* Ultramarine vertical stripe (width matches intro header line) */
+/* Removed ultramarine stripe styles */
 
-
-/* FS Sans Coded fallback — drop the font file at public/fonts/FS-Sans-Coded.woff2 */
+/* (removed duplicate stripe and body pseudo used previously) */
 @font-face {
   font-family: 'FS Sans Coded';
   src: url('/fonts/FS-Sans-Coded.woff2') format('woff2');
@@ -37,6 +34,8 @@ html, body {
   width: 100vw;
   transform: translateX(-50%);
 }
+
+/* (Removed earlier bordered .home-blurb variant; later definition retained) */
 
 .loading-container {
   height: 100vh;
@@ -399,6 +398,69 @@ body {
   align-items: center;
   justify-content: center;
 
+/* Highlighted article style: transparent maroon background + dotted turquoise "underquote" underline with square ends */
+.highlight-article p {
+  /* keep paragraphs wrapping naturally while the highlight sits behind the text */
+  display: inline-block;
+  background-color: rgba(128, 0, 32, 0.10); /* transparent maroon */
+  padding: 0 4px 6px 4px; /* small vertical padding to make room for underline */
+  margin-bottom: 1rem; /* preserve paragraph spacing */
+  border-radius: 0; /* squared corners */
+  position: relative; /* for the underline pseudo-element */
+}
+
+.highlight-article p::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px; /* slight offset so the underline sits under text descenders */
+  height: 4px; /* thickness of the decorative dotted line */
+  /* create repeating square turquoise segments (appears like dotted but with square ends) */
+  background-image: linear-gradient(90deg, #40E0D0 0 6px, rgba(0,0,0,0) 6px 12px);
+  background-repeat: repeat-x;
+  background-size: 12px 4px;
+  border-radius: 0; /* ensure squared ends */
+  pointer-events: none;
+}
+
+/* Ensure inline links/strong/em remain visible and inherit highlight */
+.highlight-article p a,
+.highlight-article p strong,
+.highlight-article p em {
+  background: transparent; /* avoid nested rounded backgrounds */
+}
+
+/* Inline highlight element for clearer visibility */
+.highlight-article .hl {
+  display: inline; /* hug text without creating a block */
+  background-color: rgba(128, 0, 32, 0.18); /* stronger transparent maroon so it's visible */
+  padding: 0 4px; /* horizontal padding so highlight breathes */
+  border-radius: 0; /* squared corners */
+  position: relative; /* for underline pseudo */
+  line-height: inherit;
+}
+
+.highlight-article .hl::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0; /* sits just under the text */
+  height: 5px; /* thickness of decorative underline */
+  background-image: linear-gradient(90deg, #40E0D0 0 6px, rgba(0,0,0,0) 6px 12px);
+  background-repeat: repeat-x;
+  background-size: 12px 5px; /* square segments (12px wide, 5px tall) */
+  border-radius: 0; /* squared ends */
+  pointer-events: none;
+  transform: translateY(2px); /* lift slightly so it doesn't overlap descenders */
+}
+
+/* reduce underline overlap on small text */
+@media (max-width: 480px) {
+  .highlight-article .hl::after { background-size: 8px 4px; height: 4px; }
+}
+
 /* About page decorative drop-cap and image styling */
 .about-center p:first-of-type {
   position: relative;
@@ -519,13 +581,30 @@ body {
 }
 
 /* Ensure any emphasized/quoted passages use the editorial Playfair font and appear bold */
+/* Override previous bold styling: make emphasized text thin */
 .newman-text strong,
 .newman-fulltext strong,
 .newman-text q,
 .newman-fulltext q {
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  font-weight: 700;
+  font-family: inherit; /* keep same sans-serif stack */
+  font-weight: 100;
   font-style: normal;
+  font-variation-settings: 'wght' 100;
+  letter-spacing: 0.3px;
+}
+
+/* Global fallback to ensure <strong> and <b> are thin across pages */
+strong, b {
+  font-weight: 100 !important; /* force thin */
+  font-variation-settings: 'wght' 100;
+  font-family: var(--font-inter), inherit;
+}
+
+/* Utility: apply thin font weight to any subtree */
+.no-bold, .no-bold * {
+  font-weight: 100 !important;
+  font-variation-settings: 'wght' 100;
+  font-family: var(--font-inter), inherit;
 }
 
 /* Make all Newman page text use the Playfair Display editorial font by default,
@@ -1023,6 +1102,14 @@ body.contact-page .site-footer::before {
   .top-emojis { gap: 2px; }
 }
 
+/* Force thin weight for the Suck It Up article (page-specific override). 
+   This uses !important to override any broader rules that might set bold weights. */
+.thin-article,
+.thin-article * {
+  font-weight: 300 !important;
+  font-family: inherit !important; /* ensure children inherit the thin-capable site font */
+}
+
 /* overlay (are.na logo) centered over the banner */
 .banner-socials {
   /* cover the exact area of the banner image so the socials row is the same size */
@@ -1388,6 +1475,38 @@ body *::-webkit-scrollbar {
 
 /* Keep html/body native scrollbar intact */
 html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; }
+
+
+
+/* === header stripe overrides: show a single stripe above the header only === */
+/* Appended override (placed at end) so it wins over earlier broad rules */
+.header-polka::before {
+  /* place a single decorative stripe inside the header at the top */
+  top: 0 !important;
+  height: 200px !important;
+  background-size: auto 200px !important;
+  background-repeat: repeat-x !important;
+  background-position: center !important;
+  transform: none !important;
+}
+.header-polka {
+  /* ensure header content is pushed below the stripe so it doesn't overlap */
+  padding-top: 200px !important;
+}
+.header-polka::after {
+  /* remove the bottom stripe entirely */
+  background-image: none !important;
+  height: 0 !important;
+  top: auto !important;
+}
+@media (max-width: 720px) {
+  .header-polka::before {
+    top: 0 !important;
+    height: 140px !important;
+    background-size: auto 140px !important;
+  }
+  .header-polka { padding-top: 140px !important; }
+}
 
 
 

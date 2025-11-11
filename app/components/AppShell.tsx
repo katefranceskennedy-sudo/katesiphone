@@ -7,7 +7,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <>
       <ReloadRedirect />
       <Header />
-      <div style={{ marginLeft: 0 }}>{children}</div>
+      <div style={{ marginLeft: 0, position: 'relative' }}>
+        {children}
+      </div>
     </>
   );
 }

@@ -1,19 +1,80 @@
 import Link from 'next/link'
+import SentenceGaps from '../components/SentenceGaps'
 
 export const metadata = { title: 'Window of Opportunity' }
 
 export default function WindowOfOpportunityPage(){
   return (
     <main style={{ background: '#fff', minHeight: '100vh', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
-  <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: '#fff', boxShadow: 'none', borderRadius: 0, overflow: 'hidden' }}>
-        <div style={{ padding: 0, borderBottom: 'none', background: '#fff', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-          <Link href="/" aria-label="Home">
-            <img src="/Home1.gif" alt="Home" className="home-arrow" />
-          </Link>
-        </div>
+  <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: '#fff', boxShadow: 'none', borderRadius: 0 }}>
+        <div style={{ padding: 0, borderBottom: 'none', background: '#fff' }} />
 
         <div style={{ padding: 0 }}>
-          <article style={{ padding: '28px 20px', maxWidth: 920, margin: '0 auto', color: '#111', lineHeight: 1.7 }}>
+          <div style={{ padding: '20px 20px 0', maxWidth: 920, margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', transform: 'translateY(-120px)' }}>
+            <h1 style={{ margin: '0 0 6px 0', textAlign: 'center' }}>
+              <span className="window-title">Window of Opportunity</span>
+              <style>{`
+                .window-title {
+                  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                  font-weight: 300;
+                  font-size: 0.95rem;
+                  color: #b80565ff;
+                  text-decoration: none;
+                  display: inline-block;
+                  padding: 4px 8px 6px 8px;
+                  border-radius: 4px;
+                  transition: background-color 120ms ease;
+                  background-color: #ffffff; /* ensure contrast behind underline on dark bg */
+                  /* black dotted underline */
+                  --dot-color: #000; /* black dots */
+                  --dot-size: 5px 3px; /* slightly larger for visibility */
+                  background-image: radial-gradient(circle, var(--dot-color) 62%, rgba(0,0,0,0) 63%);
+                  background-repeat: repeat-x;
+                  background-size: var(--dot-size);
+                  background-position: 0 calc(100% - 2px);
+                }
+
+                .window-title:hover {
+                  background-color: #ffffff; /* keep white so black line stays visible */
+                  /* black solid underline on hover */
+                  background-image: linear-gradient(#000, #000);
+                  background-size: 100% 3px; /* a touch thicker on hover */
+                  background-position: 0 calc(100% - 2px);
+                  background-repeat: no-repeat;
+                }
+
+                .window-title:focus-visible {
+                  outline: 2px solid #cfeedb;
+                  outline-offset: 2px;
+                }
+              `}</style>
+            </h1>
+          </div>
+
+          <article className="thin-window" style={{ padding: '8px 20px 28px', maxWidth: 920, margin: '0 auto', color: '#ffffff', lineHeight: 1.7, fontWeight: 700, fontVariationSettings: '"wght" 700', letterSpacing: '0.3px', transform: 'translateY(-50px)', background: '#000' }}>
+            <style>{`
+              .thin-window, .thin-window p, .thin-window strong, .thin-window b {
+                font-weight:700 !important;
+                font-variation-settings:'wght' 700;
+                font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+              }
+              .thin-window strong { letter-spacing:0.35px; }
+              /* remove paragraph-level highlight; we highlight sentences instead */
+              .thin-window p { padding: 0; margin: 0 0 0.2em 0; }
+
+              .sentence-block {
+                display: inline-block; /* keeps highlight to text width */
+                margin: 0 0 1.7em 0; /* whole-line gap between sentences (matches line-height ~1.7) */
+                background: rgba(255, 250, 150, 0.88); /* brighter, far less transparent yellow highlight */
+                padding: 2px 4px 4px 4px;
+                border-radius: 0; /* squared edges */
+                line-height: 1.5;
+                transition: background-color 140ms ease;
+              }
+              .sentence-block:hover { background: rgba(255, 235, 59, 0.95); }
+              .sentence-block:last-child { margin-bottom: 0; }
+            `}</style>
+            <SentenceGaps />
             <p><strong>Reaction to the recent release of Dove&apos;s &apos;Post-Human Code Book&apos; campaign, endorsed by UNICEF, has largely centered on a winsomely innocent reverence for dismantling beauty standards in the age of AI. Yet the playbook reveals a different UNICEF: savvy, manipulative, disingenuous, and stripped of the humanity for which it was once so admired.</strong></p>
 
             <p><strong>If there were a competition for the headline most unlikely to appear in a UNICEF press release, the winning entry would surely be “hottest bots” or “bots that are hot according to bots.”</strong> Digital governance of women, and even posthumously has always somehow fallen to UNICEF to set the tone. This is an exciting task in governance, especially when one considers that UNICEF had to raise the tone on AI without ever openly admitting that the tone needed raising for women. Yet it was always implicitly acknowledged that a dash of UNICEF was necessary for women. Of course a little leaven leaves the whole lump of matter, refining the rather coarse mixture of the recent hurrah and the bootleg version of the original UNICEF mission.</p>

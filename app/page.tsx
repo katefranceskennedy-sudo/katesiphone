@@ -1,5 +1,6 @@
 import HoverScaleImg from './components/HoverScaleImg';
 import Link from 'next/link';
+import TopEmojisAnchor from './components/TopEmojisAnchor';
 
 export default function HomePage() {
   return (
@@ -11,12 +12,52 @@ export default function HomePage() {
           marginLeft: 'auto',
           marginRight: 0,
           position: 'relative',
-          top: '-60px', // ⬅ moved up by 60px total
+          top: '-185px', // moved down 25px so tiles layer over other content by 25px
           overflow: 'hidden',
           minHeight: 'calc(1024px - 200px)',
           transition: 'all 0.3s ease',
         }}
       >
+        {/* Move the actual Digital Culture column onto the homepage, absolutely positioned to the right
+            and layered behind content. This uses the same structure as `app/digital-culture/page.tsx` so
+            TopEmojisAnchor can detect the column (it looks for #digital-culture-column). */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            right: 12,
+            top: 20,
+            width: 'min(44vw,520px)',
+            /* allow the column to extend vertically; keep it behind content */
+            zIndex: 1,
+            pointerEvents: 'none',
+            /* moved down 400px: previously top:20 + translateY(-20px) == 0; now translateY(380px) == +400px */
+            transform: 'translateY(380px)',
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
+          <main
+            id="digital-culture-column"
+            style={{
+              padding: '28px 12px',
+              maxWidth: 'min(44vw,520px)',
+              margin: 0,
+              textAlign: 'center',
+              background: 'rgba(243,232,255,0.6)',
+              /* make text in the purple column a dark pink */
+              color: '#ad1457',
+              minHeight: '100vh',
+              borderRadius: 12,
+              pointerEvents: 'none',
+            }}
+          >
+            {/* Top emojis row (moved from the Digital Culture page) */}
+            <TopEmojisAnchor />
+
+            {/* content intentionally left out (matches Digital Culture page where content was removed) */}
+          </main>
+        </div>
         <div
           style={{
             display: 'flex',

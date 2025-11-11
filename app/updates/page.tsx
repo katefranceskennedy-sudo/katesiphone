@@ -2,7 +2,9 @@ import Link from 'next/link';
 
 export const metadata = { title: 'Updates' };
 
-export default function UpdatesPage() {
+export const __updates_is_module = true; // ensure TS treats this file as a module in all environments
+
+export default function Page() {
 	return (
 		<main style={{ padding: '24px 16px', minHeight: '60vh' }}>
 			<div style={{ maxWidth: 920, margin: '0 auto' }}>

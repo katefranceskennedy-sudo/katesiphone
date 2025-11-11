@@ -1,8 +1,7 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
-export const metadata = { title: 'Updates' };
-
-export const __updates_is_module = true; // ensure TS treats this file as a module in all environments
+export const metadata: Metadata = { title: 'Updates' };
 
 export default function Page() {
 	return (

@@ -31,8 +31,8 @@ export default function HomePage() {
             /* allow the column to extend vertically; keep it behind content */
             zIndex: 0,
             pointerEvents: 'none',
-            /* move DC up by 150px from current position */
-            transform: 'translateY(205px)',
+            /* move DC down by an additional 40px */
+            transform: 'translateY(375px)',
             display: 'flex',
             justifyContent: 'center',
           }}
@@ -67,6 +67,8 @@ export default function HomePage() {
           }}
         >
           <div style={{ position: 'relative', marginLeft: 0, marginTop: 25 }}>
+            {/* Decorative red stripe behind GIF tiles */}
+            <div className="red-horizontal-stripe" aria-hidden="true" />
             <div
               style={{
                 display: 'flex',

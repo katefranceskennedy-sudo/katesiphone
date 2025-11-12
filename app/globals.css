@@ -1,7 +1,7 @@
 #digital-culture-column .caption-text:hover,
 #digital-culture-column .caption-attribution:hover,
 #digital-culture-column .caption-body-inner p:hover {
-  background: rgba(255,246,150,0.88); /* stronger on hover */
+  background: rgba(204,85,0,0.88); /* burnt orange stronger on hover */
 }
 /* Relaxed, friendly UI font (Rubik loaded as a helpful fallback) */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
@@ -29,7 +29,7 @@ body {
   font-style: normal;
 }
 
-/* Very background light-blue vertical stripe, centered and matching header width */
+/* Very background ultramarine-blue vertical stripe, centered and matching header width */
 .aquamarine-vertical-stripe {
   position: fixed;
   top: 0;
@@ -38,7 +38,7 @@ body {
   /* width follows the measured header text width; fallback to 480px */
   width: var(--aqua-stripe-width, 480px);
   transform: translateX(calc(-0.5 * var(--aqua-stripe-width, 480px)));
-  background: rgba(137, 201, 255, 0.18); /* light blue, subtle */
+  background: rgb(18, 10, 143); /* solid ultramarine blue (no transparency) */
   pointer-events: none;
   z-index: 0; /* sits behind header stripes (z=1) and tiles (z>1) */
 }
@@ -886,23 +886,25 @@ body.contact-page .site-footer::before {
 }
 .home-blurb {
   margin: 18px auto 24px;
-  max-width: clamp(360px, 62vw, 720px); /* align with header span from Home to Digital Culture */
+  max-width: clamp(360px, 62vw, 670px); /* reduced by 50px */
   font-size: 16px;
   line-height: 1.6;
   /* requested visual adjustments */
-  background: rgba(255, 0, 153, 0.34); /* bright transparent pink */
+  background: rgb(255, 0, 153); /* solid bright pink (no transparency) */
   border-radius: 0; /* square edges */
   padding: 12px 14px;
-  transform: translate(-210px, -90px); /* nudge left 210px (prev 190 + 20) and up 90px (prev 70 + 20) */
+  transform: translate(-270px, -70px); /* moved 10px further left */
+  position: relative; /* create stacking context */
+  z-index: 2; /* ensure it sits above the blue vertical stripe (z=0) */
   text-decoration-line: underline;
   text-decoration-style: dotted;
   text-decoration-thickness: 2px;
-  text-decoration-color: rgba(255, 0, 153, 0.6); /* pink dotted underline */
+  text-decoration-color: rgba(255, 247, 153, 0.85); /* pastel yellow dotted underline */
   text-underline-offset: 3px;
 }
 .home-blurb:hover {
   text-decoration-style: solid; /* become solid underline on hover */
-  text-decoration-color: rgba(255, 0, 153, 0.8); /* brighter pink on hover */
+  text-decoration-color: rgb(255, 247, 153); /* solid pastel yellow on hover */
 }
 
 @media (max-width: 720px) {
@@ -993,11 +995,11 @@ body.contact-page .site-footer::before {
 }
 .caption-body-inner p { margin: 0 0 0.9rem 0; color: #89c9ff; }
 
-/* Stronger pastel yellow highlight for Digital Culture text */
+/* Burnt orange highlight for Digital Culture text */
 #digital-culture-column .caption-text,
 #digital-culture-column .caption-attribution,
 #digital-culture-column .caption-body-inner p {
-  background: rgba(255,246,150,0.72); /* stronger highlighter yellow */
+  background: rgba(204,85,0,0.72); /* burnt orange */
   padding: 2px 4px; /* give the highlight some breathing room */
   border-radius: 2px; /* gentle rounding to feel like a marker */
   transition: background-color 160ms ease;
@@ -1346,7 +1348,7 @@ body.contact-page .site-footer::before {
 
 /* Article-style title placed next to GIF tiles (magazine headline style) */
 .article-title {
-  font-family: 'Playfair Display', serif;
+  font-family: inherit; /* match the site's default font */
   font-weight: 600;
   margin: 0; /* reset default h3 margin */
   color: #111;
@@ -1359,7 +1361,7 @@ body.contact-page .site-footer::before {
   /* replace bottom border with red dotted underline */
   text-decoration-line: underline;
   text-decoration-style: dotted;
-  text-decoration-color: #ff1e3a; /* vivid red */
+  text-decoration-color: #000; /* black underline */
   text-decoration-thickness: 3px;
   text-underline-offset: 6px;
 }
@@ -1375,7 +1377,29 @@ body.contact-page .site-footer::before {
 /* Hover: switch dotted underline to solid while keeping color */
 .article-title:hover {
   text-decoration-style: solid;
-  text-decoration-color: #ff1e3a; /* keep vivid red on hover */
+  text-decoration-color: #000; /* keep black on hover */
+}
+
+/* Highlight images within the Digital Culture (blue text) column in bright pastel yellow */
+#digital-culture-column img {
+  background-color: rgb(255, 247, 153); /* solid pastel yellow highlight */
+}
+
+/* Red horizontal stripe behind the GIF tiles on the homepage */
+.red-horizontal-stripe {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* span full viewport width */
+  top: -10px; /* start slightly above the tile row */
+  height: 280px; /* band thickness */
+  background: #ff1e3a; /* vivid red */
+  z-index: 1; /* behind tiles (z=3), above very-back (z=0) */
+  pointer-events: none; /* purely decorative */
+}
+
+@media (max-width: 720px) {
+  .red-horizontal-stripe { height: 200px; top: -6px; }
 }
 
 /* Title image placed to the right of the third GIF on the home page */

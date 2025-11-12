@@ -1,6 +1,5 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 function ImageNavLink({
@@ -81,21 +80,24 @@ function ImageNavLink({
 export default function Header() {
   const textRef = useRef<HTMLSpanElement | null>(null);
 
-  // Measure only the width of the text content (not a full-width container) so the stripe matches just the header line.
+  // Measure only the width of the text content (not a full-width container)
+  // so the vertical stripe matches just the header line width.
   useEffect(() => {
     const el = textRef.current;
     if (!el) return;
     const updateWidth = () => {
       const w = el.getBoundingClientRect().width;
-      document.documentElement.style.setProperty('--ultramarine-stripe-width', `${w}px`);
+      // Set both legacy and current CSS variables for safety
+      document.documentElement.style.setProperty("--aqua-stripe-width", `${w}px`);
+      document.documentElement.style.setProperty("--ultramarine-stripe-width", `${w}px`);
     };
     updateWidth();
     const ro = new ResizeObserver(updateWidth);
     ro.observe(el);
-    window.addEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth);
     return () => {
       ro.disconnect();
-      window.removeEventListener('resize', updateWidth);
+      window.removeEventListener("resize", updateWidth);
     };
   }, []);
 
@@ -218,8 +220,8 @@ export default function Header() {
           </nav>
         </div>
       </header>
-      {/* Vertical ultramarine stripe spanning full page height, matching intro width */}
-      <div aria-hidden="true" className="ultramarine-vertical-stripe" />
+      {/* Vertical aquamarine stripe spanning full viewport height, matching intro width */}
+      <div aria-hidden="true" className="aquamarine-vertical-stripe" />
     </>
   );
 }

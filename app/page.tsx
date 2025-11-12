@@ -29,10 +29,10 @@ export default function HomePage() {
             top: 20,
             width: 'min(44vw,520px)',
             /* allow the column to extend vertically; keep it behind content */
-            zIndex: 1,
+            zIndex: 0,
             pointerEvents: 'none',
-            /* moved down 400px: previously top:20 + translateY(-20px) == 0; now translateY(380px) == +400px */
-            transform: 'translateY(380px)',
+            /* move DC up by 150px from current position */
+            transform: 'translateY(205px)',
             display: 'flex',
             justifyContent: 'center',
           }}
@@ -44,9 +44,9 @@ export default function HomePage() {
               maxWidth: 'min(44vw,520px)',
               margin: 0,
               textAlign: 'center',
-              background: 'rgba(243,232,255,0.6)',
-              /* make text in the purple column a dark pink */
-              color: '#ad1457',
+              /* chocolate background applied */
+              background: 'rgba(60,34,15,0.70)',
+              color: '#f9f5f2',
               minHeight: '100vh',
               borderRadius: 12,
               pointerEvents: 'none',
@@ -74,7 +74,7 @@ export default function HomePage() {
                 flexWrap: 'wrap',
                 gap: 28,
                 position: 'relative',
-                zIndex: 2,
+                zIndex: 3,
               }}
             >
               <div
@@ -165,6 +165,8 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Bottom-center beaded woman GIF removed per request */}
 
         {/* Homepage blurb */}
         <div className="home-blurb">

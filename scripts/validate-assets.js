@@ -3,7 +3,7 @@ const path = require('path');
 
 const publicDir = path.resolve(__dirname, '..', 'public');
 // logo and gif are required; poster is optional but recommended
-const required = ['logo.png', 'jackets.gif'];
+const required = ['logo1.png', 'jackets.gif'];
 // Accept either jpg or svg poster filename
 const optional = ['jacket-countdown-poster.jpg', 'jacket-countdown-poster.svg'];
 

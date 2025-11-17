@@ -10,27 +10,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Oswald:wght@400;700&display=swap');
 
 :root {
-
-  /* Make the labrador emoji render as a black silhouette */
-  .top-emoji-img.black-lab {
-    filter: brightness(0) saturate(100%);
-  }
   --ultramarine: #3d1aff;
-  --nav-blue: #3f66f0; /* sampled blue from attachment */
   /* neutral greys (centralized to make global adjustments easy) */
   --grey-900: #111111; /* used for primary text; slightly lighter than pure black */
   --grey-700: #050505; /* used for secondary text (very dark) */
   --grey-500: #0a0a0a; /* used for borders / muted elements (very dark) */
-  --neon-pastel-blue: var(--ultramarine); /* replaced neon pastel blue with ultramarine */
-  --neon-yellow: #FFD60A; /* neon yellow for emoji highlights */
 }
 
 /* Header / navigation improvements */
 :root {
   --menu-color: #111111; /* slightly lighter black for menu text */
+  --menu-hover: var(--ultramarine); /* use ultramarine for hover/active */
   --menu-gap: 0.5rem;
   --menu-ml: 16.875rem; /* 270px fallback (16.875rem @ 16px) - moved 50px right from 220px */
-  --menu-top: 1.25rem; /* vertical offset for the header menu (used for emoji alignment) */
 }
 
 .header-menu {
@@ -41,14 +33,112 @@
   padding: 0;
   align-items: center;
   justify-content: center;
-  margin-left: 90px; /* horizontal offset to separate from emojis (moved +30px) */
-  margin-top: -5px; /* moved up 25px from previous 20px to better align with emojis */
+  margin-left: var(--menu-ml);
+  margin-top: 1.25rem; /* 20px - moved down 20px from 0 */
 }
 
-/* Aquamarine boxed nav links (neat boxed look) */
+.nav-link {
+  color: var(--menu-color);
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px; /* thinner so it fits inside menu backgrounds */
+  text-underline-offset: 1px; /* moved up another 1px for tighter fit */
+  text-decoration-color: currentColor; /* underline matches text color */
+  -webkit-text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto; /* allow natural skipping where appropriate */
+  display: inline; /* keep anchor inline so underline breaks per wrapped line */
+  white-space: normal; /* allow wrapping so underline breaks at line ends */
+  font-weight: 500;
+  transition: color 160ms ease, transform 120ms ease;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-link.active {
+  outline: none;
+  color: var(--menu-hover);
+  text-decoration-color: currentColor;
+  text-shadow: none;
+}
+
+.nav-link:focus-visible {
+  outline: 3px solid rgba(0,0,0,0.08);
+  outline-offset: 4px;
+}
+
+/* Top emojis row: compact, tactile buttons */
+.top-emojis-inline {
+  display: flex;
+  align-items: center;
+  gap: 0; /* remove gap so emojis sit flush */
+  transform: translateX(0); /* no micro-shift */
+  flex-wrap: nowrap; /* keep emojis on a single horizontal row */
+  white-space: nowrap; /* prevent inline wrapping */
+  overflow-x: auto; /* allow horizontal scrolling on very narrow viewports */
+  -webkit-overflow-scrolling: touch;
+}
+.top-emojis-anchor { 
+  margin-left: 6px; /* tighter margin so highlight is closer to leftmost emoji */
+  transform: translateX(4px); /* smaller anchor shift */
+  will-change: transform;
+}
+.top-emojis {
+  display: flex;
+  gap: 1px !important; /* 1px horizontal gap between emojis */
+  position: relative;
+  z-index: 2; /* place emojis above the decorative strip */
+  flex-wrap: nowrap; /* force single-row layout */
+  overflow-x: auto; /* allow horizontal scroll if container is too narrow */
+}
+.top-emoji {
+  background: transparent; /* no per-emoji pastel */
+  border: none;
+  padding: 0 0 0; /* minimal padding so emoji highlights hug the glyph */
+  line-height: 1;
+  border-radius: 2px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  position: relative;
+  z-index: 3; /* ensure each emoji sits above the pseudo-element */
+  transform: translateY(0); /* align with strip without fractional offset */
+  flex: 0 0 auto; /* prevent emojis from shrinking or growing */
+}
+.top-emoji:hover,
+.top-emoji:focus {
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  outline: none;
+}
+
+/* Header container: subtle backdrop and spacing to make two rows feel cohesive */
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-direction: row; /* place emojis and menu in one centered row */
+  padding: 0.75rem 0;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+
+/* Make header-menu slightly tighter and visually balanced beneath emojis */
+.header-menu {
+  display: flex;
+  gap: var(--menu-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0.125rem 0;
+  align-items: center;
+  justify-content: center;
+  margin-left: 70px; /* move menu right by additional 30px (total +70px) */
+}
+
+/* Header nav links use the sampled blue color */
 .header-menu .nav-link {
-  color: var(--neon-yellow);
-  -webkit-text-fill-color: var(--neon-yellow);
+  color: #ffffff;
   background: var(--nav-blue);
   padding: 6px 12px;
   border-radius: 4px;
@@ -61,215 +151,37 @@
 .header-menu .nav-link:focus,
 .header-menu .nav-link.active {
   background: var(--ultramarine); /* use ultramarine on hover to match title menu */
-  /* no vertical movement on hover */
+  /* no vertical hover movement */
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
   color: #ffffff; /* ensure contrast against ultramarine */
 }
 
-/* Header center wrapper: places emojis and menu in one centered row */
-.header-center {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* center emojis and menu together */
-  gap: 24px;
-  width: 100%;
-  padding: 0 12px; /* small horizontal padding to avoid edge collisions */
-  box-sizing: border-box;
-  flex-wrap: nowrap;
-  margin-top: 20px; /* move emojis + menu down together */
-}
-
-/* Reduce inset on small screens so header doesn't overflow */
-@media (max-width: 720px) {
-  .header-center { padding: 0 12px; }
-}
-
-/* Ensure the emoji block and menu don't collapse when space is constrained */
-.header-center > * {
-  display: inline-flex;
-  flex-shrink: 0;
-}
-
-.top-emojis-anchor {
-  display: inline-flex;
-  flex-shrink: 0;
-  /* don't push menu away; keep the anchor inline so it centers with menu */
-  margin: 0;
-  margin-left: 30px; /* shift emoji anchor and its decorative background 30px to the right */
+/* Animated underline style for nav links */
+.nav-link {
   position: relative;
-  padding: 0 2px;
-  transform: translateX(4px); /* smaller anchor shift to match component CSS */
-  will-change: transform;
+  color: var(--menu-color);
+  text-decoration: none; /* use pseudo-element underline instead */
+  padding: 2px 0;
 }
-
-/* Decorative strip behind the emojis; emojis will overlap this */
-.top-emojis-anchor::before {
+.nav-link::after {
   content: "";
   position: absolute;
-  left: 12px; /* inset from the left side so the strip doesn't extend fully */
-  right: 12px; /* inset from the right side */
-  /* move the decorative strip slightly up so it extends above the emoji row */
-  top: 40%;
-  transform: translateY(-60%);
-  height: 28px; /* taller so it reaches slightly above the emojis */
-  background-color: rgba(230, 240, 255, 0.55); /* more obvious pastel-blue strip behind emojis */
-  border-radius: 0; /* square edges */
-  z-index: 0; /* sit behind emojis */
-  pointer-events: none;
-}
-
-/* On hover, make the decorative strip use the same ultramarine as the menu */
-.top-emojis-anchor:hover::before {
-  background-color: var(--ultramarine);
-  transition: background-color 180ms ease;
-}
-
-/* Inline emoji wrapper used when emojis are placed inside the header */
-.top-emojis-inline {
-  display: flex;
-  align-items: center;
-  /* ensure the emoji row is unshifted so CSS component rules take effect */
-  transform: translateX(0);
-  /* avoid forcing a compositing layer which can blur color glyphs */
-  will-change: auto;
-  gap: 1px; /* tight 1px gap between groups */
-}
-
-/* Make individual emoji buttons look refined (no per-emoji pastel background) */
-.top-emojis .top-emoji {
-  background: transparent; /* remove per-emoji pastel so the row reads as a single band */
-  padding: 2px 2px 0; /* small touch target retained */
-  margin: 0;
-  border: none;
+  left: 0;
+  right: 0;
+  height: 2px;
+  bottom: -3px;
+  width: 0%;
+  background: var(--menu-hover);
+  transition: width 180ms ease, opacity 180ms ease;
+  opacity: 0.95;
   border-radius: 2px;
-  box-shadow: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
-.top-emojis .top-emoji:hover,
-.top-emojis .top-emoji:focus {
-  /* Disable interactive hover: keep emojis visually still */
-  transform: none;
-  box-shadow: none;
-  outline: none;
+.nav-link:hover::after,
+.nav-link:focus::after,
+.nav-link.active::after {
+  width: 100%;
 }
 
-/* Tighten emoji glyph layout: control font-size and line-height so glyphs sit close */
-.top-emojis .top-emoji > span {
-  display: inline-block;
-  line-height: 1;
-  font-size: clamp(18px, 2.2vw, 24px); /* responsive, crisp sizes */
-  vertical-align: middle;
-  /* prefer native color emoji fonts for sharp rendering */
-  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', 'Twemoji Mozilla', 'EmojiOne Mozilla', 'Segoe UI Symbol', sans-serif;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  transform: translateZ(0); /* promote to its own layer to avoid subpixel blending */
-  backface-visibility: hidden;
-}
-/* When using Twemoji SVGs, size them crisply and avoid transforms */
-.top-emojis .top-emoji-img {
-  display: block;
-  width: 28px; /* slightly larger and crisper */
-  height: 28px;
-  max-width: none;
-  image-rendering: auto; /* let browser render PNG crisply */
-  margin: 0;
-  filter: none; /* show full color */
-  transition: transform 140ms ease, opacity 120ms ease, box-shadow 140ms ease;
-  border-radius: 6px; /* tiny rounding to read as refined */
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
-}
-
-/* Nudge specific emoji art up by 4px for visual alignment */
-.top-emojis .top-emoji-img[src$="landscape.png"],
-.top-emojis .top-emoji-img[src$="Hotel.png"],
-.top-emojis .top-emoji-img[src$="city.png"],
-.top-emojis .top-emoji-img[src$="flower.png"] {
-  transform: translateY(-4px);
-}
-
-.top-emojis .top-emoji:hover .top-emoji-img,
-.top-emojis .top-emoji:focus .top-emoji-img {
-  /* Keep image glyphs unchanged on hover */
-  transform: none;
-  opacity: 1;
-  box-shadow: none;
-}
-
-.top-emojis .top-emoji {
-  /* ensure buttons don't apply fractional transforms that blur icons */
-  transform: translateY(0) !important;
-  padding: 2px 2px 0 !important; /* keep small touch padding, even where !important is used */
-  margin: 0 !important;
-}
-
-.top-emojis { gap: 1px !important; }
-
-/* Ensure the emoji row sits above the decorative strip */
-.top-emojis {
-  z-index: 2;
-  position: relative;
-  display: inline-flex; /* use flex to control spacing precisely */
-  align-items: center;
-  gap: 1px; /* 1px gap between emoji buttons */
-}
-
-/* Override: prevent emojis from shifting vertically on hover
-   Some components elsewhere apply small translateY lifts; enforce scale-only hover here. */
-.top-emoji:hover,
-.top-emoji:focus,
-.top-emojis .top-emoji:hover,
-.top-emojis .top-emoji:focus {
-  transform: none !important;
-  box-shadow: none !important;
-}
-
-.nav-link {
-  color: var(--menu-color);
-  text-decoration-line: underline;
-  text-decoration-style: solid;
-  text-decoration-thickness: 1px; /* thinner so it fits inside menu backgrounds */
-  text-underline-offset: 1px; /* moved up another 1px for tighter fit */
-  text-decoration-color: currentColor; /* underline matches text color */
-  -webkit-text-decoration-skip-ink: auto;
-  text-decoration-skip-ink: auto; /* allow natural skipping where appropriate */
-  display: inline-block; /* allow background on hover */
-  padding: 6px 8px; /* breathing room for hover background */
-  white-space: normal; /* allow wrapping so underline breaks at line ends */
-  font-weight: 500;
-  font-size: 18px; /* match emoji size (reduced) */
-  line-height: 1; /* ensure same height as emoji */
-  transition: color 160ms ease, transform 120ms ease, background-color 160ms ease, box-shadow 220ms ease, text-shadow 220ms ease;
-}
-
-.nav-link:hover,
-.nav-link:focus {
-  outline: none;
-  /* ultramarine background on hover/focus */
-  background-color: var(--ultramarine);
-  color: #ffffff; /* light text for contrast on ultramarine background */
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 1px;
-  /* remove inset glow for a flat hover; keep a subtle outer shadow */
-  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-  text-shadow: none;
-}
-
-.nav-link:focus-visible {
-  outline: 3px solid rgba(0,0,0,0.08);
-  outline-offset: 4px;
-}
-
-/* Make the 'home' link underline visually thicker for emphasis */
-.nav-link.nav-home {
-  /* Use a dotted, thicker underline to visually match the emoji dotted line */
-  text-decoration-style: dotted;
-  text-decoration-thickness: 6px; /* match the visual height of the dotted underline */
-  text-underline-offset: 6px; /* nudge the underline down so it aligns with the continuous dots */
-}
 
 /* Utility class for making paragraph/inline underlines look more "personal" */
 .personal-underline {
@@ -291,6 +203,9 @@
   transform-origin: left center;
   transition: transform 220ms ease, opacity 180ms ease;
 }
+
+/* Force menu links to use black text even if overridden elsewhere */
+.nav-link, .header-menu .nav-link { color: var(--grey-900) !important; }
 
 /* Simple utility to apply standard text-decoration underlines */
 .underline {
@@ -327,16 +242,13 @@
 }
 
 
-/* Force menu links to use black text even if overridden elsewhere */
-.nav-link, .header-menu .nav-link { color: var(--grey-900) !important; }
-
 body {
   margin: 0;
   /* Use DejaVu Sans as the primary font; fall back to other sans fonts if not present */
   font-family: var(--font-inter), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   /* make body text a bit lighter/thinner */
   font-weight: 300;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.6; /* breezier leading for relaxed reading */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -581,7 +493,7 @@ body {
   margin-left: 8px;
   background: transparent;
   border: none;
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1;
   cursor: pointer;
   padding: 4px 8px;
@@ -1094,8 +1006,7 @@ strong, b {
 .header-menu a:hover,
 .header-menu a:focus,
 .header-menu a:focus-visible {
-  background-color: var(--ultramarine); /* match emoji row hover */
-  color: #ffffff; /* ensure contrast when the menu pill becomes ultramarine */
+  background-color: #e6f0ff; /* pastel blue */
 }
 
 /* Ensure publications has an ultramarine hover underline specifically */
@@ -1108,7 +1019,7 @@ strong, b {
   text-underline-offset: 1px;
 }
 
-/* Make publications permanently highlighted in pastel blue (kept as-is) */
+/* Make publications permanently highlighted in pastel blue */
 .header-menu a.nav-publications {
   background-color: #e6f0ff; /* same pastel blue used on hover */
   border-radius: 1px;
@@ -1137,7 +1048,8 @@ strong, b {
 .header-menu a.nav-projects,
 .header-menu a.nav-bio,
 .header-menu a.nav-posts {
-  background-color: #e6f0ff;
+  color: var(--grey-900);
+  background: var(--nav-blue);
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -1148,10 +1060,10 @@ strong, b {
 .header-polka nav a:hover .nav-link-text,
 .header-polka nav a:focus-visible .nav-link-text {
   text-decoration-line: underline;
-  /* use current color for underline instead of purple */
-  text-decoration-color: currentColor;
-  text-decoration-style: solid;
-  text-decoration-thickness: 1px;
+  background: var(--ultramarine); /* ultramarine on hover to match menu */
+  /* no vertical hover movement */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  color: #ffffff; /* ensure contrast on ultramarine background */
   text-underline-offset: 3px;
 }
 
@@ -1448,27 +1360,34 @@ body.contact-page .site-footer::before {
 .top-emojis::before {
   /* highlight removed */
   content: none;
-  padding: 4px 6px;
 }
 
-.top-emojis .top-emoji {
+
+.top-emoji {
   /* icons sit above the highlight pseudo-element; increased 25% from 4vw/23px */
   width: min(5vw, 29px);
   height: auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  padding: 2px; /* small inner padding to keep icons from touching the highlight edges */
   /* Improve rendering on hi-DPI displays and perceptual sharpness */
   image-rendering: -webkit-optimize-contrast;
-  position: relative;
-  z-index: 2; /* ensure icons render above the highlight and dots */
-  padding-bottom: 10px; /* make room for the dots */
-  padding-left: 0;
-  padding-right: 0;
+  image-rendering: crisp-edges;
+  /* slight contrast & saturation boost to make small icons read clearer */
+  filter: contrast(1.03) saturate(1.06);
+  /* promote to its own layer for smoother transforms and sharper subpixel painting */
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+  background: transparent; /* remove per-emoji block backgrounds */
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+  opacity: 0.98;
   margin: 0;
+  position: relative;
+  z-index: 1; /* ensure icons render above the highlight */
   transition: none; /* disable per-emoji movement */
   cursor: pointer;
-  transform: translateY(0); /* avoid fractional movement that can blur emoji glyphs */
 }
 
 /* Hover/focus: deepen the whole highlight strip and lift the emojis slightly */
@@ -1478,7 +1397,6 @@ body.contact-page .site-footer::before {
   /* no movement; instead emphasize via slight scale on icon opacity for affordance */
   opacity: 1;
   outline: none;
-  transition: transform 120ms ease, opacity 120ms ease;
 }
 
 /* Make the row itself clearly interactive */
@@ -1492,7 +1410,7 @@ body.contact-page .site-footer::before {
 @media (max-width: 720px) {
   /* on small screens keep the row centered to avoid awkward offsets */
   .top-emojis-wrap { margin-left: 0; padding: 4px 6px; }
-  .top-emojis { gap: 0 !important; }
+  .top-emojis { gap: 0; }
 }
 
 /* Force thin weight for the Suck It Up article (page-specific override). 
@@ -1730,7 +1648,7 @@ body.contact-page .site-footer::before {
 }
 
 @media (max-width: 720px) {
-  .page-scrollbar { right: -14px; width: 8px; }
+  .page-scrollbar { right: -14px; width: 30px; }
 }
 
 /* Hover: switch dotted underline to solid while keeping color */
@@ -1856,130 +1774,9 @@ body, body * {
 
 /* -------------------------------------------------------------------------
    AGGRESSIVE DEBUG: hide dev-overlay / toasts / scrollable panels and remove
-
-/* Left vertical emoji column (fixed) ------------------------------------ */
-.top-emojis-absolute {
-  position: fixed;
-  /* position the row aligned with the header menu: sit to the left of the menu */
-  left: calc(var(--menu-ml) - 64px);
-  top: var(--menu-top);
-  transform: none;
-  z-index: 1000001;
-  pointer-events: none; /* wrapper doesn't block interactions */
-}
-.top-emojis-absolute .top-emojis-wrap {
-  pointer-events: none;
-}
-.top-emojis {
-  pointer-events: auto; /* inner row should accept clicks/focus */
-  display: flex;
-  flex-direction: row; /* changed to horizontal row */
-  gap: 0 !important;
-  align-items: center;
-  padding: 4px 6px 10px; /* make room for the continuous underline */
-  position: relative; /* contain the underline pseudo-element */
-  background: transparent;
-  border-radius: 8px;
-}
-.top-emojis .top-emoji {
-  background: transparent;
-  border: none;
-  padding: 0; /* remove horizontal padding so glyphs sit flush */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px; /* slightly smaller emojis */
-  line-height: 1;
-  cursor: pointer;
-  position: relative; /* for underline dot positioning */
-  z-index: 2; /* sit above the underline */
-  transform: translateY(0); /* align emojis with menu text baseline */
-}
-
-/* Remove small dotted underline under emojis and per-emoji pills.
-   Instead add a single continuous neon-yellow highlight across the whole row. */
-.top-emojis .top-emoji::before { display: none; }
-
-.top-emojis .top-emoji > span { position: relative; z-index: 3; }
-
-/* Continuous neon-yellow highlight behind the whole emoji row */
-.top-emojis::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0; /* fill the full padded area so there are no gaps */
-  border-radius: 999px; /* pill-shaped, avoids visible corner gaps */
-  pointer-events: none;
-  background: rgba(255,214,10,0.12); /* transparent yellow */
-  z-index: 1; /* behind the emoji glyphs but above page backgrounds */
-  box-shadow: none;
-}
-
-/* Pastel-blue strikethrough across the emoji row */
-.top-emojis::before {
-  content: "";
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 6px; /* thickness of the strikethrough */
-  background: rgba(61,26,255,0.22); /* pastel ultramarine */
-  border-radius: 4px;
-  pointer-events: none;
-  z-index: 4; /* sit above the yellow highlight and overlay emoji glyphs */
-}
-
-/* Ensure emoji glyphs sit below the strikethrough so they get the "struck" look */
-.top-emojis .top-emoji > span {
-  position: relative;
-  z-index: 3;
-}
-
-/* Continuous dotted underline across the whole emoji row. Uses a repeated radial-gradient
-   to create a dotted line with no gaps between individual emoji buttons. */
-.top-emojis::before { display: none; }
-
-/* When the header row (emojis + menu) is hovered or focused, change the dotted
-   underline to the pastel-blue highlight so it matches the menu hover state. */
-.header-center:hover .top-emojis::before,
-.header-center:focus-within .top-emojis::before {
-  /* keep hover behavior consistent with the permanent colour (no change) */
-  background-image: radial-gradient(circle, #e6f0ff 50%, transparent 51%);
-}
-/* Continuous pale-blue background behind the whole emoji row on hover/focus */
-.top-emojis::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  top: 2px;
-  bottom: -9px; /* extend a little to sit under the dotted underline */
-  border-radius: 10px;
-  pointer-events: none;
-  background-color: rgba(230,240,255,0); /* hidden by default */
-  z-index: 0; /* behind dots and icons */
-  transition: background-color 180ms ease, opacity 160ms ease;
-  opacity: 0;
-}
-.top-emojis:hover::after,
-.top-emojis:focus-within::after {
-  /* keep the background hidden — emojis should have no background */
-  background-color: transparent;
-  opacity: 0;
-}
-.top-emojis .top-emoji:focus {
-  outline: 3px solid rgba(255,220,70,0.12);
-  outline-offset: 3px;
-}
-@media (max-width: 720px) {
-  .top-emojis-absolute { display: none; }
-}
-/*   internal scrollbars. Use only for local debugging; this will forcefully
-  remove any in-page scrollable UI that could appear as a second scrollbar.
-  ------------------------------------------------------------------------- */
+   internal scrollbars. Use only for local debugging; this will forcefully
+   remove any in-page scrollable UI that could appear as a second scrollbar.
+   ------------------------------------------------------------------------- */
 /* Next dev overlay / toasts / panels */
 .nextjs-toast,
 [data-nextjs-dialog-overlay],
@@ -1991,74 +1788,6 @@ body, body * {
   display: none !important;
 }
 
-/* Bio page title style: straight-edged black block with white text */
-.bio-title {
-  display: inline-block;
-  background: #000000;
-  color: #ffffff !important;
-  /* Reduced vertical padding to remove 4px from top and bottom (minimized) */
-  padding: 0px 5px;
-  border-radius: 0 !important; /* straight edges */
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin: 0 0 18px 0;
-  box-shadow: none !important; /* remove inset shadow so edges read straight */
-}
-
-/* Forcefully move the bio title up 300px. This is an explicit override
-   to ensure the heading is visually elevated regardless of JS timing. */
-.bio-title {
-  margin-top: -300px !important;
-}
-
-/* Strong override: use positioning to ensure the title shifts visually even
-   when margin-based approaches are ineffective (e.g. margin collapse, layout transforms). */
-.bio-title {
-  position: relative !important;
-  top: -300px !important;
-  z-index: 50 !important;
-  transform: translateX(-290px) !important;
-  will-change: transform !important;
-}
-
-/* Projects title: mirror the bio block style (black block, white text)
-   but keep normal positioning so the title sits in flow on the projects page. */
-.projects-title {
-  display: inline-block;
-  background: #000000;
-  color: #ffffff !important;
-  padding: 0px 5px;
-  border-radius: 0 !important;
-  font-weight: 600;
-  font-size: inherit;
-  line-height: 1;
-  box-sizing: border-box;
-  text-transform: none;
-  /* Keep the title strictly on one horizontal line and move it up */
-  white-space: nowrap;
-  overflow: hidden;
-  transform: translateY(-350px) !important;
-  writing-mode: horizontal-tb !important;
-  text-align: center !important;
-  letter-spacing: 0.5px;
-  margin: 0;
-  /* enforce white-only text (remove chromatic outline) */
-  text-shadow: none !important;
-}
-
-/* Make key titles use the emoji-line hover colour (ultramarine) on hover */
-.bio-title,
-.projects-title,
-.publications-title-wrapper .bio-title {
-  transition: background-color 180ms ease, color 120ms ease;
-}
-.bio-title:hover,
-.projects-title:hover,
-.publications-title-wrapper .bio-title:hover {
-  background: var(--ultramarine) !important;
-  color: #ffffff !important;
-}
-
 /* Force internal elements to reveal content instead of scrolling (hide internal scrollbars)
    This prevents any element from showing its own vertical track on the right. */
 body * {
@@ -2067,344 +1796,6 @@ body * {
   /* hide scrollbars for Firefox */
   scrollbar-width: none !important;
   -ms-overflow-style: none !important;
-  }
-
-  /* Projects-specific override so the projects title (reusing bio-title markup)
-    is visible on the projects page and positioned similarly but without the
-    large forced offsets used on the bio page. */
-  .bio-title.projects-bio {
-     /* Allow the title component's JS to compute inline margin-top so the
-       heading positions correctly per-page. Remove the heavy forced offsets
-       from the generic .bio-title rule so these instances are visible. */
-     position: relative !important;
-     top: unset !important;
-     transform: none !important;
-     will-change: auto !important;
-     z-index: 50 !important;
-  }
-
-/* About page: reset individual forced offsets and move the whole block up 300px
-   so the title and portrait translate together and keep their proportions. */
-.about-page .bio-title,
-.about-page .bio-image-wrapper {
-  top: 0 !important;
-  margin-top: 0 !important;
-  transform: none !important;
-  position: relative !important;
-}
-
-.about-page .bio-block {
-  position: relative !important;
-  /* move up 750px and left 250px so the title+portrait shift together */
-  transform: translate(-250px, -750px) !important;
-  will-change: transform !important;
-}
-
-/* Make the bio title slightly smaller and nudge it left on the About page */
-.about-page .bio-title {
-  display: inline-block !important;
-  transform: translateX(-20px) !important; /* nudge left 20px */
-  font-size: 1.1rem !important; /* reduce size to appear smaller */
-  line-height: 1 !important;
-}
-
-/* Move only the portrait down 125px on the About page without affecting
-   the bio title's position. Use translate so layout flow isn't changed. */
-.about-page .bio-image-wrapper {
-  position: relative !important;
-  /* move right 200px and down 125px relative to the bio-block */
-  transform: translate(200px, 125px) !important;
-  will-change: transform !important;
-}
-
-/* Scale the portrait 3x visually on the About page without affecting layout
-   so the bio title keeps its position. Using `transform: scale` preserves
-   document flow while increasing the visible size. */
-.about-page .bio-image {
-  display: inline-block !important;
-  transform: scale(3) !important;
-  transform-origin: center center !important;
-  /* increase rendering quality on some browsers when upscaling */
-  image-rendering: auto !important;
-}
-
-/* Move the primary portrait (`kate.jpg`) 150px to the left without
-   affecting the absolutely-positioned secondary portrait (`sana.jpg`). */
-.about-page .bio-image {
-  position: relative !important;
-  left: -150px !important; /* shift Kate left 150px */
-}
-
-/* Caption for the bio portrait on the about page.
-   Positioned absolutely so it doesn't change document flow or page proportions.
-   `top` uses `300%` to account for the image being scaled 3× so the caption
-   visually sits below the upscaled image. */
-.about-page .bio-image-wrapper {
-  position: relative !important;
-  left: 50px !important; /* shift image + caption 50px to the right */
-}
-.about-page .bio-image-sana {
-  position: absolute !important;
-  top: 0 !important;
-  /* place immediately to the right of the primary image without affecting layout */
-  left: calc(100% + 108px) !important; /* moved 100px further right */
-  display: inline-block !important;
-  /* inherit the same visual scaling as the primary image */
-  /* Reduce the base width by 25px so after the 3x transform the visible
-     image is 75px smaller than the primary portrait. */
-  width: calc(clamp(64px, 9vw, 120px) - 25px) !important;
-  height: auto !important;
-  object-fit: cover !important;
-  transform: scale(3) !important;
-  transform-origin: center center !important;
-}
-.about-page .bio-caption-sana {
-  position: absolute !important;
-  /* match vertical positioning used by the primary caption so it sits under the image
-     and then move it an additional 73px down as requested */
-  top: calc(300% + 12px - 124px + 73px) !important;
-    /* anchor to the left edge of the Sana image and size to Sana's rendered width
-      moved 70px left as requested */
-    left: calc(100% + 38px) !important;
-  width: calc((clamp(64px, 9vw, 120px) - 25px) * 3) !important; /* match scaled sana width */
-  text-align: center !important;
-  font-style: italic !important;
-  font-size: 0.85rem !important;
-  color: var(--grey-900) !important;
-  font-weight: 100 !important;
-  font-variation-settings: "wght" 100 !important;
-  font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  text-rendering: optimizeLegibility !important;
-  white-space: normal !important; /* allow wrapping to fit image width */
-  pointer-events: auto !important;
-  text-decoration-line: underline !important;
-  text-decoration-style: dotted !important;
-  text-decoration-thickness: 1.4px !important;
-  text-underline-offset: 4px !important;
-  text-decoration-color: currentColor !important;
-}
-
-.about-page .bio-caption-sana:hover {
-  text-decoration-style: solid !important;
-  text-decoration-thickness: 1px !important;
-  text-decoration-color: currentColor !important;
-  cursor: pointer !important;
-}
-.about-page .bio-caption {
-  position: absolute !important;
-  left: 50% !important;
-  /* move caption up 125px without affecting layout; adjusted down 1px */
-  top: calc(300% + 12px - 124px) !important; /* 3× image height + gap, minus 124px */
-  /* center, then nudge right 28px; caption moved 50px left relative to image */
-  /* also shift caption left 150px to follow the primary portrait */
-  transform: translateX(calc(-50% + 28px - 150px)) !important;
-  font-style: italic !important;
-  font-size: 0.85rem !important;
-  color: var(--grey-900) !important;
-  /* Make the caption thin-lined: prefer the lightest weight and
-     use font-variation-settings when available for Inter/variable fonts. */
-  font-weight: 100 !important;
-  font-variation-settings: "wght" 100 !important;
-  /* Improve font rendering quality */
-  font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  text-rendering: optimizeLegibility !important;
-  font-feature-settings: "liga" 1, "kern" 1 !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  pointer-events: auto !important; /* allow hover interactions */
-  /* Slightly larger dotted underline (increase dot size via thickness) */
-  text-decoration-line: underline !important;
-  text-decoration-style: dotted !important;
-  text-decoration-thickness: 1.4px !important; /* increased from 0.8px */
-  text-underline-offset: 4px !important;
-  text-decoration-color: currentColor !important;
-}
-
-/* On hover, switch to a straight thin underline and indicate interactivity */
-.about-page .bio-caption:hover {
-  text-decoration-style: solid !important;
-  text-decoration-thickness: 1px !important;
-  text-decoration-color: currentColor !important;
-  cursor: pointer !important;
-}
-
-/* Highlight only the exact phrase inside the caption to match the menu color */
-.about-page .bio-caption .bio-caption-highlight,
-.about-page .bio-caption-sana .bio-caption-highlight {
-  display: inline !important; /* keep underline rendering continuous */
-  /* Use the site's pastel-blue decorative strip colour so the highlight
-     matches other pastel accents (soft, semi-transparent). */
-  background: rgba(230,240,255,0.55) !important;
-  color: var(--grey-900) !important; /* keep highlighted text black like caption */
-  padding: 0 1px !important; /* even tighter to the font */
-  border-radius: 1px !important; /* use sharp-edged highlight to match publications/menu */
-  line-height: 1 !important;
-  box-decoration-break: unset !important; /* avoid cloned decorations that can double lines */
-  text-decoration: inherit !important; /* inherit dotted/solid underline from parent caption */
-  -webkit-text-decoration-skip-ink: auto !important;
-  text-decoration-skip-ink: auto !important;
-  /* Use the same pastel-blue used in the header menu for consistency */
-  background: #e6f0ff !important;
-  transition: background-color 160ms ease, color 160ms ease !important;
-}
-
-.about-page .bio-caption .bio-caption-highlight:hover,
-.about-page .bio-caption-sana .bio-caption-highlight:hover {
-  filter: brightness(0.95) !important; /* subtle feedback on hover */
-  background-color: #e6f0ff !important; /* keep hover consistent with menu */
-}
-
-/* Decorative bottom rule removed: caption underline is handled via
-  the caption's `text-decoration` (dotted / solid on hover). */
-
-/* Sublist under the publications title (decorative list like the attachment) */
-.pub-sublist {
-  list-style: none;
-  margin: 12px 0 0 0;
-  padding: 0;
-  display: inline-block;
-  text-align: left;
-}
-.pub-sublist li {
-  position: relative;
-  padding-left: 20px; /* tightened to match smaller marker */
-  margin: 6px 0;
-}
-.pub-sublist li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px; /* reduced marker size */
-  height: 6px; /* reduced marker size */
-  border: 1px solid rgba(0,0,0,0.6);
-  border-radius: 50%;
-  background: transparent;
-}
-
-
-.pub-sublist a {
-  color: var(--neon-yellow) !important; /* bright yellow */
-  -webkit-text-fill-color: var(--neon-yellow) !important; /* ensure the glyph fill is yellow in WebKit */
-  -moz-text-fill-color: var(--neon-yellow) !important;
-  text-decoration-line: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 1px !important; /* moved up 5px (was 6px) */
-  text-decoration-thickness: 1px !important; /* thin underline */
-  text-decoration-color: var(--neon-yellow) !important;
-  /* match the header/menu pastel-blue background used for the publications menu item */
-  background-color: #e6f0ff;
-  padding: 0 4px;
-  border-radius: 1px;
-  display: inline-block;
-  font-weight: 500 !important; /* thicker text for better legibility */
-  font-size: 13px !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-kerning: normal;
-  font-optical-sizing: auto;
-  /* explicit font stack for consistent, high-quality shapes */
-  font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  backface-visibility: hidden;
-  transition: color 120ms ease, text-decoration-thickness 120ms ease, background-color 180ms ease;
-}
-
-.pub-sublist a:hover,
-.pub-sublist a:focus {
-  /* match the emoji strip hover: ultramarine background + white text */
-  background-color: var(--ultramarine) !important;
-  color: #ffffff !important;
-  /* switch dotted underline to solid underline on hover but keep it thin */
-  text-decoration-style: solid !important;
-  text-decoration-line: underline !important;
-  text-decoration-thickness: 1px !important;
-  text-underline-offset: 1px !important; /* keep underline 5px higher on hover too */
-  /* use neon yellow for the underline on hover as requested */
-  text-decoration-color: var(--neon-yellow) !important;
-  -webkit-text-decoration-color: var(--neon-yellow) !important;
-}
-
-.publications-title-wrapper {
-  /* Keep the publications title in normal document flow like the bio.
-     Use `position: relative` so absolutely-positioned decorative elements
-     (like the extra titles row) can be placed visually without changing
-     document dimensions. */
-  position: relative !important;
-  top: auto !important;
-  left: auto !important;
-  z-index: auto !important;
-  pointer-events: auto;
-  transform: none !important;
-  will-change: auto;
-  margin: 0 0 12px 0 !important;
-}
-
-/* Page-specific shift for the publications page content. Moves the whole
-   publications block up 450px and left 270px as requested. */
-.publications-page-shift {
-  transform: translate(calc(-270px), calc(-500px)); /* moved up an extra 50px */
-  /* ensure the transform doesn't create a new stacking context that hides content */
-  will-change: transform;
-}
-.publications-title-wrapper .bio-title {
-  margin: 0 0 8px 0;
-  position: static !important;
-  transform: none !important;
-  font-size: 18px !important;
-  padding: 0 6px !important;
-  line-height: 1 !important;
-}
-.publications-title-wrapper .pub-sublist {
-  display: block;
-}
-
-/* Extra single-row titles that sit visually under the publications list.
-   Positioned absolutely so adding them does not change page flow/dimensions. */
-.publications-title-wrapper .pub-extra-row {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 58px); /* moved up 150px from previous 208px offset */
-  display: flex;
-  flex-direction: column; /* stack items vertically */
-  gap: 8px; /* vertical spacing between items */
-  align-items: flex-start;
-  pointer-events: auto;
-  z-index: 3;
-}
-.publications-title-wrapper .pub-extra-row .pub-extra-item {
-  margin: 0;
-  padding: 2px 10px; /* slightly larger horizontal padding for readability */
-  font-size: 20px; /* a touch larger for clarity */
-  line-height: 1;
-  display: inline-block; /* preserve blocky title look */
-  /* Reset any heavy offsets coming from .bio-title and ensure crisp rendering */
-  position: static !important;
-  top: auto !important;
-  margin-top: 0 !important;
-  transform: none !important;
-  left: auto !important;
-  z-index: 60 !important;
-  background: #000000;
-  color: #ffffff !important;
-  border-radius: 0 !important;
-  font-weight: 700; /* stronger weight for better legibility */
-  letter-spacing: 0.4px;
-  box-shadow: none !important;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  backface-visibility: hidden;
-  will-change: auto;
-}
-
-@media (max-width: 720px) {
-  .publications-title-wrapper { left: 14px; top: 18px; }
 }
 
 /* Chrome/WebKit: hide any rendered scrollbars */
@@ -2423,108 +1814,27 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; 
 html, body {
   /* Firefox native scrollbar sizing + color */
   scrollbar-width: thin;
-  scrollbar-color: #333333 #FFFFFF; /* dark grey thumb */
-}
-
-/* Bio image under the bio heading (centered, small) */
-.bio-image-wrapper {
-  text-align: center;
-  margin-top: 8px;
-}
-.bio-image-wrapper {
-  /* Move the portrait up 300px to visually align with the elevated title. */
-  position: relative !important;
-  top: -300px !important;
-  margin-top: -300px !important;
-}
-.bio-image {
-  display: inline-block;
-  width: clamp(64px, 9vw, 120px);
-  height: auto;
-  border-radius: 6px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  scrollbar-color: #B0B0B0 #FFFFFF;
 }
 
 /* WebKit/Blink scrollbar styling for the document root.
    Reduce physical thickness to ~25% of previous (8px -> 2px) per request. */
 html::-webkit-scrollbar, body::-webkit-scrollbar {
-  width: 0.4px; /* halved from 0.8px -> 0.4px */
-  height: 0.4px;
+  width: 2px; /* much thinner thumb */
+  height: 2px;
   display: initial !important;
 }
 html::-webkit-scrollbar-track, body::-webkit-scrollbar-track {
   background: #FFFFFF;
 }
 html::-webkit-scrollbar-thumb, body::-webkit-scrollbar-thumb {
-  background-color: #333333; /* dark grey */
-  border-radius: 0.8px; /* halved from 1.6px */
-  border: 0.2px solid transparent; /* halved from 0.4px */
+  background-color: #B0B0B0;
+  border-radius: 8px;
+  border: 2px solid transparent;
   background-clip: padding-box;
 }
 html::-webkit-scrollbar-thumb:hover, body::-webkit-scrollbar-thumb:hover {
-  background-color: #1f1f1f; /* slightly darker on hover */
-}
-
-/*
-  HACK: keep the browser's (document) scrollbar visible, but hide any
-  nested/inner scrollbars so the page shows a single scrollbar visually.
-  - Leaves overflow behavior intact so inner containers still receive
-    scroll events (mouse wheel/trackpad), but their scrollbar track/thumb
-    are hidden.
-  - Applies broadly to non-root elements. Use with care (accessibility
-    tradeoffs). To revert, remove these rules or narrow selectors.
-*/
-html, body, #__next {
-  /* ensure the document keeps normal scrolling */
-  overflow: auto !important;
-}
-
-/* Hide inner scrollbar visuals only inside the main content area. This
-   is less intrusive than hiding all nested scrollbars site-wide and
-   avoids affecting UI outside the main page column (headers/footers). */
-main * {
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* IE/Edge */
-}
-main *::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
-  display: none !important;
-}
-
-/* Final fallback: hide scrollbar visuals for any non-root element. This
-   ensures nested scrollbars are visually removed across the site while
-   preserving the browser/document scrollbar. Place at the end so it wins
-   over earlier rules. (Accessibility tradeoffs apply.) */
-html, body, #__next {
-  overflow: auto !important;
-}
-
-*:not(html):not(body):not(#__next) {
-  scrollbar-width: none !important; /* Firefox */
-  -ms-overflow-style: none !important; /* IE/Edge */
-}
-
-*:not(html):not(body):not(#__next)::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
-  display: none !important;
-}
-
-/* About page: keep the bio title visually near the top (reset offsets).
-   This ensures the title appears directly below the header on the bio page. */
-.about-page .bio-title {
-  margin-top: 0 !important;
-  top: 0 !important;
-  transform: none !important;
-  position: relative !important;
-  left: 0 !important;
-}
-.about-page .bio-image-wrapper {
-  top: 0 !important;
-  margin-top: 8px !important;
-  position: relative !important;
+  background-color: #9F9F9F;
 }
 
 /* Helper class: apply a usable native scrollbar to custom scroll areas */
@@ -2539,15 +1849,15 @@ html, body, #__next {
 /* Make any `.custom-scrollBar` areas use the same thin thumb (approx 25% size).
    Use !important to override broader rules that hide scrollbars. */
 body .custom-scrollBar::-webkit-scrollbar {
-  width: 0.2px !important; /* halved from 0.4px */
+  width: 2px !important;
 }
 body .custom-scrollBar::-webkit-scrollbar-thumb {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3) !important;
-  background-color: #333333 !important;
-  border-radius: 0.6px !important; /* halved from 1.2px */
+  background-color: #D0D0D0 !important;
+  border-radius: 6px !important;
 }
 body .custom-scrollBar::-webkit-scrollbar-thumb:hover {
-  background-color: #1f1f1f !important;
+  background-color: #B0B0B0 !important;
 }
 
 /* Ensure the main viewport uses the native browser scrollbar. This override
@@ -2769,19 +2079,19 @@ input[type="submit"],
 
 /* End rounded overrides */
 
-/* Global WebKit scrollbar (user-supplied): reduced size, dark grey thumb */
+/* Global WebKit scrollbar (user-supplied): 4px wide, darker thumb */
 ::-webkit-scrollbar {
-  width: 0.4px;        /* halved from 0.8px */
-  height: 0.4px;
+  width: 4px;        /* Default is ~16px → 75% smaller */
+  height: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333333; /* dark grey */
-  border-radius: 0.8px;
+  background: #888;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #1f1f1f;
+  background: #555;
 }
 
 /* Firefox: keep thin scrollbars where supported */

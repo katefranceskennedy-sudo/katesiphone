@@ -10,19 +10,7 @@ export default function AboutContent() {
 
   return (
     <div className="about-content" style={{ maxWidth: 900, width: "90%" }}>
-  <p style={{ marginTop: 20 }}>My name is Kate Kennedy. I use my middle initial &apos;F&apos; as there are many other Kate Kennedy&apos;s out there.</p>
-
-      <p style={{ marginTop: 8 }}>
-        To get in touch, please copy and paste my email into your mail client:
-        <br />
-        <strong>katefranceskennedy@gmail.com</strong>
-      </p>
-
-      <p style={{ marginTop: 8 }}>
-        I am still figuring out how to build a contact page in Visual Studio, so for now, please copy and paste my email to get in touch:
-        <br />
-        <strong>katefranceskennedy@gmail.com</strong>
-      </p>
+  <p style={{ marginTop: 20 }}>Contact information has been removed.</p>
 
       <p style={{ marginTop: 12 }}>You can also find me at:</p>
 

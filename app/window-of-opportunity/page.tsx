@@ -65,7 +65,7 @@ export default function WindowOfOpportunityPage(){
               .sentence-block {
                 display: inline-block; /* keeps highlight to text width */
                 margin: 0 0 1.7em 0; /* whole-line gap between sentences (matches line-height ~1.7) */
-                background: rgba(255, 250, 150, 0.88); /* brighter, far less transparent yellow highlight */
+                background: rgba(245, 124, 0, 0.25); /* darker amber highlight for better readability */
                 padding: 2px 4px 4px 4px;
                 border-radius: 0; /* squared edges */
                 line-height: 1.5;

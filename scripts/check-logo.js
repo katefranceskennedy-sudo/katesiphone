@@ -1,5 +1,5 @@
 const http = require('http');
-const url = 'http://localhost:3000/logo.png';
+const url = 'http://localhost:3000/logo1.png';
 http.get(url, (res) => {
   console.log('status', res.statusCode);
   let size = 0;

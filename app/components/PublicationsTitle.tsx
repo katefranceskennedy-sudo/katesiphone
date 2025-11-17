@@ -1,18 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useRef } from "react";
 
 export default function PublicationsTitle() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  const content = (
+  return (
     <div ref={wrapperRef} className="publications-title-wrapper">
       <h1 className="bio-title projects-bio">publications</h1>
 
@@ -33,18 +26,4 @@ export default function PublicationsTitle() {
       </div>
     </div>
   );
-
-  useEffect(() => {
-    // Previously this effect force-locked the publications wrapper into
-    // a fixed position using inline styles and a MutationObserver. To keep
-    // the publications content in-flow like the bio, we no longer perform
-    // runtime locking here. The wrapper will render in document flow and
-    // be positioned by CSS instead.
-    return;
-  }, [mounted]);
-
-  if (!mounted) return null;
-  // Render in-place (no portal) so the publications block stays in the
-  // document flow like the bio title and doesn't rely on runtime locking.
-  return content;
 }

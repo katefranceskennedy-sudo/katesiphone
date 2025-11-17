@@ -1748,7 +1748,7 @@ body.contact-page .site-footer::before {
 .red-horizontal-stripe {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% + 600px)); /* shift the rectangle 600px right from center (200px further) */
   width: 100vw; /* span full viewport width */
   top: -10px; /* start slightly above the tile row */
   height: 280px; /* band thickness */
@@ -2261,6 +2261,77 @@ body * {
 /* Decorative bottom rule removed: caption underline is handled via
   the caption's `text-decoration` (dotted / solid on hover). */
 
+/* Degree caption under bio images: stacked lines and larger size */
+.bio-caption-degree {
+  display: block !important;
+  margin-top: 8px !important;
+  padding: 0 2px !important;
+  white-space: normal !important;
+  text-align: left !important; /* align stacked degree lines to the left */
+}
+.bio-caption-degree .degree-line {
+  display: block !important;
+  /* Slightly larger line-height and spacing so stacked lines read neatly */
+  font-size: 0.85rem !important;
+  font-weight: 100 !important;
+  font-style: normal !important; /* use straight (non-italic) text */
+  font-variation-settings: "wght" 100 !important;
+  line-height: 1.4 !important; /* increased for neater spacing */
+  margin: 4px 0 !important;     /* slightly larger gap between lines */
+  color: var(--grey-900) !important;
+}
+.bio-caption-degree .bio-caption-highlight {
+  background: #e6f0ff !important;
+  color: var(--grey-900) !important;
+  padding: 0 2px !important;
+  border-radius: 1px !important;
+}
+
+/* Remove italic slant from highlighted phrases so highlights render straight */
+.about-page .bio-caption .bio-caption-highlight,
+.about-page .bio-caption-sana .bio-caption-highlight,
+.publications-title-wrapper .bio-caption-highlight,
+.pub-extra-row .bio-caption-highlight {
+  font-style: normal !important;
+}
+
+/* Move the degree caption 200px down relative to the standard bio caption
+   positioning without affecting other caption instances. */
+.about-page .bio-caption.bio-caption-degree {
+  position: absolute !important;
+  top: calc(300% + 12px - 124px + 200px) !important; /* original calc +200px */
+  /* keep same horizontal centering/offset as other captions */
+  transform: translateX(calc(-50% + 28px - 150px)) !important;
+  left: 50% !important;
+}
+
+/* Extra caption under the degree block: left-aligned stacked lines that match
+   the standard caption font/attributes but are positioned below the degree text. */
+.about-page .bio-caption.bio-caption-extra {
+  position: absolute !important;
+  top: calc(300% + 12px - 124px + 260px) !important; /* 60px below the degree block */
+  left: 50% !important;
+  transform: translateX(calc(-50% + 28px - 150px)) !important;
+  text-align: left !important;
+  white-space: normal !important;
+  pointer-events: auto !important;
+}
+.bio-caption-extra .extra-line {
+  display: block !important;
+  font-size: 0.85rem !important;
+  font-weight: 100 !important;
+  font-style: italic !important; /* match standard caption style */
+  line-height: 1.4 !important;
+  margin: 3px 0 !important;
+  color: var(--grey-900) !important;
+}
+
+/* Ensure degree caption is left-aligned on the about page by using a
+   selector with matching specificity to the centered caption rules. */
+.about-page .bio-caption.bio-caption-degree {
+  text-align: left !important;
+}
+
 /* Sublist under the publications title (decorative list like the attachment) */
 .pub-sublist {
   list-style: none;
@@ -2280,8 +2351,8 @@ body * {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 6px; /* reduced marker size */
-  height: 6px; /* reduced marker size */
+  width: 8px; /* slightly larger marker for better visibility */
+  height: 8px; /* slightly larger marker for better visibility */
   border: 1px solid rgba(0,0,0,0.6);
   border-radius: 50%;
   background: transparent;
@@ -2299,11 +2370,12 @@ body * {
   text-decoration-color: var(--neon-yellow) !important;
   /* match the header/menu pastel-blue background used for the publications menu item */
   background-color: #e6f0ff;
-  padding: 0 4px;
-  border-radius: 1px;
+  padding: 0 6px; /* slightly wider so larger text breathes */
+  border-radius: 2px;
   display: inline-block;
-  font-weight: 500 !important; /* thicker text for better legibility */
-  font-size: 13px !important;
+  font-weight: 600 !important; /* slightly stronger for readability */
+  font-size: 18px !important; /* increased from 13px to improve legibility */
+  line-height: 1.2 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -2378,13 +2450,15 @@ body * {
   z-index: 3;
 }
 .publications-title-wrapper .pub-extra-row .pub-extra-item {
-  margin: 0;
-  padding: 2px 10px; /* slightly larger horizontal padding for readability */
+  margin: 0 0 120px 0; /* reserve space for the rectangle below, reduced from 260px */
+  padding: 8px 14px; /* slightly larger horizontal padding for readability */
   font-size: 20px; /* a touch larger for clarity */
   line-height: 1;
   display: inline-block; /* preserve blocky title look */
-  /* Reset any heavy offsets coming from .bio-title and ensure crisp rendering */
-  position: static !important;
+  /* make this a positioned container so the colored rectangle can sit
+     outside the element's filled background (using an absolutely
+     positioned pseudo-element) */
+  position: relative !important;
   top: auto !important;
   margin-top: 0 !important;
   transform: none !important;
@@ -2397,11 +2471,35 @@ body * {
   letter-spacing: 0.4px;
   box-shadow: none !important;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  backface-visibility: hidden;
-  will-change: auto;
 }
+
+.publications-title-wrapper .pub-extra-row .pub-extra-item {
+  overflow: visible !important;
+}
+
+/* Colored rectangle below each extra item (one per item).
+   Use nth-child selectors to assign distinct colours in the requested order. */
+.publications-title-wrapper .pub-extra-row .pub-extra-item::after {
+  content: "";
+  position: absolute;
+  /* place relative to the center, then offset right by 600px */
+  left: calc(50% + 600px);
+  transform: translateX(-50%);
+  bottom: -56px; /* position the slimmer rectangle just below the item */
+  display: block;
+  width: min(800px, 90vw); /* responsive: up to 800px, but not wider than viewport */
+  height: 40px; /* slender rectangular shape */
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 9999; /* ensure visible above nearby elements */
+  outline: 3px solid magenta !important; /* debug outline to make it obvious */
+  box-shadow: none !important; /* remove shadow */
+}
+.publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(1)::after { background: coral; }
+.publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(2)::after { background: olive; }
+.publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(3)::after { background: chocolate; }
+.publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(4)::after { background: #ffd400; /* warm yellow */ }
+.publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(5)::after { background: silver; }
 
 @media (max-width: 720px) {
   .publications-title-wrapper { left: 14px; top: 18px; }

@@ -13,7 +13,7 @@ export default function SentenceGaps({
   selector = ".thin-window p",
   gap = 12,
   highlightColor = "#fff9c4",
-  hoverColor = "#f57c00",
+  hoverColor = "#ffeb3b",
 }: SentenceGapsProps) {
   useEffect(() => {
     const paragraphs = document.querySelectorAll<HTMLElement>(selector);

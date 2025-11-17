@@ -519,9 +519,6 @@ export default function SplashScreen({
           {hasLoadingGif ? (
             <img src="/loading.gif" alt="loading" style={{ width: 'min(70vw,260px)', height: 'auto', display: 'block', margin: '0 auto' }} />
           ) : null}
-          <p className="personal-underline" style={{ marginTop: 12 }}>
-            loading{'.'.repeat(dots)}
-          </p>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ export default function NewmanReportPage() {
           background-size: 100% 3px;
           background-position: 0 calc(100% - 3px);
           background-repeat: no-repeat;
-          background-color: #f57c00;
+          background-color: #ffeb3b;
         }
 
         .newman-title:focus-visible {

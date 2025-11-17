@@ -1,5 +1,5 @@
 const http = require('http');
-http.get('http://localhost:3000/logo1.png', (res) => {
+http.get('http://localhost:3000/logo.png', (res) => {
   console.log('status', res.statusCode);
   console.log('type', res.headers['content-type']);
   let n = 0;

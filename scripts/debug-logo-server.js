@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 
-const publicPath = path.resolve(__dirname, '..', 'public', 'logo1.png');
+const publicPath = path.resolve(__dirname, '..', 'public', 'logo.png');
 console.log('Checking file on disk:', publicPath);
 try {
   const st = fs.statSync(publicPath);
@@ -11,7 +11,7 @@ try {
   console.error('File not found on disk:', e.message);
 }
 
-const urls = ['http://localhost:3000/logo1.png', 'http://localhost:3000/logo.svg'];
+const urls = ['http://localhost:3000/logo.png', 'http://localhost:3000/logo.svg'];
 for (const url of urls) {
   console.log('Requesting:', url);
   const req = http.get(url, (res) => {

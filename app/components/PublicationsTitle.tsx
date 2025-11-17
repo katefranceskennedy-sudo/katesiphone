@@ -10,19 +10,27 @@ export default function PublicationsTitle() {
       <h1 className="bio-title projects-bio">publications</h1>
 
       <ul className="pub-sublist" aria-label="Publications sections">
-        <li><a href="#overview">overview</a></li>
-        <li><a href="#viewpoint">viewpoint</a></li>
-        <li><a href="#opinion">opinion</a></li>
-        <li><a href="#reviews">reviews</a></li>
-        <li><a href="#social-media">social media</a></li>
+        <li><a href="#overview-extra">overview</a></li>
+        <li><a href="#viewpoint-extra">viewpoint</a></li>
+        <li><a href="#opinion-extra">opinion</a></li>
+        <li><a href="#reviews-extra">reviews</a></li>
+        <li><a href="#social-media-extra">social media</a></li>
       </ul>
 
       <div className="pub-extra-row" aria-hidden="false">
-        <span className="bio-title pub-extra-item">overview</span>
-        <span className="bio-title pub-extra-item">viewpoint</span>
-        <span className="bio-title pub-extra-item">opinion</span>
-        <span className="bio-title pub-extra-item">reviews</span>
-        <span className="bio-title pub-extra-item">social media</span>
+        <a id="overview-extra" className="bio-title pub-extra-item" href="#overview-extra">overview</a>
+        <a id="viewpoint-extra" className="bio-title pub-extra-item" href="#viewpoint-extra">viewpoint</a>
+        <div id="opinion-extra" className="bio-title pub-extra-item" role="region">
+          <span className="pub-extra-label"><a className="window-link" href="/window-of-opportunity">Window of Opportunity</a></span>
+          opinion
+        </div>
+        <div id="reviews-extra" className="bio-title pub-extra-item" role="region">
+          <span className="pub-extra-label">
+            <a className="newman-report-link" href="/newman-review">The Newman Report</a>: <a className="leadlight-link" href="https://linktr.ee/leadlightmagazine" target="_blank" rel="noopener noreferrer">LeadLight Issue 1</a>
+          </span>
+          reviews
+        </div>
+        <a id="social-media-extra" className="bio-title pub-extra-item" href="#social-media-extra">social media</a>
       </div>
     </div>
   );

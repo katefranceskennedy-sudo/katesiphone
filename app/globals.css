@@ -4,6 +4,103 @@
   background: var(--ultramarine); /* ultramarine on hover */
   color: white;
 }
+
+/* Ensure extra-row anchors (decorative titles) are not underlined
+   — primary `.pub-sublist a` keeps its dotted underline intentionally. */
+.publications-title-wrapper .pub-extra-row .pub-extra-item,
+.publications-title-wrapper .pub-extra-row .pub-extra-item:link,
+.publications-title-wrapper .pub-extra-row .pub-extra-item:visited,
+.publications-title-wrapper .pub-extra-row .pub-extra-item:hover,
+.publications-title-wrapper .pub-extra-row .pub-extra-item:focus,
+.publications-title-wrapper .pub-extra-row .pub-extra-item:active {
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+}
+
+  /* Label that sits centered over the rectangle for specific extras (reviews) */
+  .publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label {
+    position: absolute;
+    /* align the label to the left edge of the rectangle */
+    left: calc((50% + 370px) - (min(450px, 90vw) / 2));
+    /* remove centering transform so left: positions the left edge */
+    transform: none;
+    bottom: -96px; /* vertically centered inside the 80px tall rectangle */
+    width: min(450px, 90vw);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* align label content to left */
+    text-align: left;
+    pointer-events: auto; /* allow interaction for contained links */
+    z-index: 10001; /* above the rectangle pseudo-element */
+    color: #000000; /* ensure legibility against light/bright backgrounds */
+    font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 100 !important; /* even thinner */
+    font-variation-settings: "wght" 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    line-height: 1.1;
+    white-space: normal; /* allow wrapping so whole title is visible */
+    padding: 6px 12px; /* breathing room inside the rectangle; left padding for alignment */
+    box-sizing: border-box;
+    word-break: break-word; /* ensure long words wrap */
+  }
+
+/* LeadLight link inside the reviews label: pastel-blue highlight + strike-through */
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .leadlight-link {
+  background-color: #e6f0ff; /* same pastel blue used elsewhere */
+  color: rgba(0,0,0,0.95);
+  text-decoration: none !important; /* remove strike-through */
+  padding: 1px 4px; /* tighter highlight */
+  border-radius: 1px;
+  pointer-events: auto; /* ensure clickable */
+  z-index: 10002;
+  font-weight: 100 !important; /* maintain thin appearance */
+  font-size: 13px; /* slightly smaller for thinner look */
+  line-height: 1;
+}
+
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .leadlight-link:focus,
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .leadlight-link:hover {
+  outline: none;
+  box-shadow: none; /* remove hover shadow so highlight remains tight */
+}
+
+/* Underlined internal link for the Newman Report label */
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .newman-report-link {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  padding: 0 2px; /* minimal padding so underline sits close */
+  pointer-events: auto;
+  font-weight: 200 !important; /* keep it thin but visible */
+}
+
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .newman-report-link:focus,
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .newman-report-link:hover {
+  outline: none;
+}
+
+/* Underlined internal link for the Window of Opportunity label (chocolate rectangle) */
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .window-link {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 1px;
+  text-decoration-color: currentColor;
+  padding: 0 2px; /* minimal padding so underline sits close */
+  pointer-events: auto;
+  font-weight: 200 !important; /* keep it thin but visible */
+}
+
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .window-link:focus,
+.publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label .window-link:hover {
+  outline: none;
+}
 /* Relaxed, friendly UI font (Rubik loaded as a helpful fallback) */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 /* Editorial serif for the site title (Playfair Display still available as an import) */
@@ -2450,7 +2547,7 @@ body * {
   z-index: 3;
 }
 .publications-title-wrapper .pub-extra-row .pub-extra-item {
-  margin: 0 0 120px 0; /* reserve space for the rectangle below, reduced from 260px */
+  margin: 0 0 220px 0; /* reserve more space for taller rectangles */
   padding: 8px 14px; /* slightly larger horizontal padding for readability */
   font-size: 20px; /* a touch larger for clarity */
   line-height: 1;
@@ -2482,17 +2579,19 @@ body * {
 .publications-title-wrapper .pub-extra-row .pub-extra-item::after {
   content: "";
   position: absolute;
-  /* place relative to the center, then offset right by 600px */
-  left: calc(50% + 600px);
+  /* place relative to the center, previously offset right by 600px; move 230px left */
+  left: calc(50% + 370px); /* 600 - 230 = 370 */
   transform: translateX(-50%);
-  bottom: -56px; /* position the slimmer rectangle just below the item */
+  bottom: -96px; /* position the taller rectangle just below the item (moved down) */
   display: block;
-  width: min(800px, 90vw); /* responsive: up to 800px, but not wider than viewport */
-  height: 40px; /* slender rectangular shape */
-  border-radius: 6px;
+  width: min(450px, 90vw); /* reduced by another 150px (now 450px max) */
+  height: 80px; /* doubled height for thicker rectangles */
+  border-radius: 0 !important; /* straight-edged */
+  border: none !important; /* remove outline so rectangles are flush-colour blocks */
+  opacity: 0.95 !important; /* slightly opaque so background colour is visible */
+  will-change: transform, opacity;
   pointer-events: none;
   z-index: 9999; /* ensure visible above nearby elements */
-  outline: 3px solid magenta !important; /* debug outline to make it obvious */
   box-shadow: none !important; /* remove shadow */
 }
 .publications-title-wrapper .pub-extra-row .pub-extra-item:nth-child(1)::after { background: coral; }

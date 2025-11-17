@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     // Prepare to send via SendGrid (preferred) or fallback to error
     const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
     const FROM_EMAIL = process.env.FROM_EMAIL || 'no-reply@yourdomain.com';
-    const TO_EMAIL = process.env.CONTACT_RECEIVER || 'katefranceskennedy@gmail.com';
+    const TO_EMAIL = process.env.CONTACT_RECEIVER || 'contact@example.com';
 
     if (!SENDGRID_API_KEY) {
       console.error('Missing SENDGRID_API_KEY env var');

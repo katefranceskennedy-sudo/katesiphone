@@ -1,7 +1,7 @@
 This project expects a few files in `public/` for the splash and header UI.
 
 Required files (place in `public/`):
-- logo.png        — site logo used in the header
+- logo1.png        — site logo used in the header
 - jackets.gif     — splash GIF animation
 
 Optional but recommended:

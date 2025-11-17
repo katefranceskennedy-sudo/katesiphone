@@ -3,7 +3,7 @@ import path from "path";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const p = path.join(process.cwd(), "public", "logo.png");
+  const p = path.join(process.cwd(), "public", "logo1.png");
   const exists = fs.existsSync(p);
   let size: number | null = null;
   try {
@@ -16,7 +16,7 @@ export async function GET() {
     ok: true,
     serverTime: new Date().toISOString(),
     logo: {
-      path: "/logo.png",
+      path: "/logo1.png",
       exists,
       size,
     },

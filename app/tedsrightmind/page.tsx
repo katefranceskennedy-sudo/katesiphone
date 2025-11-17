@@ -10,7 +10,7 @@ export default function TedsRightMindPage(){
 
         <div style={{ padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <h1 style={{ margin: 0, fontSize: 'clamp(1.5rem, 4vw, 3rem)', fontWeight: 400, color: '#111', textAlign: 'center' }}>
-            in the making <span aria-hidden="true" style={{ color: '#FFEB3B' }}>💛</span>
+            in the making <span aria-hidden="true" style={{ color: '#f57c00' }}>💛</span>
           </h1>
         </div>
       </div>

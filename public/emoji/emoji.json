@@ -1,13 +1,12 @@
 {
   "slots": [
-    { "label": "Otter", "file": "otter.png" },
-    { "label": "Daffodil", "file": "flower.png" },
-    { "label": "Music Dial", "file": "city.png" },
-    { "label": "Hotel", "file": "Hotel.png" },
     { "label": "Tractor", "file": "tractor.png" },
-    { "label": "English Hill", "file": "landscape.png" },
+    { "label": "Radio", "file": "radio.png" },
+    { "label": "Daffodil", "file": "flower.png" },
     { "label": "Strawberry", "file": "luggage.png" },
-    { "label": "Star", "file": "shell.png" }
+    { "label": "Otter", "file": "otter.png" },
+    { "label": "Star", "file": "shell.png" },
+    { "label": "Floppy", "file": "flop.png" }
   ],
   "extras": []
 }

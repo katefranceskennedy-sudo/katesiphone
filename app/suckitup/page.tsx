@@ -23,7 +23,7 @@ export default function SuckItUpPage() {
           color: '#fffaf0', /* light text for contrast */
           lineHeight: 1.6,
           fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
-          fontFamily: 'Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontFamily: 'var(--font-open-sans), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
           fontWeight: 100,
           transform: 'translateY(-100px)',
           willChange: 'transform',
@@ -35,7 +35,7 @@ export default function SuckItUpPage() {
 
         <style>{`
           .suck-title {
-            font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: var(--font-open-sans), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             font-weight: 100; /* make title thin */
             font-variation-settings: 'wght' 100;
             letter-spacing: 0.3px;

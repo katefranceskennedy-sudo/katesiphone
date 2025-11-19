@@ -11,17 +11,29 @@ export default function TopEmojisAnchor() {
   return (
     <div className="top-emojis-inline">
       <nav className="top-emojis" aria-label="Quick emojis">
-        {EMOJIS.map((e, i) => (
-          <span key={i} className="top-emoji" title={e.label} aria-hidden={false}>
-            <img
-              src={`/emoji/${e.file}`}
-              alt={e.label}
-              className={`top-emoji-img ${e.label === "Labrador" ? "black-lab" : ""}`}
-              width={20}
-              height={20}
-            />
-          </span>
-        ))}
+        {EMOJIS.map((e, i) => {
+          const dot = e.file.lastIndexOf('.');
+          const base = dot > 0 ? e.file.substring(0, dot) : e.file;
+          const ext = dot > 0 ? e.file.substring(dot + 1) : 'png';
+          return (
+            <span key={i} className="top-emoji" title={e.label} aria-hidden={false}>
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`/emoji/${base}.webp 1x, /emoji/${base}@2x.webp 2x, /emoji/${base}@3x.webp 3x`}
+                />
+                <img
+                  src={`/emoji/${e.file}`}
+                  srcSet={`/emoji/${base}@2x.${ext} 2x, /emoji/${base}@3x.${ext} 3x`}
+                  alt={e.label}
+                  className={`top-emoji-img ${e.label === "Labrador" ? "black-lab" : ""}`}
+                  width={20}
+                  height={20}
+                />
+              </picture>
+            </span>
+          );
+        })}
       </nav>
     </div>
   );

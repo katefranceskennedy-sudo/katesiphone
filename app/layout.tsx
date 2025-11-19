@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import AppShell from "./components/AppShell";
 import TitleSync from "./components/TitleSync";
@@ -7,7 +7,7 @@ import RedirectOnReload from "./components/RedirectOnReload";
 import ScrollToTopOnNavigation from "./components/ScrollToTopOnNavigation";
 import { LOGO_PATH } from "./config/assets";
 
-const inter = Inter({ subsets: ["latin"], weight: ["100","300","400","700"], variable: "--font-inter" });
+const openSans = Open_Sans({ subsets: ["latin"], weight: ["300","400","600","700","800"], variable: "--font-open-sans" });
 
 export const metadata = {
   title: {
@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={openSans.variable}>
       <head>
         {/* favicon uses the uploaded logo in public/ */}
         <link rel="icon" href={LOGO_PATH} />
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body style={{ fontFamily: 'var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif' }}>
+      <body style={{ fontFamily: 'var(--font-open-sans), system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif' }}>
         <div className="site-root">
           <TitleSync />
           <RedirectOnReload />

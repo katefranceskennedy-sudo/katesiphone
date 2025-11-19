@@ -232,7 +232,7 @@ body {
 /* Inherited from ancestor level 5 (regular) */
 body {
   margin: 0;
-  font-family: var(--font-inter), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-open-sans), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 1.6;
@@ -242,7 +242,7 @@ body {
   margin-right: 0px;
   margin-bottom: 0px;
   margin-left: 0px;
-  font-family: var(--font-inter), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-open-sans), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 300;
   font-size: 16px;
   line-height: 1.6;
@@ -353,6 +353,6 @@ html, body {
 
 /* Inherited from ancestor level 6 (regular) */
 .__variable_45936e {
-  --font-inter: 'Inter', 'Inter Fallback';
-  --font-inter: 'Inter', 'Inter Fallback';
+  --font-open-sans: 'Open Sans', 'Open Sans Fallback';
+  --font-open-sans: 'Open Sans', 'Open Sans Fallback';
 }

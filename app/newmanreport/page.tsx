@@ -24,7 +24,7 @@ export default function NewmanReportPage() {
           border-radius: 4px;
           transition: background-color 120ms ease;
           background-color: #fff9c4;
-          --dot-color: #ffd60a;
+          --dot-color: var(--neon-yellow);
           --dot-size: 4px 2px;
           background-image: radial-gradient(circle, var(--dot-color) 60%, rgba(0,0,0,0) 61%);
           background-repeat: repeat-x;

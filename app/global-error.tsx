@@ -1,11 +1,15 @@
 "use client";
 import React from "react";
 
-export default function GlobalError(props: {
-  error: Error & { digest?: string };
+type Props = {
+  error: { message?: string; digest?: string } | unknown;
   reset: () => void;
-}) {
-  const { error, reset } = props;
+};
+
+export default function GlobalError({ error, reset }: Props) {
+  const message = (error as any)?.message;
+  const digest = (error as any)?.digest;
+
   return (
     <html>
       <body
@@ -13,23 +17,21 @@ export default function GlobalError(props: {
           minHeight: "100vh",
           display: "grid",
           placeItems: "center",
-          padding: "24px",
+          padding: 24,
           fontFamily:
-            'var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif',
+            'var(--font-open-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
         }}
       >
         <div style={{ maxWidth: 720, textAlign: "center" }}>
           <h2 style={{ marginBottom: 8 }}>App error</h2>
-          {error?.message && (
-            <p style={{ opacity: 0.8, marginTop: 0 }}>{error.message}</p>
-          )}
-          {error?.hasOwnProperty("digest") && error.digest && (
+          {message && <p style={{ opacity: 0.8, marginTop: 0 }}>{message}</p>}
+          {digest && (
             <p style={{ fontFamily: "monospace", opacity: 0.7 }}>
-              Error digest: {error.digest}
+              Error digest: {digest}
             </p>
           )}
           <button
-            onClick={() => reset()}
+            onClick={reset}
             style={{
               marginTop: 16,
               padding: "8px 12px",

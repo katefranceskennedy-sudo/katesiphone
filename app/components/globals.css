@@ -1,13 +1,15 @@
 #digital-culture-column .caption-text:hover,
 #digital-culture-column .caption-attribution:hover,
 #digital-culture-column .caption-body-inner p:hover {
-  background: var(--ultramarine); /* ultramarine on hover */
-  color: white;
+  background: var(--neon-yellow); /* bright yellow on hover (replaced ultramarine) */
+  color: #000; /* dark text for contrast against bright yellow */
 }
 /* Relaxed, friendly UI font (Rubik loaded as a helpful fallback) */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
 /* Editorial serif for the site title (Playfair Display still available as an import) */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Oswald:wght@400;700&display=swap');
+
+/* Open Sans is loaded via Next's optimized font loader in `app/layout.tsx` */
 
 :root {
   --ultramarine: #3d1aff;
@@ -15,14 +17,22 @@
   --grey-900: #111111; /* used for primary text; slightly lighter than pure black */
   --grey-700: #050505; /* used for secondary text (very dark) */
   --grey-500: #0a0a0a; /* used for borders / muted elements (very dark) */
+  /* site background removed - using default white */
 }
 
 /* Header / navigation improvements */
 :root {
   --menu-color: #111111; /* slightly lighter black for menu text */
-  --menu-hover: var(--ultramarine); /* use ultramarine for hover/active */
+  --menu-hover: var(--neon-yellow); /* use bright yellow for hover/active instead of ultramarine */
   --menu-gap: 0.5rem;
   --menu-ml: 16.875rem; /* 270px fallback (16.875rem @ 16px) - moved 50px right from 220px */
+  /* moved left by 25px per request: 270px - 25px = 245px => 15.3125rem */
+  --menu-ml: 15.3125rem; /* 245px */
+}
+
+/* Force Open Sans as the primary UI font across the app */
+html, body, #__next, .site-root {
+  font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
 }
 
 .header-menu {
@@ -138,22 +148,20 @@
 
 /* Header nav links use the sampled blue color */
 .header-menu .nav-link {
-  color: #ffffff;
-  background: var(--nav-blue);
-  padding: 6px 12px;
-  border-radius: 4px;
+  color: var(--menu-color);
+  background: transparent;
+  padding: 2px 4px; /* subtle padding but keep inline feel */
+  border-radius: 0;
   display: inline-block;
   text-decoration-line: none;
   text-underline-offset: 3px;
-  transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  transition: color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
 }
 .header-menu .nav-link:hover,
 .header-menu .nav-link:focus,
 .header-menu .nav-link.active {
-  background: var(--ultramarine); /* use ultramarine on hover to match title menu */
-  /* no vertical hover movement */
-  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  color: #ffffff; /* ensure contrast against ultramarine */
+  color: var(--menu-hover);
+  text-decoration-color: currentColor;
 }
 
 /* Animated underline style for nav links */
@@ -244,14 +252,19 @@
 
 body {
   margin: 0;
-  /* Use DejaVu Sans as the primary font; fall back to other sans fonts if not present */
-  font-family: var(--font-inter), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Use Open Sans (next/font) as the primary font; fall back to system sans fonts */
+  font-family: var(--font-open-sans), 'DejaVu Sans', 'Rubik', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   /* make body text a bit lighter/thinner */
   font-weight: 300;
   font-size: 16px;
   line-height: 1.6; /* breezier leading for relaxed reading */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Apply site background color (make the pale yellow visible across the site) */
+body {
+  background: var(--site-bg) !important;
 }
 
 /* Vertical stripe backgrounds removed per request (aquamarine & ultramarine) */
@@ -647,8 +660,8 @@ body {
   right: 0;
   bottom: 2px; /* slight offset so the underline sits under text descenders */
   height: 4px; /* thickness of the decorative dotted line */
-  /* create repeating square turquoise segments (appears like dotted but with square ends) */
-  background-image: linear-gradient(90deg, #40E0D0 0 6px, rgba(0,0,0,0) 6px 12px);
+  /* create repeating square pale-yellow segments (appears like dotted but with square ends) */
+  background-image: linear-gradient(90deg, #fff3a6 0 6px, rgba(0,0,0,0) 6px 12px);
   background-repeat: repeat-x;
   background-size: 12px 4px;
   border-radius: 0; /* ensure squared ends */
@@ -665,8 +678,8 @@ body {
 /* Inline highlight element for clearer visibility */
 .highlight-article .hl {
   display: inline; /* hug text without creating a block */
-  background-color: var(--ultramarine); /* ultramarine highlight */
-  color: white; /* white text for visibility */
+  background-color: #fffde6; /* sampled pale yellow from attachment */
+  color: inherit; /* keep text color natural (hover remains bright yellow only) */
   padding: 0 4px; /* horizontal padding so highlight breathes */
   border-radius: 0; /* squared corners */
   position: relative; /* for underline pseudo */
@@ -680,7 +693,7 @@ body {
   right: 0;
   bottom: 0; /* sits just under the text */
   height: 5px; /* thickness of decorative underline */
-  background-image: linear-gradient(90deg, #40E0D0 0 6px, rgba(0,0,0,0) 6px 12px);
+  background-image: linear-gradient(90deg, #fff3a6 0 6px, rgba(0,0,0,0) 6px 12px);
   background-repeat: repeat-x;
   background-size: 12px 5px; /* square segments (12px wide, 5px tall) */
   border-radius: 0; /* squared ends */
@@ -751,7 +764,9 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  image-rendering: pixelated; /* attempt to preserve sharpness when scaled */
+  /* Let the browser use normal image interpolation for photos and GIFs
+     so upscaling uses available sampling rather than forcing pixelation. */
+  image-rendering: auto;
   transform: translateZ(0); /* promote to its own layer for smoother compositing */
 }
 
@@ -848,14 +863,14 @@ img.beadedwoman-gif[src$="beadedwoman.gif"] {
 strong, b {
   font-weight: 100 !important; /* force thin */
   font-variation-settings: 'wght' 100;
-  font-family: var(--font-inter), inherit;
+  font-family: var(--font-open-sans), inherit;
 }
 
 /* Utility: apply thin font weight to any subtree */
 .no-bold, .no-bold * {
   font-weight: 100 !important;
   font-variation-settings: 'wght' 100;
-  font-family: var(--font-inter), inherit;
+  font-family: var(--font-open-sans), inherit;
 }
 
 /* Make all Newman page text use the Playfair Display editorial font by default,
@@ -1006,7 +1021,7 @@ strong, b {
 .header-menu a:hover,
 .header-menu a:focus,
 .header-menu a:focus-visible {
-  background-color: #e6f0ff; /* pastel blue */
+  background-color: #fffde6; /* sampled pastel yellow from attachment */
 }
 
 /* Ensure publications has an ultramarine hover underline specifically */
@@ -1021,14 +1036,14 @@ strong, b {
 
 /* Make publications permanently highlighted in pastel blue */
 .header-menu a.nav-publications {
-  background-color: #e6f0ff; /* same pastel blue used on hover */
+  background-color: #fffde6; /* sampled pastel yellow from attachment */
   border-radius: 1px;
   padding: 0 2px;
 }
 
 /* Make home permanently highlighted as well */
 .header-menu a.nav-home {
-  background-color: #e6f0ff;
+  background-color: #fffde6;
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -1060,10 +1075,10 @@ strong, b {
 .header-polka nav a:hover .nav-link-text,
 .header-polka nav a:focus-visible .nav-link-text {
   text-decoration-line: underline;
-  background: var(--ultramarine); /* ultramarine on hover to match menu */
+  background: var(--neon-yellow); /* bright yellow on hover instead of ultramarine */
   /* no vertical hover movement */
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  color: #ffffff; /* ensure contrast on ultramarine background */
+  color: var(--grey-900); /* darker text for contrast on yellow */
   text-underline-offset: 3px;
 }
 
@@ -1370,8 +1385,10 @@ body.contact-page .site-footer::before {
   display: inline-block;
   padding: 2px; /* small inner padding to keep icons from touching the highlight edges */
   /* Improve rendering on hi-DPI displays and perceptual sharpness */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
+    /* For small emoji/icons, prefer crisper rendering, but avoid forcing pixelation
+      which harms photos. These rules are hints; keep `auto` as the fallback. */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
   /* slight contrast & saturation boost to make small icons read clearer */
   filter: contrast(1.03) saturate(1.06);
   /* promote to its own layer for smoother transforms and sharper subpixel painting */
@@ -1659,7 +1676,7 @@ body.contact-page .site-footer::before {
 
 /* Highlight images within the Digital Culture (blue text) column in bright pastel blue */
 #digital-culture-column img {
-  background-color: rgba(230, 240, 255, 0.25); /* pastel-blue highlight */
+  background-color: rgba(255, 253, 230, 0.25); /* sampled pastel-yellow highlight */
 }
 
 /* Red horizontal stripe behind the GIF tiles on the homepage */
@@ -1924,7 +1941,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; 
   --silver-100: #f5f6f8; /* page background */
 
   /* small accents */
-  --accent-ice: #eaf4ff; /* icy blue highlight */
+  --accent-ice: #fff9e6; /* icy (warm) highlight — now pastel yellow */
   --accent-muted: #e6e2f8; /* muted violet wash */
   --text-default: var(--silver-900);
 }

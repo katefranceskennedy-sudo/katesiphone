@@ -82,7 +82,7 @@ export default function NewmanReportPage() {
       `}</style>
 
       <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: '#fff' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 40, flexDirection: 'column', alignItems: 'center', transform: 'translateY(-220px)' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 40, flexDirection: 'column', alignItems: 'center' }}>
           <h1 style={{ width: 'min(92vw,700px)', margin: '0 0 24px 0', textAlign: 'center' }}>
             <span className="newman-title">The Newman Report</span>
           </h1>

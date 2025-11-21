@@ -6,6 +6,8 @@
     "dev": "next dev",
     "validate-assets": "node ./scripts/validate-assets.js",
     "build": "next build",
+    "analyze": "cross-env ANALYZE=true next build",
+    "optimize-images": "node ./scripts/optimize-images.js --src public --out public/_optimized",
     "start": "next start",
     "lint": "eslint",
     "test": "jest --passWithNoTests"
@@ -36,6 +38,9 @@
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.14",
     "ts-jest": "^29.1.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webpack-bundle-analyzer": "^4.9.0",
+    "cross-env": "^7.0.3"
   }
 }
+

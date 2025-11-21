@@ -46,7 +46,7 @@ export default function PostsTitle() {
   }, []);
 
   return (
-    <h1 ref={ref} className="bio-title projects-bio">
+    <h1 ref={ref} className="bio-title projects-bio" style={{ fontWeight: 700 }}>
       posts
     </h1>
   );

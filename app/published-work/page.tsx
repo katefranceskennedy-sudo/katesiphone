@@ -1,14 +1,11 @@
 
 export const metadata = { title: 'Publications' };
 
-import PublicationsTitle from "../components/PublicationsTitle";
-
 export default function PublishedWorkPage() {
+  // Publications content removed — placeholder kept so page route remains.
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 36 }}>
-      <div className="publications-page-shift">
-        <PublicationsTitle />
-      </div>
+    <main style={{ minHeight: '100vh' }}>
+      {/* content removed; will be re-added later */}
     </main>
   );
 }

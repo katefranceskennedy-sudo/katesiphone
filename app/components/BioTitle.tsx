@@ -79,22 +79,26 @@ export default function BioTitle() {
           bio
         </h1>
         <div className="bio-image-wrapper" aria-hidden="true">
-          <img src="/kate.jpg" alt="Kate" className="bio-image" />
+          <img
+            src="/kate.jpg"
+            alt="Kate"
+            className="bio-image"
+            style={{ width: '300px', display: 'block', opacity: 1 }}
+          />
           {/* second portrait placed to the right; absolutely positioned so it doesn't affect layout */}
-          <img src="/sana.jpg" alt="Sana" className="bio-image bio-image-sana" />
-          <figcaption className="bio-caption"><span className="bio-caption-highlight">photo of me</span> by the seine in front of pont neuf</figcaption>
-          <figcaption className="bio-caption-sana"><span className="bio-caption-highlight">photo of my friend and I</span> by millennium bridge behind the <span className="bio-caption-highlight">southbank centre</span></figcaption>
-          <figcaption className="bio-caption bio-caption-degree">
-            <span className="degree-line">Kate Kennedy is a graduate of</span>
-            <span className="degree-line"><span className="bio-caption-highlight">Digital Media and Culture</span></span>
-            <span className="degree-line">at the <span className="bio-caption-highlight">Department of Digital Humanities, King's College London</span>.</span>
-          </figcaption>
-          <figcaption className="bio-caption bio-caption-extra">
-            <span className="extra-line">To independently build kate.网站, she sourced open and closed software</span>
-            <span className="extra-line">editing applications including Github, Microsoft Visual Code, Canva, Figma, G-Suite</span>
-            <span className="extra-line">and Adobe Premiere Pro and Audition.</span>
-            <span className="extra-line">Kate works across both windows and macOS systems.</span>
-          </figcaption>
+          <img
+            src="/sana.jpg"
+            alt="Sana"
+            className="bio-image bio-image-sana"
+            style={{ width: '300px', display: 'block', opacity: 1 }}
+          />
+          {/* Hidden source text for the overlay (kept out of layout). This
+             preserves the bio paragraphs so the overlay can display them
+             without moving page content. Text is visually hidden and
+             aria-hidden so it doesn't affect accessibility. */}
+          <div id="bio-overlay-source" style={{display: 'none'}} aria-hidden="true">
+            Kate Kennedy is a graduate of Digital Media and Culture at the Department of Digital Humanities, King's College London. To independently build kate.网站, she sourced open and closed software editing applications including Github, Microsoft Visual Code, Canva, Figma, G-Suite and Adobe Premiere Pro and Audition. Kate works across both windows and macOS systems.
+          </div>
         </div>
       </div>
     </>

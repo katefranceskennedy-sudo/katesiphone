@@ -1,5 +1,12 @@
 /* Open Sans is loaded via Next's optimized font loader in `app/layout.tsx` */
 
+/* Reduce base font-size site-wide so fonts are slightly smaller.
+   This sets the root font-size to 15px (browser default is 16px).
+   Update or remove if you prefer a different global scale. */
+html {
+  font-size: 15px;
+}
+
 #digital-culture-column .caption-text:hover,
 #digital-culture-column .caption-attribution:hover,
 #digital-culture-column .caption-body-inner p:hover {
@@ -22,8 +29,8 @@
   /* Label that sits centered over the rectangle for specific extras (reviews) */
   .publications-title-wrapper .pub-extra-row .pub-extra-item .pub-extra-label {
     position: absolute;
-    /* align the label to the left edge of the rectangle */
-    left: calc((50% + 370px) - (min(450px, 90vw) / 2));
+    /* align the label to the left edge of the rectangle and nudge right by 100px */
+    left: calc((50% + 370px) - (min(450px, 90vw) / 2) + 100px);
     /* remove centering transform so left: positions the left edge */
     transform: none;
     bottom: -96px; /* vertically centered inside the 80px tall rectangle */
@@ -129,6 +136,7 @@
 /* Force the pale yellow background to show across the app root */
 html, body, #__next {
   background: var(--site-bg) !important;
+  color: #008000; /* make default text color green */
 }
 
 /* Make top-level Next.js wrapper transparent so body background is visible */
@@ -154,7 +162,10 @@ html, body, #__next {
   justify-content: center;
   margin-left: 65px; /* moved left by 25px from 90px to 65px */
   margin-top: -5px; /* base top offset */
-  transform: translateY(-9.5px) !important; /* move menu up by 9.5px as requested */
+  /* Avoid using `transform` for vertical placement — transforms can create
+     a new compositing layer which sometimes blurs text on certain GPUs/browsers.
+     Use margin-top to achieve the same visual offset without promoting compositing. */
+  margin-top: -14.5px; /* combined offset previously achieved by -5px + -9.5px transform */
 }
 
 /* Aquamarine boxed nav links (neat boxed look) */
@@ -168,6 +179,19 @@ html, body, #__next {
   text-decoration-line: none;
   text-underline-offset: 3px;
   transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  /* Improved font rendering for crisp menu labels */
+  font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  -webkit-font-smoothing: antialiased;
+  /* Prefer subpixel antialiasing on supported browsers (improves crispness on Windows/Chromium). */
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  letter-spacing: 0.2px;
+  /* Remove subtle text-shadow which can visually soften glyphs on smaller sizes */
+  text-shadow: none;
+  font-weight: 700; /* increase weight slightly for sharper letterforms */
 }
 .header-menu .nav-link:hover,
 .header-menu .nav-link:focus,
@@ -191,6 +215,55 @@ html, body, #__next {
   margin-top: 20px; /* move emojis + menu down together */
 }
 
+/* Additional header/menu improvements: crisp text, accessible focus, avoid fractional transforms */
+.header-menu .nav-link {
+  transform: none !important; /* avoid fractional transforms that blur text */
+  backface-visibility: hidden;
+  text-rendering: optimizeLegibility;
+}
+.header-menu .nav-link:focus-visible {
+  outline: 3px solid rgba(63,102,240,0.18);
+  outline-offset: 4px;
+}
+
+/* Emoji row: prefer higher-resolution icons on high-DPI, respect reduced motion */
+.top-emojis .top-emoji-img {
+  image-rendering: optimizeQuality;
+  -webkit-image-rendering: -webkit-optimize-contrast;
+  will-change: transform, opacity;
+}
+
+/* Extra improvements for emoji/icon clarity */
+.top-emojis .top-emoji-img {
+  object-fit: contain; /* avoid distortion when scaled */
+  background-color: transparent;
+  filter: contrast(1.03) saturate(1.05); /* subtle boost for clarity */
+  image-rendering: crisp-edges;
+  -moz-image-rendering: -moz-crisp-edges;
+}
+
+/* If using SVGs, prefer crisp shape rendering */
+.top-emojis .top-emoji-img[src$=".svg"] {
+  shape-rendering: crispEdges;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Ensure high-DPI uses slightly larger assets where available */
+@media (min-resolution: 2dppx) {
+  .top-emojis .top-emoji-img { width: 44px !important; height: 44px !important; }
+}
+
+@media (min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2) {
+  .top-emojis .top-emoji-img { width: 40px !important; height: 40px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-emojis .top-emoji-img,
+  .header-menu .nav-link {
+    transition: none !important;
+  }
+}
+
 /* Reduce inset on small screens so header doesn't overflow */
 @media (max-width: 720px) {
   .header-center { padding: 0 12px; }
@@ -201,6 +274,50 @@ html, body, #__next {
   display: inline-flex;
   flex-shrink: 0;
 }
+
+/* Posts list: improve text clarity and avoid compositing-induced blurring */
+.posts-list,
+.posts-list .post-item,
+.posts-list .post-title,
+.posts-list .posts-subheading,
+.posts-list .bio-caption-highlight {
+  /* Prefer precise text rendering and subpixel AA where available */
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  /* Remove text shadows which soften small text */
+  text-shadow: none !important;
+  /* Avoid promoting to its own compositor layer which can blur on some GPUs */
+  transform: none !important;
+  backface-visibility: hidden;
+  will-change: auto !important;
+}
+
+.posts-list .post-title {
+  font-weight: 700 !important; /* stronger weight for crisper glyphs */
+  font-size: 1.05rem !important;
+  line-height: 1.28 !important;
+  letter-spacing: 0.1px !important;
+  margin: 4px 0 14px 0 !important;
+}
+
+.posts-list .posts-subheading {
+  color: #b30000; /* keep red accent */
+  font-weight: 600 !important;
+  margin: 0 0 6px 0 !important;
+  padding: 2px 6px !important;
+}
+
+/* If inline negative margins were applied, override them on the posts area so text isn't rendered off-screen */
+.under-header-inner .posts-list,
+.under-header-inner .posts-list .post-item,
+.under-header-inner > div,
+.under-header-inner .posts-subheading {
+  margin-left: 0 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 
 .top-emojis-anchor {
   display: inline-flex;
@@ -279,21 +396,35 @@ html, body, #__next {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transform: translateZ(0); /* promote to its own layer to avoid subpixel blending */
+  /* Avoid promoting color glyphs to their own compositing layer — this
+     can cause blurring on some Windows/Chromium combos. Keep rendering
+     in the main layer and request precise text rendering instead. */
+  transform: none;
   backface-visibility: hidden;
+  will-change: auto;
+  text-rendering: geometricPrecision;
 }
 /* When using Twemoji SVGs, size them crisply and avoid transforms */
 .top-emojis .top-emoji-img {
   display: block;
-  width: 28px; /* slightly larger and crisper */
-  height: 28px;
+  width: 32px; /* slightly larger and crisper */
+  height: 32px;
   max-width: none;
-  image-rendering: auto; /* let browser render PNG crisply */
+  /* Prefer high-quality rendering for emoji/PNG/SVG assets */
+  image-rendering: crisp-edges; /* standard property for crisper downscaling */
+  -moz-image-rendering: -moz-crisp-edges;
+  -webkit-image-rendering: -webkit-optimize-contrast; /* vendor hint for WebKit/Blink */
+  image-rendering: optimizeQuality;
   margin: 0;
   filter: none; /* show full color */
   transition: transform 140ms ease, opacity 120ms ease, box-shadow 140ms ease;
-  border-radius: 6px; /* tiny rounding to read as refined */
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
+  /* Use squared edges and no inset shadow for maximum pixel clarity */
+  border-radius: 0;
+  box-shadow: none;
+  /* Avoid forcing its own compositing layer unless an animation requires it. */
+  will-change: auto;
+  transform: none;
+  backface-visibility: hidden;
 }
 
 /* Nudge specific emoji art up by 4px for visual alignment */
@@ -2091,6 +2222,8 @@ body, body * {
 @media (max-width: 720px) {
   .top-emojis-absolute { display: none; }
 }
+/* Import Glass Antiqua from Google Fonts for the centered overlay paragraph */
+@import url('https://fonts.googleapis.com/css2?family=Glass+Antiqua&display=swap');
 /*   internal scrollbars. Use only for local debugging; this will forcefully
   remove any in-page scrollable UI that could appear as a second scrollbar.
   ------------------------------------------------------------------------- */
@@ -2195,6 +2328,14 @@ body * {
      transform: none !important;
      will-change: auto !important;
      z-index: 50 !important;
+      /* Make the background tighter to the font for project/posts titles */
+      display: inline-block !important;
+        padding: 0 2px !important;
+        line-height: 1 !important;
+        /* Use the site's primary sans (Open Sans via next/font) and make it smaller */
+        font-family: var(--font-open-sans), inherit !important;
+        font-size: 15px !important;
+        font-weight: 300 !important;
   }
 
 /* About page: reset individual forced offsets and move the whole block up 300px
@@ -2209,15 +2350,16 @@ body * {
 
 .about-page .bio-block {
   position: relative !important;
-  /* move up 750px and left 250px so the title+portrait shift together */
-  transform: translate(-250px, -750px) !important;
+          /* move up 450px and left 130px so the title+portrait shift together
+            (moved an additional 50px upward from previous -400px) */
+          transform: translate(-130px, -450px) !important;
   will-change: transform !important;
 }
 
 /* Make the bio title slightly smaller and nudge it left on the About page */
 .about-page .bio-title {
   display: inline-block !important;
-  transform: translateX(-20px) !important; /* nudge left 20px */
+  transform: translate(-20px, -20px) !important; /* nudge left 20px and up 20px */
   font-size: 1.1rem !important; /* reduce size to appear smaller */
   line-height: 1 !important;
 }
@@ -2310,6 +2452,119 @@ body * {
   text-decoration-color: currentColor !important;
   cursor: pointer !important;
 }
+
+/* Center both portraits and set them to 200px on the About page */
+.about-page .bio-image-wrapper {
+  position: relative !important;
+  transform: none !important;
+  left: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+.about-page .bio-image,
+.about-page .bio-image-sana {
+  /* Use a fixed visual width so the images are exactly 300px and layout
+     is not affected by transforms. This keeps proportions consistent. */
+  width: 300px !important;
+  height: auto !important;
+  object-fit: cover !important;
+  position: relative !important;
+  left: 0 !important;
+  transform: none !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+.about-page .bio-image-wrapper {
+  /* Ensure portraits are visible and shifted 300px to the right on the About page */
+  transform: translateX(300px) !important;
+  left: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  z-index: 100 !important;
+}
+.about-page .bio-image,
+.about-page .bio-image-sana {
+  /* Ensure individual images aren't hidden or shifted unexpectedly */
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  left: 0 !important;
+  transform: none !important;
+}
+.about-page .bio-caption,
+.about-page .bio-caption-sana {
+  position: relative !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  text-align: center !important;
+  margin-top: 6px !important;
+  white-space: normal !important;
+}
+
+/* Hide caption text visually but keep decorative highlight backgrounds.
+   This keeps the highlighted blocks visible while removing caption content. */
+.about-page .bio-caption,
+.about-page .bio-caption-sana,
+.about-page .bio-caption-degree,
+.about-page .bio-caption-extra {
+  color: transparent !important; /* hide text */
+  text-shadow: none !important;
+  pointer-events: none !important;
+}
+
+/* Ensure highlight backgrounds remain visible even though text is hidden */
+.about-page .bio-caption .bio-caption-highlight,
+.about-page .bio-caption-sana .bio-caption-highlight {
+  background: rgba(255,253,230,0.55) !important; /* retain highlight */
+  color: transparent !important; /* keep inner text hidden */
+}
+
+/* Remove any dotted underlines or decorative underlines on the About page.
+   This forces captions and any child spans to have no text-decoration so
+   dotted underlines added elsewhere won't appear here. */
+.about-page .bio-caption,
+.about-page .bio-caption-sana,
+.about-page .bio-caption *,
+.about-page .bio-caption-sana * {
+  text-decoration-line: none !important;
+  text-decoration-style: none !important;
+  text-decoration-thickness: 0 !important;
+}
+
+/* Centered overlay that shows the page's text in a single paragraph
+   Uses 'Glass Antiqua' as requested; overlay is non-interactive so it
+   doesn't move or block existing page content. */
+.center-overlay {
+  position: fixed !important;
+  z-index: 9999 !important;
+  pointer-events: none !important; /* allow clicks through overlay */
+}
+/* Right-anchored overlay: will be positioned via inline styles from the component
+   so we keep only minimal defaults here. */
+.center-overlay__text {
+  font-family: 'Glass Antiqua', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 20px !important;
+  line-height: 1.4 !important;
+  color: rgba(0,0,0,0.75) !important; /* slightly transparent text */
+  background: rgba(255,255,255,0.0) !important;
+  text-align: left !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  margin: 0 !important;
+}
+
+.center-overlay__line {
+  display: block !important;
+  white-space: nowrap !important; /* keep words on same line */
+}
+
 .about-page .bio-caption {
   position: absolute !important;
   left: 50% !important;
@@ -3098,6 +3353,14 @@ main, main > div {
 .posts-list .post-title { margin: 0; font-size: 1rem; font-weight: 300; font-variation-settings: "wght" 100; }
 .posts-list .post-title .bio-caption-highlight { background: rgba(255,253,230,0.35) !important; padding: 0 1px !important; }
 
+/* Subheading above posts list */
+.posts-subheading {
+  color: #c90000 !important; /* strong red */
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin: 8px 0 6px 0 !important;
+}
+
 /* Compact highlight styling: behave like a text-selection highlight (snug to the glyphs) */
 .bio-caption-highlight {
   display: inline !important;
@@ -3121,6 +3384,19 @@ main, main > div {
 .under-header-align { display: flex; justify-content: center; width: 100%; }
 .under-header-inner { width: min(920px, 92%); margin-left: 165px; box-sizing: border-box; }
 @media (max-width: 720px) { .under-header-inner { margin-left: 12px; width: calc(100% - 24px); } }
+
+
+
+/* About page: force the image wrapper down 200px and ensure images are visible */
+.about-page .bio-image-wrapper {
+  position: relative !important;
+  top: 200px !important; /* shift down 200px */
+  left: 30px !important; /* shift right 30px */
+  margin-top: 0 !important; /* avoid double spacing */
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 100 !important;
+}
 
 
 

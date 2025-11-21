@@ -27,8 +27,8 @@ export default function TopEmojisAnchor() {
                   srcSet={`/emoji/${base}@2x.${ext} 2x, /emoji/${base}@3x.${ext} 3x`}
                   alt={e.label}
                   className={`top-emoji-img ${e.label === "Labrador" ? "black-lab" : ""}`}
-                  width={20}
-                  height={20}
+                  width={32}
+                  height={32}
                 />
               </picture>
             </span>

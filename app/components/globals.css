@@ -260,11 +260,13 @@ body {
   line-height: 1.6; /* breezier leading for relaxed reading */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #008000; /* make default text color green */
 }
 
 /* Apply site background color (make the pale yellow visible across the site) */
 body {
   background: var(--site-bg) !important;
+  color: #008000; /* ensure body text remains green even where body rules are redefined */
 }
 
 /* Vertical stripe backgrounds removed per request (aquamarine & ultramarine) */

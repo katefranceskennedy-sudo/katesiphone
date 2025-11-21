@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Playfair_Display } from "next/font/google";
 import type { ReactNode } from "react";
 import AppShell from "./components/AppShell";
 import TitleSync from "./components/TitleSync";
@@ -8,6 +8,7 @@ import ScrollToTopOnNavigation from "./components/ScrollToTopOnNavigation";
 import { LOGO_PATH } from "./config/assets";
 
 const openSans = Open_Sans({ subsets: ["latin"], weight: ["300","400","600","700","800"], variable: "--font-open-sans" });
+const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400","600","700"], variable: "--font-playfair" });
 
 export const metadata = {
   title: {
@@ -18,7 +19,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={openSans.variable}>
+    <html lang="en" className={`${openSans.variable} ${playfair.variable}`}>
       <head>
         {/* favicon uses the uploaded logo in public/ */}
         <link rel="icon" href={LOGO_PATH} />

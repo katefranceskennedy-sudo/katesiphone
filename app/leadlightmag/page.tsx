@@ -10,7 +10,7 @@ export default function LeadlightMagPage(){
 
         {/* Inserted full Newman review text for Leadlight Magazine */}
         <div style={{ padding: 24, maxWidth: 920, margin: '0 auto', lineHeight: 1.6, color: '#111' }}>
-          <h2 style={{ marginTop: 0, fontFamily: 'Playfair Display, serif' }}>The Newman Report</h2>
+          <h2 style={{ marginTop: 0, fontFamily: 'var(--font-playfair), Playfair Display, serif' }}>The Newman Report</h2>
 
           <article>
             <p>I first met Frej Newman in London about four years ago and have cordially disliked her ever since. She's younger than me, smarter than me, and makes it all look too easy. I prayed for Newman to create a magazine, write a bad essay, and send it to me over WhatsApp to revel in her misfortune. How typical that only half my prayer has been answered.</p>

@@ -17,6 +17,15 @@ export default function PublishedWorkPage() {
             <Link href="/leadlightmag" className="leadlight-link">The Newman Report</Link>
           </li>
         </ul>
+        
+        {/* Subsections with headings and links for quick access */}
+        <section style={{ marginTop: 28 }}>
+          <h2 style={{ marginBottom: 8 }}>Window of Opportunity</h2>
+          <p style={{ marginTop: 0, marginBottom: 12 }}>A special feature exploring the digital surveillance ecosystem. <Link href="/robotun" className="window-link">Read the piece</Link>.</p>
+
+          <h2 style={{ marginBottom: 8 }}>The Newman Report</h2>
+          <p style={{ marginTop: 0 }}>A review and essays collection. <Link href="/leadlightmag" className="leadlight-link">Read the report</Link>.</p>
+        </section>
       </div>
     </main>
   );

@@ -89,6 +89,18 @@ export default function NewmanReportPage() {
 
           {/* Full article wrapped in blue-blurb */}
           <article className="thinlined blue-blurb" style={{ marginTop: 0 }}>
+            <p>Freja Newman is the enfant terrible of cultural journalism. Her new magazine proves it.</p>
+
+            <p>I first met Frej Newman in London about four years ago and have cordially disliked her ever since. She’s younger than me, smarter than me, and makes it all look too easy. I prayed for Newman to create a magazine, write a bad essay, and send it to me over WhatsApp to revel in her missfotune. How typical that only half my prayer has been answered.</p>
+
+            <p>For decades, King’s College London has been dominated by a beaming dolt named The Tab (awful name). I mentally divide its student reporters into two camps: those who play it safe, and those heroic few who have never abandoned their opinion that The Tab is a giant meeting for the feebleminded student. (There was also a third camp, whose members thought the Editor in Chief was cute but that’s too big a digression for now.)</p>
+
+            <p>In her first issue of Leadlight Magazine (great name, great), Freja offers a lens into how we see the world, with culture, science, and art living side by side. In her personal essay ‘How to Erase Yourself’, she reflects on how old journals, drawings, and mementos revealed that her memory of the past was incomplete. A “sketch”, built on growing pains rather than the full truth. This is the strength and weakness of the essay: it delights the reader. How often can you say that these days? Funny, ironic, mordant, and clever, Newman’s eye catches memory as fraud and windbag.</p>
+
+            <p>For instance:</p>
+
+            <p><strong>“For a lot of my life, I was reminded of what a pain I was as a child (all in jest, but jokes have to come from somewhere). I was a pain to the point where none of my parents’ friends volunteered to babysit me, or if they did, they endured warnings or pats on the back for their brave sacrifice. Apparently, I just threw the worst tantrums. If something didn’t go my way, or I was thrown out of balance in the slightest, I would resign to screaming on the floor and never stopping. Honestly, if I had to babysit my younger self, I would resent it too.”</strong></p>
+
             <p>I first met Frej Newman in London about four years ago and have cordially disliked her ever since. She&apos;s younger than me, smarter than me, and makes it all look too easy. I prayed for Newman to create a magazine, write a bad essay, and send it to me over WhatsApp to revel in her misfortune. How typical that only half my prayer has been answered.</p>
             <p>For decades, King&apos;s College London has been dominated by a beaming dolt named The Tab (awful name). I mentally divide its student reporters into two camps: those who play it safe, and those heroic few who have never abandoned their opinion that The Tab is a giant meeting for the feebleminded student. (There was also a third camp, whose members thought the Editor in Chief was cute but that&apos;s too big a digression for now.)</p>
             <p>In her first issue of Leadlight Magazine (great name, great), Freja offers a lens into how we see the world, with culture, science, and art living side by side. In her personal essay &apos;How to Erase Yourself&apos;, she reflects on how old journals, drawings, and mementos revealed that her memory of the past was incomplete. A sketch, built on growing pains rather than the full truth. This is the strength and weakness of the essay: it delights the reader. How often can you say that these days? Funny, ironic, mordant, and clever, Newman&apos;s eye catches memory as fraud and windbag.</p>

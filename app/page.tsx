@@ -8,6 +8,7 @@ export default function HomePage() {
       <header style={{ padding: '28px 12px 8px', textAlign: 'center' }} aria-hidden>
         {/* heading removed */}
       </header>
+      {/* Beaded woman GIF removed */}
       {/* Emoji row removed */}
     </main>
   );

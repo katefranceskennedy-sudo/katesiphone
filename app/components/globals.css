@@ -1,8 +1,8 @@
 #digital-culture-column .caption-text:hover,
 #digital-culture-column .caption-attribution:hover,
 #digital-culture-column .caption-body-inner p:hover {
-  background: var(--neon-yellow); /* bright yellow on hover (replaced ultramarine) */
-  color: #000; /* dark text for contrast against bright yellow */
+  background: var(--neon-yellow); /* olive green on hover (replaced ultramarine) */
+  color: #000; /* dark text for contrast against olive green */
 }
 /* Relaxed, friendly UI font (Rubik loaded as a helpful fallback) */
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
@@ -23,7 +23,7 @@
 /* Header / navigation improvements */
 :root {
   --menu-color: #111111; /* slightly lighter black for menu text */
-  --menu-hover: var(--neon-yellow); /* use bright yellow for hover/active instead of ultramarine */
+  --menu-hover: var(--neon-yellow); /* use olive green for hover/active instead of ultramarine */
   --menu-gap: 0.5rem;
   --menu-ml: 16.875rem; /* 270px fallback (16.875rem @ 16px) - moved 50px right from 220px */
   /* moved left by 25px per request: 270px - 25px = 245px => 15.3125rem */
@@ -1023,7 +1023,7 @@ strong, b {
 .header-menu a:hover,
 .header-menu a:focus,
 .header-menu a:focus-visible {
-  background-color: #fffde6; /* sampled pastel yellow from attachment */
+  background-color: #39ff14; /* bright neon green on hover */
 }
 
 /* Ensure publications has an ultramarine hover underline specifically */
@@ -1036,16 +1036,16 @@ strong, b {
   text-underline-offset: 1px;
 }
 
-/* Make publications permanently highlighted in pastel blue */
+/* Make publications permanently highlighted in olive green */
 .header-menu a.nav-publications {
-  background-color: #fffde6; /* sampled pastel yellow from attachment */
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
 
 /* Make home permanently highlighted as well */
 .header-menu a.nav-home {
-  background-color: #fffde6;
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -1065,8 +1065,7 @@ strong, b {
 .header-menu a.nav-projects,
 .header-menu a.nav-bio,
 .header-menu a.nav-posts {
-  color: var(--grey-900);
-  background: var(--nav-blue);
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -1676,9 +1675,9 @@ body.contact-page .site-footer::before {
   text-decoration-color: #000; /* keep black on hover */
 }
 
-/* Highlight images within the Digital Culture (blue text) column in bright pastel blue */
+/* Highlight images within the Digital Culture (blue text) column in olive green */
 #digital-culture-column img {
-  background-color: rgba(255, 253, 230, 0.25); /* sampled pastel-yellow highlight */
+  background-color: rgba(107, 142, 35, 0.25); /* sampled olive green highlight */
 }
 
 /* Red horizontal stripe behind the GIF tiles on the homepage */
@@ -1950,7 +1949,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; 
 
 /* Global background & text */
 html, body {
-  background: #faf8e8 !important;
+  background: var(--site-bg) !important;
   color: var(--grey-900) !important;
 }
 

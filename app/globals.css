@@ -10,8 +10,8 @@ html {
 #digital-culture-column .caption-text:hover,
 #digital-culture-column .caption-attribution:hover,
 #digital-culture-column .caption-body-inner p:hover {
-  background: var(--neon-yellow); /* bright yellow on hover (replaced ultramarine) */
-  color: #000; /* dark text for contrast against bright yellow */
+  background: var(--neon-yellow); /* olive green on hover (replaced ultramarine) */
+  color: #000; /* dark text for contrast against olive green */
 }
 
 /* Ensure extra-row anchors (decorative titles) are not underlined
@@ -128,10 +128,13 @@ html {
   --grey-700: #050505; /* used for secondary text (very dark) */
   --grey-500: #0a0a0a; /* used for borders / muted elements (very dark) */
   --neon-pastel-blue: var(--ultramarine); /* replaced neon pastel blue with ultramarine */
-  --neon-yellow: #fff200; /* bright yellow sampled from attachment for hover/interactive states */
-  --pastel-yellow: #fff7b0; /* pastel yellow for permanent publication link background */
+  --neon-yellow: #6B8E23; /* greener olive (more green, less brown) */
+  --neon-green: #39ff14; /* bright neon green for nav hover */
+  --pastel-yellow: #6B8E23; /* olive green for permanent publication link background */
   /* Ensure site background color is available globally */
-  --site-bg: #f7fff6; /* set to user-supplied pale mint color */
+  --site-bg: #ffb7c5; /* momoiro pink */
+  /* Small tiled SVG pattern (tiny "pixel" accent) — used as repeating overlay to add texture. */
+  --site-bg-pattern: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8'><rect width='8' height='8' fill='%23ffb7c5'/><rect x='0' y='0' width='1' height='1' fill='%23ff9fb3' fill-opacity='0.08'/></svg>");
 }
 
 /* Force the pale yellow background to show across the app root */
@@ -297,6 +300,42 @@ html, body, #__next {
   }
 }
 
+/* Emoji wiggle animation: subtle rotate + translate to give a lively feel.
+   Respects `prefers-reduced-motion` and uses small staggered delays so the row
+   feels organic rather than perfectly synchronized. The keyframes start from
+   the existing visual baseline (many emoji are nudged with translateY(-4px)). */
+@keyframes emoji-wiggle {
+  0% { transform: translateY(-4px) rotate(-3deg); }
+  25% { transform: translateY(-6px) rotate(3deg); }
+  50% { transform: translateY(-4px) rotate(-2deg); }
+  75% { transform: translateY(-6px) rotate(2deg); }
+  100% { transform: translateY(-4px) rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* By default emojis are static; apply wiggle only to the hovered/focused emoji
+     so each one wiggles independently when interacted with. Maintain a short
+     duration so the motion feels responsive. */
+  .top-emojis .top-emoji-img {
+    transform-origin: 50% 70%;
+    animation: none;
+    transition: transform 160ms ease;
+  }
+
+  /* Hover, focus (keyboard), and active (touch) trigger a single-iteration
+     looping wiggle while the interaction remains. Use a shorter duration so
+     the feedback feels snappy. */
+  .top-emoji:hover .top-emoji-img,
+  .top-emoji:focus-within .top-emoji-img,
+  .top-emoji:active .top-emoji-img {
+    animation: emoji-wiggle 1.2s ease-in-out infinite;
+  }
+
+  /* For accessibility, ensure keyboard users see the same effect when the
+     emoji receives focus via tab/focus-within. */
+  .top-emoji:focus-within { outline: none; }
+}
+
 /* Reduce inset on small screens so header doesn't overflow */
 @media (max-width: 720px) {
   .header-center { padding: 0 12px; }
@@ -376,7 +415,7 @@ html, body, #__next {
   top: 40%;
   transform: translateY(-60%);
   height: 28px; /* taller so it reaches slightly above the emojis */
-  background-color: rgba(255, 253, 230, 0.55); /* sampled pastel-yellow strip behind emojis */
+  background-color: rgba(107, 142, 35, 0.55); /* sampled olive green strip behind emojis */
   border-radius: 0; /* square edges */
   z-index: 0; /* sit behind emojis */
   pointer-events: none;
@@ -1381,7 +1420,7 @@ strong, b {
 .header-menu a:hover,
 .header-menu a:focus,
 .header-menu a:focus-visible {
-  background-color: var(--neon-yellow); /* match emoji row hover but use yellow */
+  background-color: var(--neon-green); /* bright neon green on hover */
   color: var(--grey-900); /* dark text for readability */
 }
 
@@ -1395,16 +1434,16 @@ strong, b {
   text-underline-offset: 1px;
 }
 
-/* Make publications permanently highlighted in pastel yellow (kept as-is) */
+/* Make publications permanently highlighted in olive green */
 .header-menu a.nav-publications {
-  background-color: #fffde6; /* sampled pastel yellow from attachment */
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
 
 /* Make home permanently highlighted as well */
 .header-menu a.nav-home {
-  background-color: #fffde6;
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -1424,7 +1463,7 @@ strong, b {
 .header-menu a.nav-projects,
 .header-menu a.nav-bio,
 .header-menu a.nav-posts {
-  background-color: #fffde6;
+  background-color: rgba(107, 142, 35, 0.35); /* olive green highlight */
   border-radius: 1px;
   padding: 0 2px;
 }
@@ -2026,9 +2065,9 @@ body.contact-page .site-footer::before {
   text-decoration-color: #000; /* keep black on hover */
 }
 
-/* Highlight images within the Digital Culture (blue text) column in bright pastel blue */
+/* Highlight images within the Digital Culture (blue text) column in olive green */
 #digital-culture-column img {
-  background-color: rgba(255, 253, 230, 0.25); /* sampled pastel-yellow highlight */
+  background-color: rgba(107, 142, 35, 0.25); /* sampled olive green highlight */
 }
 
 /* Red horizontal stripe behind the GIF tiles on the homepage */
@@ -3136,7 +3175,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: initial !important; 
 
 /* Global background & text */
 html, body {
-  background: #faf8e8 !important;
+  background-color: var(--site-bg) !important;
+  /* tiled subtle pixel overlay to add crisp texture */
+  background-image: var(--site-bg-pattern);
+  background-repeat: repeat;
+  background-size: 8px 8px;
+  background-position: 0 0;
   color: var(--grey-900) !important;
 }
 

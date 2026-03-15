@@ -16,7 +16,7 @@ export default function TopEmojisAnchor() {
           const base = dot > 0 ? e.file.substring(0, dot) : e.file;
           const ext = dot > 0 ? e.file.substring(dot + 1) : 'png';
           return (
-            <span key={i} className="top-emoji" title={e.label} aria-hidden={false}>
+            <span key={i} className="top-emoji" aria-hidden={false}>
               <picture>
                 <source
                   type="image/webp"

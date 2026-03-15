@@ -265,7 +265,7 @@ body, body * {
 
 /* Inherited from ancestor level 5 (regular) */
 html, body {
-  background: #faf8e8 !important;
+  background: var(--site-bg) !important;
   color: #111111 !important;
   background-image: initial !important;
   background-position-x: initial !important;
@@ -275,7 +275,7 @@ html, body {
   background-attachment: initial !important;
   background-origin: initial !important;
   background-clip: initial !important;
-  background-color: rgb(250, 248, 232) !important;
+  background-color: var(--site-bg) !important;
   color: #111111 !important;
 }
 
@@ -291,7 +291,7 @@ html {
 
 /* Inherited from ancestor level 6 (regular) */
 html, body {
-  background: #faf8e8 !important;
+  background: var(--site-bg) !important;
   color: #000000 !important;
   background-image: initial !important;
   background-position-x: initial !important;
@@ -301,7 +301,7 @@ html, body {
   background-attachment: initial !important;
   background-origin: initial !important;
   background-clip: initial !important;
-  background-color: rgb(250, 248, 232) !important;
+  background-color: var(--site-bg) !important;
   color: rgb(0, 0, 0) !important;
 }
 

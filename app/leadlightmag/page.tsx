@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 export const metadata = { title: 'The Newman Report' }
 
@@ -14,7 +15,7 @@ export default function LeadlightMagPage(){
   }
 
   // render a paragraph where each line contains at most `maxWords` words
-  const renderWrapped = (node: string | JSX.Element, maxWords = 8) => {
+  const renderWrapped = (node: string | ReactNode, maxWords = 8) => {
     let text = ''
     let tagType: 'text' | 'em' | 'strong' = 'text'
     if (typeof node === 'string') text = node

@@ -4,9 +4,9 @@ export const metadata = { title: 'The Reticence' }
 
 export default function FannysPage(){
   return (
-    <main style={{ background: '#fff', minHeight: '100vh', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-  <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: '#fff', boxShadow: 'none', borderRadius: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ padding: 0, borderBottom: 'none', background: '#fff' }} />
+    <main style={{ background: 'transparent', minHeight: '100vh', padding: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: 'transparent', boxShadow: 'none', borderRadius: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div style={{ padding: 0, borderBottom: 'none', background: 'transparent' }} />
 
         <div style={{ padding: 0, transform: 'translateY(-100px)' }}>
           <h1

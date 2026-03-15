@@ -129,6 +129,7 @@ html {
   --grey-500: #0a0a0a; /* used for borders / muted elements (very dark) */
   --neon-pastel-blue: var(--ultramarine); /* replaced neon pastel blue with ultramarine */
   --neon-yellow: #fff200; /* bright yellow sampled from attachment for hover/interactive states */
+  --pastel-yellow: #fff7b0; /* pastel yellow for permanent publication link background */
   /* Ensure site background color is available globally */
   --site-bg: #f7fff6; /* set to user-supplied pale mint color */
 }
@@ -200,6 +201,38 @@ html, body, #__next {
   /* no vertical movement on hover */
   box-shadow: 0 6px 14px rgba(0,0,0,0.06);
   color: var(--grey-900); /* darker text for contrast on yellow */
+}
+
+/* Reuse header/menu boxed link styles for publications links */
+.publications-link {
+  color: var(--menu-color);
+  -webkit-text-fill-color: var(--menu-color);
+  background: var(--pastel-yellow); /* permanent pastel yellow */
+  padding: 6px 12px;
+  border-radius: 0; /* sharp edges */
+  display: inline-block;
+  text-decoration-line: none;
+  text-underline-offset: 3px;
+  transition: background-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+  font-family: 'Rubik', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* make titles visually thin-lined but still readable */
+  font-weight: 300;
+  font-variation-settings: "wght" 300;
+  font-size: 18px;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+  letter-spacing: 0.4px;
+  text-shadow: none;
+}
+.publications-link:hover,
+.publications-link:focus,
+.publications-link:focus-visible {
+  background: var(--neon-yellow); /* bright yellow on hover */
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+  color: var(--grey-900);
 }
 
 /* Header center wrapper: places emojis and menu in one centered row */
@@ -327,7 +360,8 @@ html, body, #__next {
   margin-left: 75px; /* shift emoji anchor right by additional 45px (was 30px) */
   position: relative;
   padding: 0 2px;
-  transform: translateX(4px); /* smaller anchor shift to match component CSS */
+  /* Shift anchor left by an additional 200px from current position */
+  transform: translateX(-246px); /* previous -46px - 200px = -246px */
   z-index: 10010; /* keep emoji row above decorative strips and ensure visibility */
   will-change: transform;
 }
@@ -363,6 +397,14 @@ html, body, #__next {
   /* avoid forcing a compositing layer which can blur color glyphs */
   will-change: auto;
   gap: 1px; /* tight 1px gap between groups */
+}
+
+/* Dotted underline styling for quoted substrings inserted via JS/TSX wrappers */
+.dotted-quote {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
 }
 
 /* Make individual emoji buttons look refined (no per-emoji pastel background) */
@@ -3396,6 +3438,93 @@ main, main > div {
   opacity: 1 !important;
   visibility: visible !important;
   z-index: 100 !important;
+}
+
+
+/* -------------------------------------------------------------------------
+   Image quality and background fixes
+   - Ensure photos and page images use high-quality scaling (avoid pixelated/crisp-edges)
+   - Remove any grey/backdrop showing behind images by forcing transparent backgrounds
+   - Keep emoji/icon specific rules intact (they use `.top-emoji-img` selector)
+   ------------------------------------------------------------------------- */
+img:not(.top-emoji-img):not([src$=".svg"]) {
+  image-rendering: auto !important;
+  -webkit-image-rendering: auto !important;
+  -moz-image-rendering: auto !important;
+  /* prefer smooth, high-quality resampling for photos */
+  image-rendering: optimizeQuality !important;
+  background: transparent !important;
+  filter: none !important;
+  backface-visibility: hidden; /* help some browsers with compositing */
+}
+
+/* Extra strong overrides to catch inline backgrounds or component-specific rules
+   that may still leave a white/grey backdrop behind images. This targets:
+   - elements with literal inline `background: '#fff' | #fff | white` styles
+   - common image wrapper elements
+   - the about-center image rule which previously set `background: #fff`
+*/
+*[style*="background: #fff"],
+*[style*="background: '#fff'"],
+*[style*="background: #ffffff"],
+*[style*="background: '#ffffff'"],
+*[style*="background: white"],
+*[style*="background: 'white'"],
+figure, picture, .img-wrapper, .image-wrapper, .image {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.about-center img {
+  background: transparent !important;
+}
+
+/* If a container primarily holds an image, remove its card-like background/shadow so
+   the image sits directly on the site background. Uses `:has()` (modern browsers).
+   Also include attribute-style fallbacks to catch inline `box-shadow` or `boxShadow`.
+*/
+:where(div, section, article, main):has(> img),
+:where(div, section, article, main):has(img) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Fallback: if an element uses inline box-shadow styles, remove its background to avoid white cards */
+*[style*="box-shadow"], *[style*="boxShadow"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Extra fallbacks to catch variations of inline background declarations without spaces */
+*[style*="background:#fff"], *[style*="background:#ffffff"], *[style*="background:white"], *[style*="background-color:#fff"], *[style*="background-color:#ffffff"] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Aggressive parent selectors: if an element contains images, remove card styling so
+   the image sits directly on the site background. Uses :has() where supported. */
+*:has(img) {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure images and their immediate wrappers are transparent */
+*:has(img) > img,
+*:has(img) img,
+img, picture, figure, .image, .img-wrapper, .image-wrapper {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Next.js Image wrappers: target common wrapper elements to avoid white spans */
+span[style*="position:relative"]:has(img),
+span[style*="display:inline-block"]:has(img) {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 

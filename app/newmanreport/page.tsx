@@ -4,7 +4,7 @@ export default function NewmanReportPage() {
   return (
     <main
       style={{
-        background: '#fff',
+        background: 'transparent',
         minHeight: '100vh',
         display: 'flex',
         justifyContent: 'center',
@@ -81,7 +81,7 @@ export default function NewmanReportPage() {
             .blue-blurb p, .blue-blurb strong, .blue-blurb b, .blue-blurb span, .blue-blurb em, .blue-blurb a { color: inherit !important; font-weight: 700; font-variation-settings: "wght" 700; }
       `}</style>
 
-      <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: '#fff' }}>
+      <div style={{ maxWidth: 1100, width: '100%', margin: '0 auto', background: 'transparent' }}>
         <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 40, flexDirection: 'column', alignItems: 'center' }}>
           <h1 style={{ width: 'min(92vw,700px)', margin: '0 0 24px 0', textAlign: 'center' }}>
             <span className="newman-title">The Newman Report</span>

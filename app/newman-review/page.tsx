@@ -2,7 +2,7 @@ export default function NewmanReview() {
   return (
     <div style={{ whiteSpace: 'pre-wrap', padding: '28px' }}>
       <img
-        src="/leadlightmag.gif"
+        src="/leadlightmag_trimmed.png"
         alt="leadlightmag"
         width={300}
         style={{

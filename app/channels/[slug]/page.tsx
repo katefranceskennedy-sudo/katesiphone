@@ -1,5 +1,6 @@
 import AppShell from '../../components/AppShell';
 import BlockCard from '../../components/BlockCard';
+import Image from 'next/image';
 import { channels, blocksByChannel } from '../../../lib/seed';
 
 type Props = { params: { slug: string } };
@@ -22,9 +23,18 @@ export default function ChannelDetailPage(props: any) {
 
   return (
     <AppShell>
-      <div style={{ padding: 28 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <img src={channel.thumbnailUrl} alt={channel.title} style={{ width: 180, height: 120, objectFit: 'cover', borderRadius: 6 }} />
+      <div style={{ padding: 28, background: 'transparent' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, background: 'transparent' }}>
+          <div style={{ background: 'transparent', padding: 0 }}>
+            <Image
+              src={channel.thumbnailUrl}
+              alt={channel.title}
+              width={180}
+              height={120}
+              quality={85}
+              style={{ objectFit: 'cover', borderRadius: 6, background: 'transparent' }}
+            />
+          </div>
           <div>
             <h1 style={{ margin: 0 }}>{channel.title}</h1>
             <p style={{ marginTop: 8, color: '#666' }}>{channel.description}</p>

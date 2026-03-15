@@ -14,7 +14,7 @@ export default function RobotUnPage(){
   }
 
   // render a paragraph where each line contains at most `maxWords` words
-  const renderWrapped = (node: string | JSX.Element, maxWords = 8) => {
+  const renderWrapped = (node: string | React.ReactNode, maxWords = 8) => {
     let text = ''
     let isEm = false
     if (typeof node === 'string') text = node

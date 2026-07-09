@@ -20,9 +20,8 @@ export default function CVPage() {
           </div>
           <p className={styles.roleOrg}>McCann Manchester</p>
           <ul className={styles.bullets}>
-            <li>Specialised in PPC, advancing from a planning executive to a PPC exec on the recommendation of my manager.</li>
-            <li>Head finance and billing, scheduling, reporting, and budget monitoring across multiple accounts.</li>
-            <li>Constant evaluation and data collection with manual optimisations.</li>
+            <li>Promoted from Digital Media Planning Executive on manager recommendation; leads PPC strategy across multiple accounts.</li>
+            <li>Heads finance, billing, and budget monitoring with continuous data collection and manual optimisations.</li>
           </ul>
         </div>
 
@@ -33,8 +32,7 @@ export default function CVPage() {
           </div>
           <p className={styles.roleOrg}>McCann Manchester</p>
           <ul className={styles.bullets}>
-            <li>Lead reporting, account management, and finance systems.</li>
-            <li>Head scheduling, bookings, and DCO.</li>
+            <li>Led account management, reporting, scheduling, bookings, and DCO across finance systems.</li>
             <li>Established key relationships with stakeholders.</li>
           </ul>
         </div>
@@ -46,17 +44,14 @@ export default function CVPage() {
           </div>
           <p className={styles.roleOrg}>Bland PR Consultancy</p>
           <ul className={styles.bullets}>
-            <li>Advanced from Account Intern to permanent Press and Publicity Coordinator, managing all B2B communications and achieving over £25,000 in earned media value (EAV) for clients including Pierre Marcolini and Nutravita through brand collaboration, influencer outreach, and effective public relations.</li>
-            <li>Designed and executed automated email marketing campaigns across multichannels including Mailchimp, boosting customer retention with a 4% increase in open rates and a 6% increase in weekly click-through rates; drafted and distributed high-impact press releases to boost online presence and brand equity.</li>
-            <li>Managed CRM campaigns facilitated by DV360 and The Trade Desk to track weekly intelligence and optimise product ROI.</li>
-            <li>Analysed social analytics using Google Analytics and management extension tools to monitor real-time engagement, conduct sentiment analysis, and inform campaign optimisation — resulting in a 25% improvement in campaign ROI and a 45% reduction in response times on public queries.</li>
-            <li>Managed media buying and influencer marketing using social insights tools such as Buffer across Instagram, TikTok, X, LinkedIn, Facebook, and YouTube; tracked total follower growth of 10% and increased average post engagement rates by 32%.</li>
-            <li>Developed and implemented content marketing strategies utilising multi-channel campaigns, content creation, and editorial planning.</li>
-            <li>Produced original press releases, sponsored content, and campaign assets leveraging digital PR, cross-functional collaboration, and digital storytelling to enhance brand awareness.</li>
-            <li>Integrated owned and earned media with paid media, resulting in a 40% increase in website traffic and measurable improvement in brand sentiment.</li>
-            <li>Coordinated product send-outs using Amazon DSP and in-store activations, facilitating press events and physical campaign integration during peak periods.</li>
-            <li>Directly managed directors&apos; diaries, coordinated executive travel, and ensured smooth delivery of client meetings through precise scheduling and strategic preparation.</li>
-            <li>Streamlined reputation management through online review monitoring, proactive feedback management, and crisis communication protocols, leveraging social listening and issue escalation processes to safeguard brand reputation.</li>
+            <li>Advanced from Account Intern to permanent Press and Publicity Coordinator, managing all B2B communications and achieving over £25,000 in earned media value (EAV) for clients including Pierre Marcolini and Nutravita through brand collaboration, influencer outreach, and public relations.</li>
+            <li>Designed and executed automated email marketing campaigns across multichannels including Mailchimp, achieving a 4% increase in open rates and a 6% increase in weekly click-through rates.</li>
+            <li>Managed CRM campaigns via DV360 and The Trade Desk; analysed real-time engagement using Google Analytics and social listening tools — resulting in a 25% improvement in campaign ROI and a 45% reduction in response times.</li>
+            <li>Led media buying and influencer marketing across Instagram, TikTok, X, LinkedIn, Facebook, and YouTube using Buffer, driving 10% total follower growth and a 32% increase in average post engagement.</li>
+            <li>Produced press releases, sponsored content, and multi-channel campaign assets; developed editorial planning and content marketing strategies to enhance brand awareness and equity.</li>
+            <li>Integrated owned, earned, and paid media distribution, resulting in a 40% increase in website traffic and measurable improvement in brand sentiment.</li>
+            <li>Coordinated product send-outs, press events, and Amazon DSP activations to maximise PR impact during peak periods.</li>
+            <li>Managed directors&apos; diaries and executive travel; streamlined reputation management through review monitoring, crisis communication protocols, and proactive stakeholder engagement.</li>
           </ul>
         </div>
 
